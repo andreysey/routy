@@ -1,21 +1,17 @@
 import React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBarMainPage from "../appBar/AppBarMainPage";
+import AppBarMain from "../AppBarMain";
 import {Container} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import ButtonEndShift from "../buttons/ButtonEndShift";
-import ButtonPassenger from "../buttons/ButtonPassenger";
-import ButtonStartLoco from "../buttons/ButtonStartLoco";
-import CardStartShift from "../cards/CardStartShift";
-import ButtonBack from '../buttons/ButtonBack';
-import CardStartLoco from '../cards/CardStartLoco';
-import CardStartPass from "../cards/CardStartPass";
-import ButtonTrain from '../buttons/ButtonTrain';
-import ButtonEndLoco from "../buttons/ButtonEndLoco";
-import CardStartTrain from "../cards/CardStartTrain";
-import CardEndLoco from "../cards/CardEndLoco";
-import CardEndShift from "../cards/CardEndShift";
+import SimpleCard from '../SimpleCard';
+import TextButton from "../TextButton";
+import LocalBarRoundedIcon from "@material-ui/icons/LocalBarRounded";
+import EmojiPeopleRoundedIcon from "@material-ui/icons/EmojiPeopleRounded";
+import TrainRoundedIcon from "@material-ui/icons/TrainRounded";
+import DirectionsRailwayRoundedIcon from "@material-ui/icons/DirectionsRailwayRounded";
+import DirectionsRunRoundedIcon from "@material-ui/icons/DirectionsRunRounded";
+import TextButtonBack from "../TextButtonBack";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -37,43 +33,61 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ShiftPage() {
     const classes = useStyles();
 
-    const propsAppBar = {title: 'Смена'}
-
     return (
         <div className={classes.wrapper}>
             <CssBaseline/>
             <div className={classes.header}>
-                <AppBarMainPage {...propsAppBar} />
+                <AppBarMain title={'Смена'}/>
             </div>
             {/* Main */}
             <Container className={classes.main} maxWidth="sm">
                 <Grid container>
-                    <ButtonBack/>
+                    <TextButtonBack/>
                 </Grid>
                 <Grid
                     container
-                    // spacing={4}
-                    // direction="column"
-                    // justifyContent="center"
-                    // alignItems="center"
                 >
                     <Grid item xs={12}>
-                        <CardStartShift/>
+                        <SimpleCard
+                            name={'Явка'}
+                            info={'15:00'}
+                            to={'/start'}
+                        />
                     </Grid>
                     <Grid item xs={12}>
-                        <CardStartPass/>
+                        <SimpleCard
+                            name={'Пассажиром'}
+                            info={'15:30 / --:--'}
+                            to={'/start-pass'}
+                        />
                     </Grid>
                     <Grid item xs={12}>
-                        <CardStartLoco/>
+                        <SimpleCard
+                            name={'Принят'}
+                            info={'ВЛ-11 074'}
+                            to={'/start-loco'}
+                        />
                     </Grid>
                     <Grid item xs={12}>
-                        <CardStartTrain/>
+                        <SimpleCard
+                            name={'Поезд'}
+                            info={'15:30 / 17:29'}
+                            to={'/start-train'}
+                        />
                     </Grid>
                     <Grid item xs={12}>
-                        <CardEndLoco/>
+                        <SimpleCard
+                            name={'Сдан'}
+                            info={'ВЛ-11 485'}
+                            to={'/end-loco'}
+                        />
                     </Grid>
                     <Grid item xs={12}>
-                        <CardEndShift/>
+                        <SimpleCard
+                            name={'Конец работы'}
+                            info={'23:59'}
+                            to={'/end'}
+                        />
                     </Grid>
 
                 </Grid>
@@ -89,19 +103,39 @@ export default function ShiftPage() {
                     alignItems="center"
                 >
                     <Grid item>
-                        <ButtonEndShift/>
+                        <TextButton
+                            name={'Конец смены'}
+                            to={'/end'}
+                            startIcon={<LocalBarRoundedIcon/>}
+                        />
                     </Grid>
                     <Grid item>
-                        <ButtonPassenger/>
+                        <TextButton
+                            name={'Пассажиром'}
+                            to={'/start-pass'}
+                            startIcon={<EmojiPeopleRoundedIcon/>}
+                        />
                     </Grid>
                     <Grid item>
-                        <ButtonStartLoco/>
+                        <TextButton
+                            name={'Приемка'}
+                            to={'/start-loco'}
+                            startIcon={<TrainRoundedIcon/>}
+                        />
                     </Grid>
                     <Grid item>
-                        <ButtonTrain/>
+                        <TextButton
+                            name={'Поезд'}
+                            to={'/start-train'}
+                            startIcon={<DirectionsRailwayRoundedIcon/>}
+                        />
                     </Grid>
                     <Grid item>
-                        <ButtonEndLoco/>
+                        <TextButton
+                            name={'Сдача'}
+                            to={'/end-loco'}
+                            startIcon={<DirectionsRunRoundedIcon/>}
+                        />
                     </Grid>
                 </Grid>
             </Container>

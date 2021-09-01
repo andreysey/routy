@@ -1,15 +1,13 @@
 import React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBarMainPage from "../appBar/AppBarMainPage";
+import AppBarMain from "../AppBarMain";
 import {Container} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import ButtonSave from "../buttons/ButtonSave";
-import ButtonBack from "../buttons/ButtonBack";
-import TextLocoEnergyA from "../textFields/TextLocoEnergyA";
-import TextLocoEnergyB from "../textFields/TextLocoEnergyB";
-import TextLocoRecupA from "../textFields/TextLocoRecupA";
-import TextLocoRecupB from "../textFields/TextLocoRecupB";
+import TextButton from "../TextButton";
+import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
+import TextButtonBack from "../TextButtonBack";
+import TextFieldInput from "../TextFieldInput";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -34,18 +32,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function EndLocoPage() {
     const classes = useStyles();
 
-    const propsAppBar = {title: 'Сдача локомотива'}
-
     return (
         <div className={classes.wrapper}>
             <CssBaseline/>
             <div className={classes.header}>
-                <AppBarMainPage {...propsAppBar} />
+                <AppBarMain title={'Сдача локомотива'}/>
             </div>
             {/* Main */}
             <Container className={classes.main} maxWidth="sm">
                 <Grid container>
-                    <ButtonBack/>
+                    <TextButtonBack/>
                 </Grid>
                 <Grid
                     container
@@ -54,20 +50,40 @@ export default function EndLocoPage() {
                     <Grid item xs={6}
                     >
                         <Grid >
-                            <TextLocoEnergyA/>
+                            <TextFieldInput
+                                label={'А'}
+                                placeholder={'00-00-00'}
+                                helperText={'Энергия'}
+                                type={'number'}
+                            />
                         </Grid>
                         <Grid >
-                            <TextLocoRecupA/>
+                            <TextFieldInput
+                                label={'А'}
+                                placeholder={'00-00-00'}
+                                helperText={'Рекуперация'}
+                                type={'number'}
+                            />
                         </Grid>
                     </Grid>
 
                     <Grid item xs={6}
                     >
                         <Grid >
-                            <TextLocoEnergyB/>
+                            <TextFieldInput
+                                label={'Б'}
+                                placeholder={'00-00-00'}
+                                helperText={'Энергия'}
+                                type={'number'}
+                            />
                         </Grid>
                         <Grid >
-                            <TextLocoRecupB/>
+                            <TextFieldInput
+                                label={'Б'}
+                                placeholder={'00-00-00'}
+                                helperText={'Рекуперация'}
+                                type={'number'}
+                            />
                         </Grid>
                     </Grid>
                 </Grid>
@@ -82,7 +98,11 @@ export default function EndLocoPage() {
                       alignItems="center"
                 >
                     <Grid item xs={12}>
-                        <ButtonSave/>
+                        <TextButton
+                        name={'Сохранить'}
+                        to={'/shift'}
+                        startIcon={<SaveAltRoundedIcon/>}
+                        />
                     </Grid>
 
                 </Grid>

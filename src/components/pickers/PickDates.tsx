@@ -6,6 +6,7 @@ import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
+import ruLocale from "date-fns/locale/ru";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,14 +35,14 @@ export default function PickDates() {
 
     return (
         <div className={classes.root}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils} >
+            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
                 <Grid container>
                     <KeyboardDatePicker
                         fullWidth
                         autoOk
                         inputVariant="outlined"
                         margin="normal"
-                        id="date-picker-dialog"
+                        // id="date-picker-dialog"
                         // label="Дата"
                         format="dd-MM-yy"
                         value={selectedDate}

@@ -1,16 +1,15 @@
 import React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBarMainPage from "../appBar/AppBarMainPage";
+import AppBarMain from "../AppBarMain";
 import {Container} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import PickDates from "../pickers/PickDates";
 import PickTimes from "../pickers/PickTimes";
-import ButtonSave from "../buttons/ButtonSave";
-import ButtonBack from "../buttons/ButtonBack";
-import TextTrainNumber from '../textFields/TextTrainNumber';
-import TextDepartureStation from '../textFields/TextDepartureStation';
-import TextArrivalStation from '../textFields/TextArrivalStation';
+import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
+import TextButton from "../TextButton";
+import TextButtonBack from "../TextButtonBack";
+import TextFieldInput from "../TextFieldInput";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,25 +35,27 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function StartPassPage() {
     const classes = useStyles();
 
-    const propsAppBar = {title: 'Пассажиром'}
-
     return (
         <div className={classes.wrapper}>
             <CssBaseline/>
             <div className={classes.header}>
-                <AppBarMainPage {...propsAppBar} />
+                <AppBarMain title={'Пассажиром'}/>
             </div>
             {/* Main */}
             <Container className={classes.main} maxWidth="sm">
                 <Grid container
                 >
-                    <ButtonBack/>
+                    <TextButtonBack/>
                 </Grid>
                 <Grid container
                       spacing={2}
                 >
                     <Grid item xs={12}>
-                        <TextTrainNumber/>
+                        <TextFieldInput
+                            label={'Поезд'}
+                            placeholder={'Номер'}
+                            type={'number'}
+                        />
                     </Grid>
                 </Grid>
                 <Grid
@@ -62,7 +63,9 @@ export default function StartPassPage() {
                     spacing={2}
                 >
                     <Grid item xs={12}>
-                        <TextDepartureStation/>
+                        <TextFieldInput
+                            label={'Станция оправления'}
+                        />
                     </Grid>
 
                     <Grid item xs={7}>
@@ -77,7 +80,9 @@ export default function StartPassPage() {
                     spacing={2}
                 >
                     <Grid item xs={12}>
-                        <TextArrivalStation/>
+                        <TextFieldInput
+                            label={'Станция прибытия'}
+                        />
                     </Grid>
 
                     <Grid item xs={7}>
@@ -98,7 +103,11 @@ export default function StartPassPage() {
                       alignItems="center"
                 >
                     <Grid item xs={12}>
-                        <ButtonSave/>
+                        <TextButton
+                            name={'Сохранить'}
+                            to={'/shift'}
+                            startIcon={<SaveAltRoundedIcon/>}
+                        />
                     </Grid>
 
                 </Grid>

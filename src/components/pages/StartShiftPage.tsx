@@ -1,14 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBarMainPage from "../appBar/AppBarMainPage";
+import AppBarMain from "../AppBarMain";
 import {Container} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import PickDates from "../pickers/PickDates";
 import PickTimes from "../pickers/PickTimes";
-import ButtonSave from "../buttons/ButtonSave";
-import RouteNumber from '../textFields/TextRouteNumber';
-import ButtonBack from "../buttons/ButtonBack";
+import TextFieldInput from "../TextFieldInput";
+import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
+import TextButton from "../TextButton";
+import TextButtonBack from "../TextButtonBack";
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -18,9 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
             minHeight: '100vh',
 
         },
-        header: {
-
-        },
+        header: {},
         main: {
             marginTop: theme.spacing(2),
         },
@@ -30,28 +30,23 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function StartShiftPage() {
+export default function StartShiftPage(props: any) {
     const classes = useStyles();
-
-    const propsAppBar = {title: 'Начать смену'}
 
     return (
         <div className={classes.wrapper}>
             <CssBaseline/>
             <div className={classes.header}>
-                <AppBarMainPage {...propsAppBar} />
+                <AppBarMain title={'Начать смену'}/>
             </div>
             {/* Main */}
             <Container className={classes.main} maxWidth="sm">
                 <Grid container>
-                    <ButtonBack/>
+                    <TextButtonBack/>
                 </Grid>
                 <Grid
                     container
                     spacing={4}
-                    // direction="column"
-                    // justifyContent="center"
-                    // alignItems="center"
                 >
                     <Grid item xs={12}>
                         <PickDates/>
@@ -60,7 +55,12 @@ export default function StartShiftPage() {
                         <PickTimes/>
                     </Grid>
                     <Grid item xs={12}>
-                        <RouteNumber/>
+                        <TextFieldInput
+                            label={'Маршрут'}
+                            placeholder={'Номер'}
+                            type={'number'}
+                            valueProps={props.value}
+                        />
                     </Grid>
                 </Grid>
             </Container>
@@ -72,9 +72,13 @@ export default function StartShiftPage() {
                     container
                     justifyContent="center"
                     alignItems="center"
-                    >
+                >
                     <Grid item>
-                        <ButtonSave/>
+                        <TextButton
+                            name={'Сохранить'}
+                            to={'/shift'}
+                            startIcon={<SaveAltRoundedIcon/>}
+                        />
                     </Grid>
                 </Grid>
             </Container>

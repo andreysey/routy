@@ -1,12 +1,12 @@
 import React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBarMainPage from "../appBar/AppBarMainPage";
+import AppBarMain from "../AppBarMain";
 import {Container} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import ButtonBack from '../buttons/ButtonBack';
-import CardRout from "../cards/CardRout";
 import PickDatesYM from '../pickers/PickDatesYM';
+import TextButtonBack from "../TextButtonBack";
+import SimpleCard from "../SimpleCard";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -28,19 +28,17 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function HistoryPage() {
     const classes = useStyles();
 
-    const propsAppBar = {title: 'Маршруты'}
-
     return (
         <div className={classes.wrapper}>
             <CssBaseline/>
             <div className={classes.header}>
-                <AppBarMainPage {...propsAppBar} />
+                <AppBarMain title={'Маршруты'}/>
             </div>
             {/* Main */}
             <Container className={classes.main} maxWidth="sm">
                 <Grid container>
                     <Grid item xs={12}>
-                        <ButtonBack/>
+                        <TextButtonBack/>
                     </Grid>
                     <Grid item xs={12}>
                         <PickDatesYM/>
@@ -54,13 +52,25 @@ export default function HistoryPage() {
                     // alignItems="center"
                 >
                     <Grid item xs={12}>
-                        <CardRout/>
+                        <SimpleCard
+                            name={'24.08.21  2002/4004'}
+                            info={'15:30 - 17:29 - 11:45'}
+                            to={'/shift'}
+                        />
                     </Grid>
                     <Grid item xs={12}>
-                        <CardRout/>
+                        <SimpleCard
+                            name={'24.08.21  2002/4004'}
+                            info={'15:30 - 17:29 - 11:45'}
+                            to={'/shift'}
+                        />
                     </Grid>
                     <Grid item xs={12}>
-                        <CardRout/>
+                        <SimpleCard
+                            name={'24.08.21  2002/4004'}
+                            info={'15:30 - 17:29 - 11:45'}
+                            to={'/shift'}
+                        />
                     </Grid>
                 </Grid>
             </Container>

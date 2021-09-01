@@ -4,6 +4,7 @@ import {
     MuiPickersUtilsProvider,
     KeyboardTimePicker,
 } from '@material-ui/pickers';
+import ruLocale from "date-fns/locale/ru";
 import React from "react";
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
@@ -33,7 +34,7 @@ export default function PickTimes() {
 
     return (
         <div className={classes.root}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
                 <Grid container justifyContent="space-around">
                     <KeyboardTimePicker
                         fullWidth
@@ -41,7 +42,7 @@ export default function PickTimes() {
                         autoOk
                         inputVariant="outlined"
                         margin="normal"
-                        id="time-picker"
+                        // id="time-picker"
                         // label="Время"
                         value={selectedDate}
                         onChange={handleDateChange}

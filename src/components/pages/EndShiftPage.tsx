@@ -1,13 +1,14 @@
 import React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBarMainPage from "../appBar/AppBarMainPage";
+import AppBarMain from "../AppBarMain";
 import {Container} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import PickDates from "../pickers/PickDates";
 import PickTimes from "../pickers/PickTimes";
-import ButtonSave from "../buttons/ButtonSave";
-import ButtonBack from "../buttons/ButtonBack";
+import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
+import TextButton from "../TextButton";
+import TextButtonBack from "../TextButtonBack";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -32,18 +33,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function StartShiftPage() {
     const classes = useStyles();
 
-    const propsAppBar = {title: 'Конец смены'}
-
     return (
         <div className={classes.wrapper}>
             <CssBaseline/>
             <div className={classes.header}>
-                <AppBarMainPage {...propsAppBar} />
+                <AppBarMain title={'Конец смены'}/>
             </div>
             {/* Main */}
             <Container className={classes.main} maxWidth="sm">
                 <Grid container>
-                    <ButtonBack/>
+                    <TextButtonBack/>
                 </Grid>
                 <Grid
                     container
@@ -70,7 +69,11 @@ export default function StartShiftPage() {
                     alignItems="center"
                 >
                     <Grid item>
-                        <ButtonSave/>
+                        <TextButton
+                            name={'Сохранить'}
+                            to={'/shift'}
+                            startIcon={<SaveAltRoundedIcon/>}
+                        />
                     </Grid>
                 </Grid>
             </Container>

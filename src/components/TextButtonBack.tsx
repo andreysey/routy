@@ -1,21 +1,22 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
-import { Link as RouterLink} from 'react-router-dom';
+import {Link as RouterLink} from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             '& > *': {
                 // margin: theme.spacing(0),
-                marginBottom: 30,
+                margin: theme.spacing(1),
+                marginBottom: 25,
             },
         },
     }),
 );
 
-export default function TextButtons() {
+export default function TextButtonBack() {
     const classes = useStyles();
 
     return (

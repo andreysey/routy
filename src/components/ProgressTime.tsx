@@ -4,10 +4,25 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { Link as RouterLink} from 'react-router-dom';
+import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            // margin: theme.spacing(1),
+            // marginBottom: theme.spacing(5),
+            // minWidth: 130,
+            // width: '45ch',
+        },
+    }),
+);
 
 function CircularProgressWithLabel(props: CircularProgressProps & { value: number }) {
+    const classes = useStyles()
+
     return (
-        <ButtonBase component={RouterLink} to={'/history'}>
+        <div className={classes.root}>
+        <ButtonBase component={RouterLink} to={'/history'} >
         <Box position="relative" display="inline-flex">
             <CircularProgress
                 thickness={5}
@@ -34,6 +49,7 @@ function CircularProgressWithLabel(props: CircularProgressProps & { value: numbe
             </Box>
         </Box>
         </ButtonBase>
+        </div>
     );
 }
 

@@ -1,17 +1,14 @@
 import React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBarMainPage from "../appBar/AppBarMainPage";
+import AppBarMain from "../AppBarMain";
 import {Container} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import ButtonSave from "../buttons/ButtonSave";
-import ButtonBack from "../buttons/ButtonBack";
-import SelectLoco from "../select/SelectLoco";
-import TextLocoNumber from '../textFields/TextLocoNumber';
-import TextLocoEnergyA from "../textFields/TextLocoEnergyA";
-import TextLocoEnergyB from "../textFields/TextLocoEnergyB";
-import TextLocoRecupA from "../textFields/TextLocoRecupA";
-import TextLocoRecupB from "../textFields/TextLocoRecupB";
+import SelectLoco from "../SelectLoco";
+import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
+import TextButton from "../TextButton";
+import TextButtonBack from "../TextButtonBack";
+import TextFieldInput from "../TextFieldInput";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,61 +33,69 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function StartLocoPage() {
     const classes = useStyles();
 
-    const propsAppBar = {title: 'Приемка локомотива'}
-
     return (
         <div className={classes.wrapper}>
             <CssBaseline/>
             <div className={classes.header}>
-                <AppBarMainPage {...propsAppBar} />
+                <AppBarMain title={'Приемка локомотива'}/>
             </div>
             {/* Main */}
             <Container className={classes.main} maxWidth="sm">
                 <Grid container>
-                    <ButtonBack/>
+                    <TextButtonBack/>
                 </Grid>
                 <Grid
                     container
                     spacing={3}
-                    // direction="column"
-                    // justifyContent="center"
-                    // alignItems="center"
                 >
-                    <Grid item xs={6}
-                        // spacing={3}
-                        //   direction="column"
-                        //   justifyContent="center"
-                        //   alignItems="center"
-                    >
-                        <Grid >
+                    <Grid item xs={6}>
+                        <Grid>
                             <SelectLoco/>
                         </Grid>
-                        <Grid >
-                            {/*<TextLocoNumber/>*/}
-                            <TextLocoEnergyA/>
+                        <Grid>
+                            <TextFieldInput
+                                label={'А'}
+                                placeholder={'00-00-00'}
+                                helperText={'Энергия'}
+                                type={'number'}
+                            />
                         </Grid>
-                        <Grid >
-                            {/*<TextLocoEnergyA/>*/}
-                            <TextLocoRecupA/>
+                        <Grid>
+                            <TextFieldInput
+                                label={'А'}
+                                placeholder={'00-00-00'}
+                                helperText={'Рекуперация'}
+                                type={'number'}
+                            />
                         </Grid>
                     </Grid>
 
                     <Grid item xs={6}
-                        // spacing={3}
-                        //   direction="column"
-                        //   justifyContent="center"
-                        //   alignItems="center"
                     >
-                        <Grid >
-                            {/*<TextLocoEnergyB/>*/}
-                            <TextLocoNumber/>
+                        <Grid>
+                            <TextFieldInput
+                                label={'Номер'}
+                                placeholder={'Локомотива'}
+                                helperText={' '}
+                                type={'number'}
+                            />
                         </Grid>
-                        <Grid >
-                            {/*<TextLocoRecupA/>*/}
-                            <TextLocoEnergyB/>
+                        <Grid>
+                            <TextFieldInput
+                                label={'Б'}
+                                placeholder={'00-00-00'}
+                                helperText={'Рекуперация'}
+                                type={'number'}
+                            />
                         </Grid>
-                        <Grid >
-                            <TextLocoRecupB/>
+
+                        <Grid>
+                            <TextFieldInput
+                                label={'Б'}
+                                placeholder={'00-00-00'}
+                                helperText={'Рекуперация'}
+                                type={'number'}
+                            />
                         </Grid>
                     </Grid>
                 </Grid>
@@ -105,7 +110,11 @@ export default function StartLocoPage() {
                       alignItems="center"
                 >
                     <Grid item xs={12}>
-                        <ButtonSave/>
+                        <TextButton
+                            name={'Сохранить'}
+                            to={'/shift'}
+                            startIcon={<SaveAltRoundedIcon/>}
+                        />
                     </Grid>
 
                 </Grid>
