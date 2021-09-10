@@ -30,7 +30,17 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function ShiftPage() {
+const timeHandler = (date: any) => {
+    let hour = date.getHours().toString()
+    let minutes = date.getMinutes().toString()
+
+    if (hour.length === 1) hour = '0' + hour
+    if (minutes.length === 1) minutes = '0' + minutes
+
+     return   hour + `:` + minutes
+}
+
+export default function ShiftPage(props: any) {
     const classes = useStyles();
 
     return (
@@ -50,45 +60,46 @@ export default function ShiftPage() {
                     <Grid item xs={12}>
                         <SimpleCard
                             name={'Явка'}
-                            info={'15:00'}
+                            info={timeHandler(props.startShiftTime)}
                             to={'/start'}
+                            state={props.startShiftDate}
                         />
                     </Grid>
-                    <Grid item xs={12}>
-                        <SimpleCard
-                            name={'Пассажиром'}
-                            info={'15:30 / --:--'}
-                            to={'/start-pass'}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <SimpleCard
-                            name={'Принят'}
-                            info={'ВЛ-11 074'}
-                            to={'/start-loco'}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <SimpleCard
-                            name={'Поезд'}
-                            info={'15:30 / 17:29'}
-                            to={'/start-train'}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <SimpleCard
-                            name={'Сдан'}
-                            info={'ВЛ-11 485'}
-                            to={'/end-loco'}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <SimpleCard
-                            name={'Конец работы'}
-                            info={'23:59'}
-                            to={'/end'}
-                        />
-                    </Grid>
+                    {/*<Grid item xs={12}>*/}
+                    {/*    <SimpleCard*/}
+                    {/*        name={'Пассажиром'}*/}
+                    {/*        info={'15:30 / --:--'}*/}
+                    {/*        to={'/start-pass'}*/}
+                    {/*    />*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={12}>*/}
+                    {/*    <SimpleCard*/}
+                    {/*        name={'Принят'}*/}
+                    {/*        info={'ВЛ-11 074'}*/}
+                    {/*        to={'/start-loco'}*/}
+                    {/*    />*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={12}>*/}
+                    {/*    <SimpleCard*/}
+                    {/*        name={'Поезд'}*/}
+                    {/*        info={'15:30 / 17:29'}*/}
+                    {/*        to={'/start-train'}*/}
+                    {/*    />*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={12}>*/}
+                    {/*    <SimpleCard*/}
+                    {/*        name={'Сдан'}*/}
+                    {/*        info={'ВЛ-11 485'}*/}
+                    {/*        to={'/end-loco'}*/}
+                    {/*    />*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={12}>*/}
+                    {/*    <SimpleCard*/}
+                    {/*        name={'Конец работы'}*/}
+                    {/*        info={'23:59'}*/}
+                    {/*        to={'/end'}*/}
+                    {/*    />*/}
+                    {/*</Grid>*/}
 
                 </Grid>
             </Container>

@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function StartShiftPage(props: any) {
     const classes = useStyles();
-
+    console.log(props)
     return (
         <div className={classes.wrapper}>
             <CssBaseline/>
@@ -49,18 +49,13 @@ export default function StartShiftPage(props: any) {
                     spacing={4}
                 >
                     <Grid item xs={12}>
-                        <PickDates/>
+                        {props.date}
                     </Grid>
                     <Grid item xs={12}>
-                        <PickTimes/>
+                        {props.time}
                     </Grid>
                     <Grid item xs={12}>
-                        <TextFieldInput
-                            label={'Маршрут'}
-                            placeholder={'Номер'}
-                            type={'number'}
-                            valueProps={props.value}
-                        />
+                        {props.routeInput}
                     </Grid>
                 </Grid>
             </Container>

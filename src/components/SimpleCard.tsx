@@ -26,6 +26,7 @@ interface ICardProps {
     name?: string;
     info?: any;
     to?: string | undefined;
+    state?: any;
 }
 
 export default function SimpleCard(props: ICardProps) {

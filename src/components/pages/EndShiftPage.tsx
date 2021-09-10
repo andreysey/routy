@@ -4,8 +4,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBarMain from "../AppBarMain";
 import {Container} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import PickDates from "../pickers/PickDates";
-import PickTimes from "../pickers/PickTimes";
 import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
 import TextButton from "../TextButton";
 import TextButtonBack from "../TextButtonBack";
@@ -30,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function StartShiftPage() {
+export default function StartShiftPage(props: any) {
     const classes = useStyles();
 
     return (
@@ -52,10 +50,10 @@ export default function StartShiftPage() {
                     // alignItems="center"
                 >
                     <Grid item xs={12}>
-                        <PickDates/>
+                        {props.date}
                     </Grid>
                     <Grid item xs={12}>
-                        <PickTimes/>
+                        {props.time}
                     </Grid>
                 </Grid>
             </Container>

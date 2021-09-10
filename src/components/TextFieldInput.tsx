@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import TextField, {BaseTextFieldProps, TextFieldProps} from '@material-ui/core/TextField';
+import {datePickerDefaultProps} from "@material-ui/pickers/constants/prop-types";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -13,43 +14,44 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-interface ITextFieldProps extends BaseTextFieldProps{
-    valueProps?: any;
+interface ITextFieldProps extends BaseTextFieldProps {
+    state?: any;
+    setState?: any;
+    id?: any;
 }
 
 export default function TextFieldInput(props: ITextFieldProps) {
     const classes = useStyles();
-    const [state, setState] = useState('');
+    // const [state, setState] = useState('');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setState(event.target.value)
+        props.setState(event.target.value)
     }
 
-    // useEffect(() => {
-    //     const existState = localStorage.getItem('state') || JSON.stringify('')
-    //     props.setState.startShift.route(JSON.parse(existState))
-    // }, [])
-    //
-    // // useEffect(() => {
-    // //     fetch('https://jsonplaceholder.typicode.com/todos/1')
-    // //         .then(response => response.json())
-    // //         .then(json => {
-    // //             console.log(json)
-    // //             setRouteNum(json.completed)
-    // //         })
-    // // }, [])
-    //
-    // useEffect(() => {
-    //     localStorage.setItem('state', props.state.startShift.route)
-    // }, [props.state.startShift.route])
-    //
-    console.log(props.valueProps)
+        // useEffect(() => {
+        //     if (typeof props.id === "string") {
+        //         const existState = localStorage.getItem(props.id) || JSON.stringify('')
+        //         props.setState(JSON.parse(existState))
+        //     }
+        //
+        // }, [])
+        //
+        //
+        // useEffect(() => {
+        //         localStorage.setItem({props.id}, props.state)
+        //
+        // }, [props.state])
+
+
+
+    console.log(props)
 
 
     return (
         <form className={classes.root} noValidate autoComplete="off">
             <TextField
                 fullWidth
+                id={props.id}
                 label={props.label}
                 placeholder={props.placeholder}
                 helperText={props.helperText}
@@ -57,7 +59,7 @@ export default function TextFieldInput(props: ITextFieldProps) {
                 variant="outlined"
                 color="primary"
                 onChange={handleChange}
-                value={state}
+                value={props.state}
             />
         </form>
     );

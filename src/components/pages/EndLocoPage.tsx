@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function EndLocoPage() {
+export default function EndLocoPage(props: any) {
     const classes = useStyles();
 
     return (
@@ -47,43 +47,20 @@ export default function EndLocoPage() {
                     container
                     spacing={3}
                 >
-                    <Grid item xs={6}
-                    >
-                        <Grid >
-                            <TextFieldInput
-                                label={'А'}
-                                placeholder={'00-00-00'}
-                                helperText={'Энергия'}
-                                type={'number'}
-                            />
+                    <Grid item xs={6}>
+                        <Grid>
+                            {props.endEnergyA}
                         </Grid>
-                        <Grid >
-                            <TextFieldInput
-                                label={'А'}
-                                placeholder={'00-00-00'}
-                                helperText={'Рекуперация'}
-                                type={'number'}
-                            />
+                        <Grid>
+                            {props.endRecupA}
                         </Grid>
                     </Grid>
-
-                    <Grid item xs={6}
-                    >
-                        <Grid >
-                            <TextFieldInput
-                                label={'Б'}
-                                placeholder={'00-00-00'}
-                                helperText={'Энергия'}
-                                type={'number'}
-                            />
+                    <Grid item xs={6}>
+                        <Grid>
+                            {props.endEnergyB}
                         </Grid>
-                        <Grid >
-                            <TextFieldInput
-                                label={'Б'}
-                                placeholder={'00-00-00'}
-                                helperText={'Рекуперация'}
-                                type={'number'}
-                            />
+                        <Grid>
+                            {props.endRecupB}
                         </Grid>
                     </Grid>
                 </Grid>
@@ -99,9 +76,9 @@ export default function EndLocoPage() {
                 >
                     <Grid item xs={12}>
                         <TextButton
-                        name={'Сохранить'}
-                        to={'/shift'}
-                        startIcon={<SaveAltRoundedIcon/>}
+                            name={'Сохранить'}
+                            to={'/shift'}
+                            startIcon={<SaveAltRoundedIcon/>}
                         />
                     </Grid>
 

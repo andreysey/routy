@@ -4,12 +4,9 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBarMain from "../AppBarMain";
 import {Container} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import PickDates from "../pickers/PickDates";
-import PickTimes from "../pickers/PickTimes";
 import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
 import TextButton from "../TextButton";
 import TextButtonBack from "../TextButtonBack";
-import TextFieldInput from "../TextFieldInput";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -32,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function StartTrainPage() {
+export default function StartTrainPage(props: any) {
     const classes = useStyles();
 
     return (
@@ -50,11 +47,7 @@ export default function StartTrainPage() {
                       spacing={2}
                 >
                     <Grid item xs={12}>
-                        <TextFieldInput
-                            label={'Поезд'}
-                            placeholder={'Номер'}
-                            type={'number'}
-                        />
+                        {props.train}
                     </Grid>
                 </Grid>
                 <Grid
@@ -62,16 +55,14 @@ export default function StartTrainPage() {
                     spacing={2}
                 >
                     <Grid item xs={12}>
-                        <TextFieldInput
-                            label={'Станция оправления'}
-                        />
+                        {props.trainStationDeparture}
                     </Grid>
 
                     <Grid item xs={7}>
-                        <PickDates/>
+                        {props.dateDeparture}
                     </Grid>
                     <Grid item xs={5}>
-                        <PickTimes/>
+                        {props.timeDeparture}
                     </Grid>
                 </Grid>
                 <Grid
@@ -79,16 +70,14 @@ export default function StartTrainPage() {
                     spacing={2}
                 >
                     <Grid item xs={12}>
-                        <TextFieldInput
-                            label={'Станция прибытия'}
-                        />
+                        {props.trainStationArrival}
                     </Grid>
 
                     <Grid item xs={7}>
-                        <PickDates/>
+                        {props.dateArrival}
                     </Grid>
                     <Grid item xs={5}>
-                        <PickTimes/>
+                        {props.timeArrival}
                     </Grid>
                 </Grid>
             </Container>

@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function StartLocoPage() {
+export default function StartLocoPage(props: any) {
     const classes = useStyles();
 
     return (
@@ -50,52 +50,26 @@ export default function StartLocoPage() {
                 >
                     <Grid item xs={6}>
                         <Grid>
-                            <SelectLoco/>
+                            {props.locoType}
                         </Grid>
                         <Grid>
-                            <TextFieldInput
-                                label={'А'}
-                                placeholder={'00-00-00'}
-                                helperText={'Энергия'}
-                                type={'number'}
-                            />
+                            {props.startEnergyA}
                         </Grid>
                         <Grid>
-                            <TextFieldInput
-                                label={'А'}
-                                placeholder={'00-00-00'}
-                                helperText={'Рекуперация'}
-                                type={'number'}
-                            />
+                            {props.startRecupA}
                         </Grid>
                     </Grid>
 
                     <Grid item xs={6}
                     >
                         <Grid>
-                            <TextFieldInput
-                                label={'Номер'}
-                                placeholder={'Локомотива'}
-                                helperText={' '}
-                                type={'number'}
-                            />
+                            {props.locoNumber}
                         </Grid>
                         <Grid>
-                            <TextFieldInput
-                                label={'Б'}
-                                placeholder={'00-00-00'}
-                                helperText={'Рекуперация'}
-                                type={'number'}
-                            />
+                            {props.startEnergyB}
                         </Grid>
-
                         <Grid>
-                            <TextFieldInput
-                                label={'Б'}
-                                placeholder={'00-00-00'}
-                                helperText={'Рекуперация'}
-                                type={'number'}
-                            />
+                            {props.startRecupB}
                         </Grid>
                     </Grid>
                 </Grid>

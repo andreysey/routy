@@ -22,12 +22,16 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function SelectLoco() {
+export default function SelectLoco(props: any) {
     const classes = useStyles();
-    const [series, setSeries] = React.useState('');
+    // const [series, setSeries] = React.useState('');
+
+    // const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    //     setSeries(event.target.value as string);
+    // };
 
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setSeries(event.target.value as string);
+        props.setState(event.target.value as string);
     };
 
     return (
@@ -38,7 +42,7 @@ export default function SelectLoco() {
                     // autoWidth
                     labelId="simple-select-outlined-label"
                     id="simple-select-outlined"
-                    value={series}
+                    value={props.state}
                     onChange={handleChange}
                     label="Локомотив"
                     // fullWidth
@@ -46,12 +50,12 @@ export default function SelectLoco() {
                     <MenuItem value="">
                         <em>Нет</em>
                     </MenuItem>
-                    <MenuItem value={10}>ВЛ-8</MenuItem>
+                    <MenuItem value={8}>ВЛ-8</MenuItem>
                     <MenuItem value={154}>ВЛ-11м</MenuItem>
-                    <MenuItem value={30}>ВЛ-11/8</MenuItem>
+                    <MenuItem value={134}>ВЛ-11/8</MenuItem>
                     <MenuItem value={40}>ВЛ-11м6</MenuItem>
-                    <MenuItem value={50}>ЧС-2</MenuItem>
-                    <MenuItem value={60}>ЧС-7</MenuItem>
+                    <MenuItem value={102}>ЧС-2</MenuItem>
+                    <MenuItem value={107}>ЧС-7</MenuItem>
                 </Select>
                 <FormHelperText>код лок-ва ---</FormHelperText>
             </FormControl>

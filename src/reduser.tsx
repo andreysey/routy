@@ -3,21 +3,24 @@ import React from "react";
 export const ContextApp = React.createContext({});
 
 export const initialState = {
-    app: {
-        test: 'test_context',
-        id: 0,
-        startShift: {
-            date: 0,
-            time: 0,
-            route: 0,
-        },
+    dateStartShift: new Date(),
+    timeStartShift: new Date(),
+    route: '',
+}
+
+interface IReducerProps {
+    state: any,
+    action: {
+        type: any,
+        payload: any,
     }
 }
 
+// state: any, action: { type: any; payload: any; }
 
 export const reducer = (state: any, action: { type: any; payload: any; }) => {
     switch (action.type) {
-        case 'test_update':
+        case 'update':
             return {
                 ...state,
                 ...action.payload
@@ -26,3 +29,16 @@ export const reducer = (state: any, action: { type: any; payload: any; }) => {
             return state
     }
 };
+
+//
+// export const reducer = (state: any, action: { type: any; payload: any; }) => {
+//     switch (action.type) {
+//         case 'route_update':
+//             return {
+//                 ...state,
+//                 ...action.payload
+//             };
+//         default:
+//             return state
+//     }
+// };

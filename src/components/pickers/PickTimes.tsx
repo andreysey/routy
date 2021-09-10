@@ -20,16 +20,22 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function PickTimes() {
+interface ITimeProps {
+    state?: any;
+    setState?: any;
+}
+
+export default function PickTimes(props: ITimeProps) {
     const classes = useStyles()
 
     // The first commit of Material-UI
-    const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-        new Date(),
-    );
+    // const [selectedDate, setSelectedDate] = React.useState<Date | null>(
+    //     new Date(),
+    // );
 
     const handleDateChange = (date: Date | null) => {
-        setSelectedDate(date);
+        // setSelectedDate(date);
+        props.setState(date)
     };
 
     return (
@@ -44,7 +50,7 @@ export default function PickTimes() {
                         margin="normal"
                         // id="time-picker"
                         // label="Время"
-                        value={selectedDate}
+                        value={props.state}
                         onChange={handleDateChange}
                         KeyboardButtonProps={{
                             'aria-label': 'change time',

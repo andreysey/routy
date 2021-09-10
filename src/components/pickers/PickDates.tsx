@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
-    KeyboardDatePicker,
+    KeyboardDatePicker, KeyboardDatePickerProps,
 } from '@material-ui/pickers';
 import ruLocale from "date-fns/locale/ru";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
@@ -19,18 +19,34 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
+//
+interface IDateProps {
+    state?: any;
+    setState?: any;
+}
 
 
-export default function PickDates() {
+export default function PickDates(props: IDateProps) {
     const classes = useStyles();
 
     // The first commit of Material-UI
-    const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-        new Date(),
-    );
+    // const [selectedDate, setSelectedDate] = React.useState<Date | null>(
+    //     props.dateStartShift
+    // );
+
+
 
     const handleDateChange = (date: Date | null) => {
-        setSelectedDate(date);
+        // setSelectedDate(date);
+        // props.dispatch({
+        //     type: 'update',
+        //     payload: {
+        //         dateStartShift: date
+        //     }
+        // })
+        props.setState(date)
+
+
     };
 
     return (
@@ -45,8 +61,8 @@ export default function PickDates() {
                         // id="date-picker-dialog"
                         // label="Дата"
                         format="dd-MM-yy"
-                        value={selectedDate}
-                        onChange={handleDateChange}
+                        value={props.state}
+                        onChange={date => handleDateChange(date)}
                         KeyboardButtonProps={{
                             'aria-label': 'change date',
                         }}
@@ -56,3 +72,39 @@ export default function PickDates() {
         </div>
     );
 }
+
+// export default function PickDates(props: IDateProps) {
+//     const classes = useStyles();
+//
+//     // The first commit of Material-UI
+//     const [selectedDate, setSelectedDate] = React.useState<Date | null>(
+//         new Date(),
+//     );
+//
+//     const handleDateChange = (date: Date | null) => {
+//         setSelectedDate(date);
+//     };
+//
+//     return (
+//         <div className={classes.root}>
+//             <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
+//                 <Grid container>
+//                     <KeyboardDatePicker
+//                         fullWidth
+//                         autoOk
+//                         inputVariant="outlined"
+//                         margin="normal"
+//                         // id="date-picker-dialog"
+//                         // label="Дата"
+//                         format="dd-MM-yy"
+//                         value={selectedDate}
+//                         onChange={handleDateChange}
+//                         KeyboardButtonProps={{
+//                             'aria-label': 'change date',
+//                         }}
+//                     />
+//                 </Grid>
+//             </MuiPickersUtilsProvider>
+//         </div>
+//     );
+// }

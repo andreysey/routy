@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function StartPassPage() {
+export default function StartPassPage(props: any) {
     const classes = useStyles();
 
     return (
@@ -51,11 +51,7 @@ export default function StartPassPage() {
                       spacing={2}
                 >
                     <Grid item xs={12}>
-                        <TextFieldInput
-                            label={'Поезд'}
-                            placeholder={'Номер'}
-                            type={'number'}
-                        />
+                        {props.passTrain}
                     </Grid>
                 </Grid>
                 <Grid
@@ -63,16 +59,14 @@ export default function StartPassPage() {
                     spacing={2}
                 >
                     <Grid item xs={12}>
-                        <TextFieldInput
-                            label={'Станция оправления'}
-                        />
+                        {props.passStationDeparture}
                     </Grid>
 
                     <Grid item xs={7}>
-                        <PickDates/>
+                        {props.dateDeparture}
                     </Grid>
                     <Grid item xs={5}>
-                        <PickTimes/>
+                        {props.timeDeparture}
                     </Grid>
                 </Grid>
                 <Grid
@@ -80,16 +74,14 @@ export default function StartPassPage() {
                     spacing={2}
                 >
                     <Grid item xs={12}>
-                        <TextFieldInput
-                            label={'Станция прибытия'}
-                        />
+                        {props.passStationArrival}
                     </Grid>
 
                     <Grid item xs={7}>
-                        <PickDates/>
+                        {props.dateArrival}
                     </Grid>
                     <Grid item xs={5}>
-                        <PickTimes/>
+                        {props.timeArrival}
                     </Grid>
                 </Grid>
             </Container>
