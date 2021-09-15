@@ -1,14 +1,9 @@
-import React, {useContext} from "react";
+import React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBarMain from "../AppBarMain";
 import {Container} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import PickDates from "../pickers/PickDates";
-import PickTimes from "../pickers/PickTimes";
-import TextFieldInput from "../TextFieldInput";
-import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
-import TextButton from "../TextButton";
 import TextButtonBack from "../TextButtonBack";
 
 
@@ -69,11 +64,7 @@ export default function StartShiftPage(props: any) {
                     alignItems="center"
                 >
                     <Grid item>
-                        <TextButton
-                            name={'Сохранить'}
-                            to={'/shift'}
-                            startIcon={<SaveAltRoundedIcon/>}
-                        />
+                        {props.saveButton}
                     </Grid>
                 </Grid>
             </Container>

@@ -1,4 +1,4 @@
-import React, {JSXElementConstructor, ReactElement, ReactNodeArray, ReactPortal} from 'react';
+import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -32,6 +32,19 @@ interface ICardProps {
 export default function SimpleCard(props: ICardProps) {
     const classes = useStyles();
 
+    const timeHandler = (date: any) => {
+
+        console.log(date)
+        let hour = date.getHours().toString()
+        let minutes = date.getMinutes().toString()
+
+
+        if (hour.length === 1) hour = '0' + hour
+        if (minutes.length === 1) minutes = '0' + minutes
+        console.log(date)
+        return   hour + `:` + minutes
+    }
+
     return (
         <Card className={classes.root}>
             <Grid container
@@ -43,7 +56,7 @@ export default function SimpleCard(props: ICardProps) {
                             {props.name || 'Card name'}
                         </Typography>
                         <Typography variant="h5" component="h2">
-                            {props.info || 'Card info'}
+                            {timeHandler(props.info) || 'Card info'}
                         </Typography>
                     </CardContent>
                 </Grid>

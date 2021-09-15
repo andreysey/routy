@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
-import TextField, {BaseTextFieldProps, TextFieldProps} from '@material-ui/core/TextField';
-import {datePickerDefaultProps} from "@material-ui/pickers/constants/prop-types";
+import TextField, {BaseTextFieldProps} from '@material-ui/core/TextField';
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -22,30 +22,27 @@ interface ITextFieldProps extends BaseTextFieldProps {
 
 export default function TextFieldInput(props: ITextFieldProps) {
     const classes = useStyles();
-    // const [state, setState] = useState('');
+
+    useEffect(()=>{
+
+        const data = localStorage.getItem(`${props.id}`)
+
+        if(data){
+            props.setState(JSON.parse(data))
+        }
+
+    },[])
+
+    useEffect(()=>{
+
+        localStorage.setItem(`${props.id}`, JSON.stringify(props.state))
+
+    })
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         props.setState(event.target.value)
     }
-
-        // useEffect(() => {
-        //     if (typeof props.id === "string") {
-        //         const existState = localStorage.getItem(props.id) || JSON.stringify('')
-        //         props.setState(JSON.parse(existState))
-        //     }
-        //
-        // }, [])
-        //
-        //
-        // useEffect(() => {
-        //         localStorage.setItem({props.id}, props.state)
-        //
-        // }, [props.state])
-
-
-
-    console.log(props)
-
+    console.log(props.state)
 
     return (
         <form className={classes.root} noValidate autoComplete="off">

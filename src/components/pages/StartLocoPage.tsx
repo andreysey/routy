@@ -4,11 +4,9 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBarMain from "../AppBarMain";
 import {Container} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import SelectLoco from "../SelectLoco";
 import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
 import TextButton from "../TextButton";
 import TextButtonBack from "../TextButtonBack";
-import TextFieldInput from "../TextFieldInput";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

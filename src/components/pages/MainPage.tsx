@@ -30,13 +30,16 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function MainPage() {
+export default function MainPage(props: any) {
     const classes = useStyles();
 
-    const date = new Date()
-    const weekday = date.toLocaleDateString('ru-RU', {weekday: "long"})
-    const dayMonth = date.toLocaleDateString('ru-RU', {day: "numeric", month: "numeric"})
 
+    const dateHandler = () => {
+        const date = new Date()
+        const weekday = date.toLocaleDateString('ru-RU', {weekday: "long"})
+        const dayMonth = date.toLocaleDateString('ru-RU', {day: "numeric", month: "numeric"})
+        return dayMonth + ` ` + weekday
+    }
 
     return (
         <div className={classes.wrapper}>
@@ -52,7 +55,7 @@ export default function MainPage() {
                 >
                     <Grid item xs={6}>
                         <Typography variant="subtitle2" color='textSecondary' align='center'>
-                            {dayMonth + ` ` + weekday}
+                            {dateHandler()}
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
@@ -83,18 +86,10 @@ export default function MainPage() {
                     alignItems="center"
                 >
                     <Grid item sm={12}>
-                        <TextButton
-                            name={'Начать смену'}
-                            startIcon={<PlayArrowRoundedIcon/>}
-                            to={'/start'}
-                        />
-                    </Grid>
-                    <Grid item sm={12}>
-                        <TextButton
-                            name={'Вернутся'}
-                            startIcon={<ArrowBackRoundedIcon/>}
-                            to={'/shift'}
-                        />
+                        {props.startShiftToggle
+                            ? < TextButton name={'Вернутся'} startIcon={<ArrowBackRoundedIcon/>} to={'/shift'}/>
+                            : <TextButton name={'Начать смену'} startIcon={<PlayArrowRoundedIcon/>} to={'/start'}/>
+                        }
                     </Grid>
                 </Grid>
             </Container>

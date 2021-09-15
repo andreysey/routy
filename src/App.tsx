@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useState} from 'react';
 import {Route, Switch,} from "react-router-dom";
 import MainPage from "./components/pages/MainPage";
 import StartShiftPage from "./components/pages/StartShiftPage";
@@ -9,16 +9,39 @@ import StartTrainPage from "./components/pages/StartTrainPage";
 import EndShiftPage from './components/pages/EndShiftPage';
 import EndLocoPage from './components/pages/EndLocoPage';
 import HistoryPage from "./components/pages/HistoryPage";
-import {ContextApp, initialState, reducer} from "./reduser";
 import TextFieldInput from "./components/TextFieldInput";
 import PickDates from "./components/pickers/PickDates";
 import PickTimes from "./components/pickers/PickTimes";
 import SelectLoco from "./components/SelectLoco";
+import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
+import TextButton from "./components/TextButton";
 
 function App() {
+    // const storage = () => {
+    //     let current = {
+    //         route: route,
+    //         startShiftDate: startShiftDate,
+    //         startShiftTime: startShiftTime,
+    //         passTrain: passTrain,
+    //         passStationDeparture: passStationDeparture,
+    //         passDateDeparture: passDateDeparture,
+    //         passTimeDeparture: passTimeDeparture,
+    //         passStationArrival: passStationArrival,
+    //         passDateArrival: passDateArrival,
+    //         passTimeArrival: passTimeArrival,
+    //     }
+    //
+    //     // let serialStartShift = JSON.stringify(startShift)
+    //
+    //     // @ts-ignore
+    //     localStorage.setItem(new Date(), JSON.stringify(current))
+    // }
+
 
     // Инициализируем reducer и получаем state + dispatch для записи
     // const [state, dispatch] = useReducer(reducer, initialState);
+
+    const [startShiftToggle, setStartShiftToggle] = useState<boolean>(false);
 
     // Start shift page state
     const [route, setRoute] = useState('');
@@ -62,18 +85,22 @@ function App() {
         <div className={'container'}>
             <Switch>
                 <Route path="/" exact>
-                    <MainPage/>
+                    <MainPage
+                        startShiftToggle={startShiftToggle}
+                    />
                 </Route>
                 <Route path="/start">
                     <StartShiftPage
                         date={
                             <PickDates
+                                id={'startShiftDate'}
                                 state={startShiftDate}
                                 setState={setStartShiftDate}
                             />
                         }
                         time={
                             <PickTimes
+                                id={'startShiftTime'}
                                 state={startShiftTime}
                                 setState={setStartShiftTime}
                             />
@@ -88,6 +115,14 @@ function App() {
                                 type={'number'}
                             />
                         }
+                        saveButton={
+                            <TextButton
+                                name={'Сохранить'}
+                                to={'/shift'}
+                                startIcon={<SaveAltRoundedIcon/>}
+                                onClick={() => setStartShiftToggle(true)}
+                            />
+                        }
                     />
                 </Route>
                 <Route path="/shift">
@@ -100,12 +135,14 @@ function App() {
                     <StartLocoPage
                         locoType={
                             <SelectLoco
+                                id={'locoType'}
                                 state={locoType}
                                 setState={setLocoType}
                             />
                         }
                         locoNumber={
                             <TextFieldInput
+                                id={'locoNumber'}
                                 state={locoNumber}
                                 setState={setLocoNumber}
                                 label={'Номер'}
@@ -116,6 +153,7 @@ function App() {
                         }
                         startEnergyA={
                             <TextFieldInput
+                                id={'startEnergyA'}
                                 state={startEnergyA}
                                 setState={setStartEnergyA}
                                 label={'А'}
@@ -126,6 +164,7 @@ function App() {
                         }
                         startEnergyB={
                             <TextFieldInput
+                                id={'startEnergyB'}
                                 state={startEnergyB}
                                 setState={setStartEnergyB}
                                 label={'Б'}
@@ -136,6 +175,7 @@ function App() {
                         }
                         startRecupA={
                             <TextFieldInput
+                                id={'startRecupA'}
                                 state={startRecupA}
                                 setState={setStartRecupA}
                                 label={'А'}
@@ -146,6 +186,7 @@ function App() {
                         }
                         startRecupB={
                             <TextFieldInput
+                                id={'startRecupB'}
                                 state={startRecupB}
                                 setState={setStartRecupB}
                                 label={'Б'}
@@ -163,9 +204,9 @@ function App() {
                                 id={'passTrain'}
                                 label={'Поезд'}
                                 placeholder={'Номер'}
-                                type={'number'}
                                 state={passTrain}
                                 setState={setPassTrain}
+                                type={'number'}
                             />
                         }
                         passStationDeparture={
@@ -178,12 +219,14 @@ function App() {
                         }
                         dateDeparture={
                             <PickDates
+                                id={'passDateDeparture'}
                                 state={passDateDeparture}
                                 setState={setPassDateDeparture}
                             />
                         }
                         timeDeparture={
                             <PickTimes
+                                id={'passTimeDeparture'}
                                 state={passTimeDeparture}
                                 setState={setPassTimeDeparture}
                             />
@@ -197,12 +240,14 @@ function App() {
                             />}
                         dateArrival={
                             <PickDates
+                                id={'passDateArrival'}
                                 state={passDateArrival}
                                 setState={setPassDateArrival}
                             />
                         }
                         timeArrival={
                             <PickTimes
+                                id={'passTimeArrival'}
                                 state={passTimeArrival}
                                 setState={setPassTimeArrival}
                             />
@@ -213,9 +258,9 @@ function App() {
                     <StartTrainPage
                         train={
                             <TextFieldInput
+                                id={'train'}
                                 label={'Поезд'}
                                 placeholder={'Номер'}
-                                type={'number'}
                                 state={train}
                                 setState={setTrain}
                             />
@@ -230,12 +275,14 @@ function App() {
                         }
                         dateDeparture={
                             <PickDates
+                                id={'trainDateDeparture'}
                                 state={trainDateDeparture}
                                 setState={setTrainDateDeparture}
                             />
                         }
                         timeDeparture={
                             <PickTimes
+                                id={'trainTimeDeparture'}
                                 state={trainTimeDeparture}
                                 setState={setTrainTimeDeparture}
                             />
@@ -249,12 +296,14 @@ function App() {
                             />}
                         dateArrival={
                             <PickDates
+                                id={'trainDateArrival'}
                                 state={trainDateArrival}
                                 setState={setTrainDateArrival}
                             />
                         }
                         timeArrival={
                             <PickTimes
+                                id={'trainTimeArrival'}
                                 state={trainTimeArrival}
                                 setState={setTrainTimeArrival}
                             />
@@ -265,6 +314,7 @@ function App() {
                     <EndLocoPage
                         endEnergyA={
                             <TextFieldInput
+                                id={'endEnergyA'}
                                 state={endEnergyA}
                                 setState={setEndEnergyA}
                                 label={'А'}
@@ -275,6 +325,7 @@ function App() {
                         }
                         endEnergyB={
                             <TextFieldInput
+                                id={'endEnergyB'}
                                 state={endEnergyB}
                                 setState={setEndEnergyB}
                                 label={'Б'}
@@ -285,6 +336,7 @@ function App() {
                         }
                         endRecupA={
                             <TextFieldInput
+                                id={'endRecupA'}
                                 state={endRecupA}
                                 setState={setEndRecupA}
                                 label={'А'}
@@ -295,6 +347,7 @@ function App() {
                         }
                         endRecupB={
                             <TextFieldInput
+                                id={'endRecupB'}
                                 state={endRecupB}
                                 setState={setEndRecupB}
                                 label={'Б'}
@@ -309,12 +362,14 @@ function App() {
                     <EndShiftPage
                         date={
                             <PickDates
+                                id={'endShiftDate'}
                                 state={endShiftDate}
                                 setState={setEndShiftDate}
                             />
                         }
                         time={
                             <PickTimes
+                                id={'endShiftTime'}
                                 state={endShiftTime}
                                 setState={setEndShiftTime}
                             />

@@ -22,6 +22,7 @@ interface IButtonProps {
     size?: "small" | "large" | "medium" | undefined;
     startIcon?: ReactElement<any, string | JSXElementConstructor<any>> | string | number | {} | ReactNodeArray | ReactPortal | boolean | null | undefined;
     to?: string | undefined;
+    onClick?: any
 }
 
 export default function TextButton(props: IButtonProps) {
@@ -37,6 +38,7 @@ export default function TextButton(props: IButtonProps) {
                 color={props.color || "primary"}
                 size={props.size || "large"}
                 startIcon={props.startIcon}
+                onClick={props.onClick}
                 // fullWidth
             >
                 {props.name ||'Button'}

@@ -1,10 +1,10 @@
 import 'date-fns';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
-    KeyboardDatePicker, KeyboardDatePickerProps,
+    KeyboardDatePicker
 } from '@material-ui/pickers';
 import ruLocale from "date-fns/locale/ru";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
@@ -19,35 +19,37 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
+
 //
 interface IDateProps {
     state?: any;
     setState?: any;
+    id?: any;
 }
 
 
 export default function PickDates(props: IDateProps) {
     const classes = useStyles();
 
-    // The first commit of Material-UI
-    // const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-    //     props.dateStartShift
-    // );
-
-
-
     const handleDateChange = (date: Date | null) => {
-        // setSelectedDate(date);
-        // props.dispatch({
-        //     type: 'update',
-        //     payload: {
-        //         dateStartShift: date
-        //     }
-        // })
         props.setState(date)
-
-
     };
+
+    useEffect(()=>{
+
+        const data = localStorage.getItem(`${props.id}`)
+
+        if(data){
+            props.setState(JSON.parse(data))
+        }
+
+    },[])
+
+    useEffect(()=>{
+
+        localStorage.setItem(`${props.id}`, JSON.stringify(props.state.toString()))
+
+    })
 
     return (
         <div className={classes.root}>
@@ -58,7 +60,7 @@ export default function PickDates(props: IDateProps) {
                         autoOk
                         inputVariant="outlined"
                         margin="normal"
-                        // id="date-picker-dialog"
+                        id={props.id}
                         // label="Дата"
                         format="dd-MM-yy"
                         value={props.state}

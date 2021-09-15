@@ -30,15 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const timeHandler = (date: any) => {
-    let hour = date.getHours().toString()
-    let minutes = date.getMinutes().toString()
 
-    if (hour.length === 1) hour = '0' + hour
-    if (minutes.length === 1) minutes = '0' + minutes
-
-     return   hour + `:` + minutes
-}
 
 export default function ShiftPage(props: any) {
     const classes = useStyles();
@@ -60,7 +52,8 @@ export default function ShiftPage(props: any) {
                     <Grid item xs={12}>
                         <SimpleCard
                             name={'Явка'}
-                            info={timeHandler(props.startShiftTime)}
+                            // info={props.startShiftTime.toString()}
+                            info={props.startShiftTime}
                             to={'/start'}
                             state={props.startShiftDate}
                         />

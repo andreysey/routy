@@ -24,11 +24,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function SelectLoco(props: any) {
     const classes = useStyles();
-    // const [series, setSeries] = React.useState('');
-
-    // const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    //     setSeries(event.target.value as string);
-    // };
 
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         props.setState(event.target.value as string);
@@ -41,7 +36,7 @@ export default function SelectLoco(props: any) {
                 <Select
                     // autoWidth
                     labelId="simple-select-outlined-label"
-                    id="simple-select-outlined"
+                    // id="simple-select-outlined"
                     value={props.state}
                     onChange={handleChange}
                     label="Локомотив"

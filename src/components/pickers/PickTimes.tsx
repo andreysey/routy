@@ -5,7 +5,7 @@ import {
     KeyboardTimePicker,
 } from '@material-ui/pickers';
 import ruLocale from "date-fns/locale/ru";
-import React from "react";
+import React, {useEffect} from "react";
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 
@@ -23,15 +23,27 @@ const useStyles = makeStyles((theme: Theme) =>
 interface ITimeProps {
     state?: any;
     setState?: any;
+    id?: any;
 }
 
 export default function PickTimes(props: ITimeProps) {
     const classes = useStyles()
 
-    // The first commit of Material-UI
-    // const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-    //     new Date(),
-    // );
+    useEffect(()=>{
+
+        const data = localStorage.getItem(`${props.id}`)
+
+        if(data){
+            props.setState(new Date(JSON.parse(data)))
+        }
+
+    },[])
+
+    useEffect(()=>{
+
+        localStorage.setItem(`${props.id}`, JSON.stringify(props.state.toString()))
+
+    })
 
     const handleDateChange = (date: Date | null) => {
         // setSelectedDate(date);
@@ -48,7 +60,7 @@ export default function PickTimes(props: ITimeProps) {
                         autoOk
                         inputVariant="outlined"
                         margin="normal"
-                        // id="time-picker"
+                        id={props.id}
                         // label="Время"
                         value={props.state}
                         onChange={handleDateChange}
