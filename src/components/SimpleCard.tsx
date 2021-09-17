@@ -32,16 +32,14 @@ interface ICardProps {
 export default function SimpleCard(props: ICardProps) {
     const classes = useStyles();
 
+    const addLeadingZero = (date: string) => {
+        return (date.length === 1) ? '0' + date : date;
+    }
+
     const timeHandler = (date: any) => {
-
         console.log(date)
-        let hour = date.getHours().toString()
-        let minutes = date.getMinutes().toString()
-
-
-        if (hour.length === 1) hour = '0' + hour
-        if (minutes.length === 1) minutes = '0' + minutes
-        console.log(date)
+        let hour = addLeadingZero(date.getHours().toString());
+        let minutes = addLeadingZero(date.getMinutes().toString());
         return   hour + `:` + minutes
     }
 

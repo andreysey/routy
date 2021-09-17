@@ -82,6 +82,7 @@ function App() {
 
     return (
         // <ContextApp.Provider value={{dispatch, state}}>
+
         <div className={'container'}>
             <Switch>
                 <Route path="/" exact>
