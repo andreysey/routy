@@ -87,8 +87,8 @@ export default function MainPage(props: any) {
                 >
                     <Grid item sm={12}>
                         {props.startShiftToggle
-                            ? < TextButton name={'Вернутся'} startIcon={<ArrowBackRoundedIcon/>} to={'/shift'}/>
-                            : <TextButton name={'Начать смену'} startIcon={<PlayArrowRoundedIcon/>} to={'/start'}/>
+                            ? (<TextButton name={'Вернутся'} startIcon={<ArrowBackRoundedIcon/>} to={'/shift'}/>)
+                            : (<TextButton name={'Начать смену'} startIcon={<PlayArrowRoundedIcon/>} to={'/start'}/>)
                         }
                     </Grid>
                 </Grid>

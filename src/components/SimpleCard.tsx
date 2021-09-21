@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 });
 
 interface ICardProps {
-    name?: string;
+    title?: string;
     info?: any;
     to?: string | undefined;
     state?: any;
@@ -37,6 +37,7 @@ export default function SimpleCard(props: ICardProps) {
     }
 
     const timeHandler = (date: any) => {
+        if(!date && typeof date !== 'object') return
         console.log(date)
         let hour = addLeadingZero(date.getHours().toString());
         let minutes = addLeadingZero(date.getMinutes().toString());
@@ -51,10 +52,10 @@ export default function SimpleCard(props: ICardProps) {
                 <Grid item xs>
                     <CardContent>
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
-                            {props.name || 'Card name'}
+                            {props.title || 'Card name'}
                         </Typography>
                         <Typography variant="h5" component="h2">
-                            {timeHandler(props.info) || 'Card info'}
+                            {props.info.toString() || 'Card info'}
                         </Typography>
                     </CardContent>
                 </Grid>

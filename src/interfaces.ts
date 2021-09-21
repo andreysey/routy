@@ -18,3 +18,9 @@ export interface IRout {
 //         }
 //     }
 // }
+
+export interface ICards {
+    title?: string
+    info?: string | Date | null | undefined
+    id?: number
+}

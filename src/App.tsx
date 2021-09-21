@@ -15,31 +15,23 @@ import PickTimes from "./components/pickers/PickTimes";
 import SelectLoco from "./components/SelectLoco";
 import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
 import TextButton from "./components/TextButton";
+import SimpleCard from "./components/SimpleCard";
+import {ICards} from "./interfaces";
+import Grid from "@material-ui/core/Grid";
 
 function App() {
-    // const storage = () => {
-    //     let current = {
-    //         route: route,
-    //         startShiftDate: startShiftDate,
-    //         startShiftTime: startShiftTime,
-    //         passTrain: passTrain,
-    //         passStationDeparture: passStationDeparture,
-    //         passDateDeparture: passDateDeparture,
-    //         passTimeDeparture: passTimeDeparture,
-    //         passStationArrival: passStationArrival,
-    //         passDateArrival: passDateArrival,
-    //         passTimeArrival: passTimeArrival,
-    //     }
-    //
-    //     // let serialStartShift = JSON.stringify(startShift)
-    //
-    //     // @ts-ignore
-    //     localStorage.setItem(new Date(), JSON.stringify(current))
-    // }
+    const cardsHandler = (title: string, info: Date | null | undefined | string) => {
+        const newTodo: ICards = {
+            title: title,
+            id: Date.now(),
+            info: info
+        }
+        setCards(prevState => [...prevState, newTodo])
+    }
 
+    const [lastAction, setLastAction] = useState('')
 
-    // Инициализируем reducer и получаем state + dispatch для записи
-    // const [state, dispatch] = useReducer(reducer, initialState);
+    const [cards, setCards] = useState<ICards[]>([]);
 
     const [startShiftToggle, setStartShiftToggle] = useState<boolean>(false);
 
@@ -81,8 +73,6 @@ function App() {
 
 
     return (
-        // <ContextApp.Provider value={{dispatch, state}}>
-
         <div className={'container'}>
             <Switch>
                 <Route path="/" exact>
@@ -121,15 +111,19 @@ function App() {
                                 name={'Сохранить'}
                                 to={'/shift'}
                                 startIcon={<SaveAltRoundedIcon/>}
-                                onClick={() => setStartShiftToggle(true)}
+                                onClick={() => {
+                                    setStartShiftToggle(true)
+                                    cardsHandler('Явка', startShiftTime)
+                                    setLastAction('Явка')
+                                }}
                             />
                         }
                     />
                 </Route>
                 <Route path="/shift">
                     <ShiftPage
-                        startShiftDate={startShiftDate}
-                        startShiftTime={startShiftTime}
+                        cards={cards}
+                        lastAction={lastAction}
                     />
                 </Route>
                 <Route path="/start-loco">
@@ -196,6 +190,17 @@ function App() {
                                 type={'number'}
                             />
                         }
+                        saveButton={
+                            <TextButton
+                                name={'Сохранить'}
+                                to={'/shift'}
+                                startIcon={<SaveAltRoundedIcon/>}
+                                onClick={() => {
+                                    cardsHandler('Принят', locoNumber)
+                                    setLastAction('Принят')
+                                }}
+                            />
+                        }
                     />
                 </Route>
                 <Route path="/start-pass">
@@ -251,6 +256,17 @@ function App() {
                                 id={'passTimeArrival'}
                                 state={passTimeArrival}
                                 setState={setPassTimeArrival}
+                            />
+                        }
+                        saveButton={
+                            <TextButton
+                                name={'Сохранить'}
+                                to={'/shift'}
+                                startIcon={<SaveAltRoundedIcon/>}
+                                onClick={() => {
+                                    cardsHandler('Пассажиром', passTimeDeparture)
+                                    setLastAction('Пассажиром')
+                                }}
                             />
                         }
                     />
@@ -309,6 +325,17 @@ function App() {
                                 setState={setTrainTimeArrival}
                             />
                         }
+                        saveButton={
+                            <TextButton
+                                name={'Сохранить'}
+                                to={'/shift'}
+                                startIcon={<SaveAltRoundedIcon/>}
+                                onClick={() => {
+                                    cardsHandler('Поезд', train)
+                                    setLastAction('Поезд')
+                                }}
+                            />
+                        }
                     />
                 </Route>
                 <Route path="/end-loco">
@@ -357,6 +384,17 @@ function App() {
                                 type={'number'}
                             />
                         }
+                        saveButton={
+                            <TextButton
+                                name={'Сохранить'}
+                                to={'/shift'}
+                                startIcon={<SaveAltRoundedIcon/>}
+                                onClick={() => {
+                                    cardsHandler('Сдан', locoNumber)
+                                    setLastAction('Сдан')
+                                }}
+                            />
+                        }
                     />
                 </Route>
                 <Route path="/end">
@@ -375,6 +413,17 @@ function App() {
                                 setState={setEndShiftTime}
                             />
                         }
+                        saveButton={
+                            <TextButton
+                                name={'Сохранить'}
+                                to={'/shift'}
+                                startIcon={<SaveAltRoundedIcon/>}
+                                onClick={() => {
+                                    cardsHandler('Конец смены', endShiftTime)
+                                    setLastAction('Конец смены')
+                                }}
+                            />
+                        }
                     />
                 </Route>
                 <Route path="/history">
@@ -382,7 +431,6 @@ function App() {
                 </Route>
             </Switch>
         </div>
-        // </ContextApp.Provider>
     );
 }
 

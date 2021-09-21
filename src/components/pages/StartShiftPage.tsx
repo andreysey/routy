@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function StartShiftPage(props: any) {
+
     const classes = useStyles();
     console.log(props)
     return (

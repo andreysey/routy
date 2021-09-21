@@ -67,11 +67,7 @@ export default function StartShiftPage(props: any) {
                     alignItems="center"
                 >
                     <Grid item>
-                        <TextButton
-                            name={'Сохранить'}
-                            to={'/shift'}
-                            startIcon={<SaveAltRoundedIcon/>}
-                        />
+                        {props.saveButton}
                     </Grid>
                 </Grid>
             </Container>

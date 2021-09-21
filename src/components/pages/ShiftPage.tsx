@@ -12,6 +12,7 @@ import TrainRoundedIcon from "@material-ui/icons/TrainRounded";
 import DirectionsRailwayRoundedIcon from "@material-ui/icons/DirectionsRailwayRounded";
 import DirectionsRunRoundedIcon from "@material-ui/icons/DirectionsRunRounded";
 import TextButtonBack from "../TextButtonBack";
+import {ICards} from "../../interfaces";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -31,9 +32,106 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-
 export default function ShiftPage(props: any) {
     const classes = useStyles();
+
+    const showButtonHelper = (lastAction: any) => {
+        const end = (<Grid item>
+            <TextButton
+                name={'Конец смены'}
+                to={'/end'}
+                startIcon={<LocalBarRoundedIcon/>}
+            />
+        </Grid>);
+
+        const startPass = (
+            <Grid item>
+                <TextButton
+                    name={'Пассажиром'}
+                    to={'/start-pass'}
+                    startIcon={<EmojiPeopleRoundedIcon/>}
+                />
+            </Grid>
+        );
+
+        const startLoco = (
+            <Grid item>
+                <TextButton
+                    name={'Приемка'}
+                    to={'/start-loco'}
+                    startIcon={<TrainRoundedIcon/>}
+                />
+            </Grid>
+        );
+
+        const endLoco = (
+            <Grid item>
+                <TextButton
+                    name={'Сдача'}
+                    to={'/end-loco'}
+                    startIcon={<DirectionsRunRoundedIcon/>}
+                />
+            </Grid>
+        );
+
+        const train = (
+            <Grid item>
+                <TextButton
+                    name={'Поезд'}
+                    to={'/start-train'}
+                    startIcon={<DirectionsRailwayRoundedIcon/>}
+                />
+            </Grid>
+        );
+
+        switch (lastAction) {
+            case 'Явка':
+                return (
+                    <>
+                        {end}
+                        {startPass}
+                        {startLoco}
+                    </>
+                )
+
+            case 'Принят':
+                return (
+                    <>
+                        {endLoco}
+                        {train}
+                    </>
+                )
+
+            case 'Пассажиром':
+                return (
+                    <>
+                        {startPass}
+                        {end}
+                        {startLoco}
+                    </>
+                )
+
+            case 'Поезд':
+                return (
+                    <>
+                        {endLoco}
+                        {train}
+                    </>
+                )
+
+            case 'Сдан':
+                return (
+                    <>
+                        {startLoco}
+                        {end}
+                        {startPass}
+                    </>
+                )
+
+            case 'Конец смены':
+                break;
+        }
+    }
 
     return (
         <div className={classes.wrapper}>
@@ -49,51 +147,18 @@ export default function ShiftPage(props: any) {
                 <Grid
                     container
                 >
-                    <Grid item xs={12}>
-                        <SimpleCard
-                            name={'Явка'}
-                            // info={props.startShiftTime.toString()}
-                            info={props.startShiftTime}
-                            to={'/start'}
-                            state={props.startShiftDate}
-                        />
-                    </Grid>
-                    {/*<Grid item xs={12}>*/}
-                    {/*    <SimpleCard*/}
-                    {/*        name={'Пассажиром'}*/}
-                    {/*        info={'15:30 / --:--'}*/}
-                    {/*        to={'/start-pass'}*/}
-                    {/*    />*/}
-                    {/*</Grid>*/}
-                    {/*<Grid item xs={12}>*/}
-                    {/*    <SimpleCard*/}
-                    {/*        name={'Принят'}*/}
-                    {/*        info={'ВЛ-11 074'}*/}
-                    {/*        to={'/start-loco'}*/}
-                    {/*    />*/}
-                    {/*</Grid>*/}
-                    {/*<Grid item xs={12}>*/}
-                    {/*    <SimpleCard*/}
-                    {/*        name={'Поезд'}*/}
-                    {/*        info={'15:30 / 17:29'}*/}
-                    {/*        to={'/start-train'}*/}
-                    {/*    />*/}
-                    {/*</Grid>*/}
-                    {/*<Grid item xs={12}>*/}
-                    {/*    <SimpleCard*/}
-                    {/*        name={'Сдан'}*/}
-                    {/*        info={'ВЛ-11 485'}*/}
-                    {/*        to={'/end-loco'}*/}
-                    {/*    />*/}
-                    {/*</Grid>*/}
-                    {/*<Grid item xs={12}>*/}
-                    {/*    <SimpleCard*/}
-                    {/*        name={'Конец работы'}*/}
-                    {/*        info={'23:59'}*/}
-                    {/*        to={'/end'}*/}
-                    {/*    />*/}
-                    {/*</Grid>*/}
-
+                    {props.cards.map((card: { title: string | undefined; info: string | undefined; }, i: any) => {
+                        return (
+                            <Grid item xs={12} key={i}>
+                                <SimpleCard
+                                    title={card.title}
+                                    info={card.info}
+                                    to={'/start'}
+                                    state={''}
+                                />
+                            </Grid>
+                        )
+                    })}
                 </Grid>
             </Container>
             {/* End main */}
@@ -106,41 +171,7 @@ export default function ShiftPage(props: any) {
                     justifyContent="center"
                     alignItems="center"
                 >
-                    <Grid item>
-                        <TextButton
-                            name={'Конец смены'}
-                            to={'/end'}
-                            startIcon={<LocalBarRoundedIcon/>}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextButton
-                            name={'Пассажиром'}
-                            to={'/start-pass'}
-                            startIcon={<EmojiPeopleRoundedIcon/>}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextButton
-                            name={'Приемка'}
-                            to={'/start-loco'}
-                            startIcon={<TrainRoundedIcon/>}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextButton
-                            name={'Поезд'}
-                            to={'/start-train'}
-                            startIcon={<DirectionsRailwayRoundedIcon/>}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextButton
-                            name={'Сдача'}
-                            to={'/end-loco'}
-                            startIcon={<DirectionsRunRoundedIcon/>}
-                        />
-                    </Grid>
+                    {showButtonHelper(props.lastAction)}
                 </Grid>
             </Container>
             {/* End footer */}

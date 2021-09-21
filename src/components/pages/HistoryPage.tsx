@@ -53,22 +53,22 @@ export default function HistoryPage() {
                 >
                     <Grid item xs={12}>
                         <SimpleCard
-                            name={'24.08.21  2002/4004'}
-                            info={'15:30 - 17:29 - 11:45'}
+                            title={'24.08.21  2002/4004'}
+                            info={''}
                             to={'/shift'}
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <SimpleCard
-                            name={'24.08.21  2002/4004'}
-                            info={'15:30 - 17:29 - 11:45'}
+                            title={'24.08.21  2002/4004'}
+                            info={''}
                             to={'/shift'}
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <SimpleCard
-                            name={'24.08.21  2002/4004'}
-                            info={'15:30 - 17:29 - 11:45'}
+                            title={'24.08.21  2002/4004'}
+                            info={''}
                             to={'/shift'}
                         />
                     </Grid>

@@ -92,11 +92,7 @@ export default function StartPassPage(props: any) {
                       alignItems="center"
                 >
                     <Grid item xs={12}>
-                        <TextButton
-                            name={'Сохранить'}
-                            to={'/shift'}
-                            startIcon={<SaveAltRoundedIcon/>}
-                        />
+                        {props.saveButton}
                     </Grid>
 
                 </Grid>
