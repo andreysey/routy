@@ -21,12 +21,12 @@ import Grid from "@material-ui/core/Grid";
 
 function App() {
     const cardsHandler = (title: string, info: Date | null | undefined | string) => {
-        const newTodo: ICards = {
+        const newCard: ICards = {
             title: title,
             id: Date.now(),
             info: info
         }
-        setCards(prevState => [...prevState, newTodo])
+        setCards(prevState => [...prevState, newCard])
     }
 
     const [lastAction, setLastAction] = useState('')

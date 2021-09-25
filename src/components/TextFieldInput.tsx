@@ -23,26 +23,30 @@ interface ITextFieldProps extends BaseTextFieldProps {
 export default function TextFieldInput(props: ITextFieldProps) {
     const classes = useStyles();
 
-    useEffect(()=>{
+    const state = props.state;
+    const setState = props.setState;
+
+    useEffect(() => {
 
         const data = localStorage.getItem(`${props.id}`)
 
-        if(data){
-            props.setState(JSON.parse(data))
+        if (data) {
+            setState(JSON.parse(data))
         }
 
-    },[])
+    }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        localStorage.setItem(`${props.id}`, JSON.stringify(props.state))
+        localStorage.setItem(`${props.id}`, JSON.stringify(state))
 
     })
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        props.setState(event.target.value)
+        setState(event.target.value)
     }
-    console.log(props.state)
+
+    console.log(state)
 
     return (
         <form className={classes.root} noValidate autoComplete="off">
@@ -56,18 +60,8 @@ export default function TextFieldInput(props: ITextFieldProps) {
                 variant="outlined"
                 color="primary"
                 onChange={handleChange}
-                value={props.state}
+                value={state}
             />
         </form>
     );
 }
-// fullWidth
-// // id="outlined-basic"
-// label="Маршрут"
-// placeholder="Номер"
-// // helperText="Номер"
-// type="number"
-// variant="outlined"
-// color="primary"
-// onChange={handleChange}
-// value={state}
