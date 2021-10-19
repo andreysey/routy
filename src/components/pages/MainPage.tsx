@@ -1,38 +1,14 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBarMain from "../AppBarMain";
 import TextButton from "../TextButton";
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {Container} from "@material-ui/core";
-import Grid from '@material-ui/core/Grid';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 import ProgressTime from "../ProgressTime";
-import Typography from '@material-ui/core/Typography';
-import PlayArrowRoundedIcon from '@material-ui/icons/PlayArrowRounded';
-import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        wrapper: {
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '100vh',
-        },
-        header: {},
-        main: {
-            marginTop: theme.spacing(2),
-        },
-        progress: {
-            marginTop: theme.spacing(10),
-        },
-        footer: {
-            padding: theme.spacing(4),
-        },
-    }),
-);
+import Typography from '@mui/material/Typography';
+import {ArrowBackRounded, PlayArrowRounded} from "@mui/icons-material";
+import Stack from "@mui/material/Stack";
 
 export default function MainPage(props: any) {
-    const classes = useStyles();
-
 
     const dateHandler = () => {
         const date = new Date()
@@ -42,14 +18,11 @@ export default function MainPage(props: any) {
     }
 
     return (
-        <div className={classes.wrapper}>
-            <CssBaseline/>
-            <div className={classes.header}>
-                <AppBarMain title={'Норма 180'}/>
-            </div>
-            {/* Main */}
-            <Container component="main" className={classes.main} maxWidth="sm">
-                <Grid container
+        <>
+            <AppBarMain title={'Норма 180'}/>
+            <Container component="main" maxWidth="sm">
+                <Grid container spacing={2}
+                      sx={{mt: 1, mb: 3}}
                       justifyContent="space-between"
                       alignItems="center"
                 >
@@ -64,37 +37,17 @@ export default function MainPage(props: any) {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid className={classes.progress}
-                      container
-                    // spacing={4}
-                      direction="column"
-                      justifyContent="center"
-                      alignItems="center"
-                >
+                <Stack>
                     <ProgressTime/>
-                </Grid>
-
+                </Stack>
+                <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
+                    {props.startShiftToggle
+                        ? (<TextButton name={'Вернутся'} startIcon={<ArrowBackRounded/>} to={'/shift'}/>)
+                        : (<TextButton name={'Начать смену'} startIcon={<PlayArrowRounded/>} to={'/start'}/>)
+                    }
+                </Stack>
             </Container>
-            {/* End main */}
-
-            {/* Footer */}
-            <Container className={classes.footer} maxWidth="sm">
-                <Grid
-                    container
-                    direction="column"
-                    justifyContent="center"
-                    alignItems="center"
-                >
-                    <Grid item sm={12}>
-                        {props.startShiftToggle
-                            ? (<TextButton name={'Вернутся'} startIcon={<ArrowBackRoundedIcon/>} to={'/shift'}/>)
-                            : (<TextButton name={'Начать смену'} startIcon={<PlayArrowRoundedIcon/>} to={'/start'}/>)
-                        }
-                    </Grid>
-                </Grid>
-            </Container>
-            {/* End footer */}
-        </div>
+        </>
     );
 }
 

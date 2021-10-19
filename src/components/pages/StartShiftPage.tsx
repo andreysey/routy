@@ -1,75 +1,26 @@
 import React from "react";
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import Stack from '@mui/material/Stack';
 import AppBarMain from "../AppBarMain";
-import {Container} from "@material-ui/core";
-import Grid from '@material-ui/core/Grid';
+import Container from '@mui/material/Container';
 import TextButtonBack from "../TextButtonBack";
-
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        wrapper: {
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '100vh',
-
-        },
-        header: {},
-        main: {
-            marginTop: theme.spacing(2),
-        },
-        footer: {
-            padding: theme.spacing(4),
-        },
-    }),
-);
+import Box from "@mui/material/Box";
 
 export default function StartShiftPage(props: any) {
-
-    const classes = useStyles();
-    console.log(props)
     return (
-        <div className={classes.wrapper}>
-            <CssBaseline/>
-            <div className={classes.header}>
-                <AppBarMain title={'Начать смену'}/>
-            </div>
-            {/* Main */}
-            <Container className={classes.main} maxWidth="sm">
-                <Grid container>
+        <>
+            <AppBarMain title={'Начать смену'}/>
+            <Container maxWidth="sm">
+                <Box sx={{mt: 3, mb: 3}}>
                     <TextButtonBack/>
-                </Grid>
-                <Grid
-                    container
-                    spacing={4}
-                >
-                    <Grid item xs={12}>
-                        {props.date}
-                    </Grid>
-                    <Grid item xs={12}>
-                        {props.time}
-                    </Grid>
-                    <Grid item xs={12}>
-                        {props.routeInput}
-                    </Grid>
-                </Grid>
+                </Box>
+                <Stack spacing={3}>
+                    {props.time}
+                    {props.routeInput}
+                </Stack>
+                <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
+                    {props.saveButton}
+                </Stack>
             </Container>
-            {/* End main */}
-
-            {/* Footer */}
-            <Container className={classes.footer} maxWidth="sm">
-                <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                >
-                    <Grid item>
-                        {props.saveButton}
-                    </Grid>
-                </Grid>
-            </Container>
-            {/* End footer */}
-        </div>
+        </>
     );
 }

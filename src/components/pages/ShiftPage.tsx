@@ -1,88 +1,33 @@
 import React from "react";
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBarMain from "../AppBarMain";
-import {Container} from "@material-ui/core";
-import Grid from '@material-ui/core/Grid';
+import Container from '@mui/material/Container';
 import SimpleCard from '../SimpleCard';
 import TextButton from "../TextButton";
-import LocalBarRoundedIcon from "@material-ui/icons/LocalBarRounded";
-import EmojiPeopleRoundedIcon from "@material-ui/icons/EmojiPeopleRounded";
-import TrainRoundedIcon from "@material-ui/icons/TrainRounded";
-import DirectionsRailwayRoundedIcon from "@material-ui/icons/DirectionsRailwayRounded";
-import DirectionsRunRoundedIcon from "@material-ui/icons/DirectionsRunRounded";
+import {
+    DirectionsRailwayRounded,
+    DirectionsRunRounded,
+    EmojiPeopleRounded,
+    LocalBarRounded,
+    TrainRounded
+} from "@mui/icons-material";
 import TextButtonBack from "../TextButtonBack";
-import {ICards} from "../../interfaces";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        wrapper: {
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '100vh',
-        },
-        header: {},
-        main: {
-            marginTop: theme.spacing(2),
-        },
-        footer: {
-            padding: theme.spacing(4),
-        },
-    }),
-);
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
 
 export default function ShiftPage(props: any) {
-    const classes = useStyles();
 
     const showButtonHelper = (lastAction: any) => {
-        const end = (<Grid item>
-            <TextButton
-                name={'Конец смены'}
-                to={'/end'}
-                startIcon={<LocalBarRoundedIcon/>}
-            />
-        </Grid>);
 
-        const startPass = (
-            <Grid item>
-                <TextButton
-                    name={'Пассажиром'}
-                    to={'/start-pass'}
-                    startIcon={<EmojiPeopleRoundedIcon/>}
-                />
-            </Grid>
-        );
+        const end = (<TextButton name={'Конец смены'} to={'/end'} startIcon={<LocalBarRounded/>}/>);
 
-        const startLoco = (
-            <Grid item>
-                <TextButton
-                    name={'Приемка'}
-                    to={'/start-loco'}
-                    startIcon={<TrainRoundedIcon/>}
-                />
-            </Grid>
-        );
+        const startPass = (<TextButton name={'Пассажиром'} to={'/start-pass'} startIcon={<EmojiPeopleRounded/>}/>);
 
-        const endLoco = (
-            <Grid item>
-                <TextButton
-                    name={'Сдача'}
-                    to={'/end-loco'}
-                    startIcon={<DirectionsRunRoundedIcon/>}
-                />
-            </Grid>
-        );
+        const startLoco = (<TextButton name={'Приемка'} to={'/start-loco'} startIcon={<TrainRounded/>}/>);
 
-        const train = (
-            <Grid item>
-                <TextButton
-                    name={'Поезд'}
-                    to={'/start-train'}
-                    startIcon={<DirectionsRailwayRoundedIcon/>}
-                />
-            </Grid>
-        );
+        const endLoco = (<TextButton name={'Сдача'} to={'/end-loco'} startIcon={<DirectionsRunRounded/>}/>);
+
+        const train = (<TextButton name={'Поезд'} to={'/start-train'} startIcon={<DirectionsRailwayRounded/>}/>);
 
         switch (lastAction) {
             case 'Явка':
@@ -93,7 +38,6 @@ export default function ShiftPage(props: any) {
                         {startLoco}
                     </>
                 )
-
             case 'Принят':
                 return (
                     <>
@@ -101,7 +45,6 @@ export default function ShiftPage(props: any) {
                         {train}
                     </>
                 )
-
             case 'Пассажиром':
                 return (
                     <>
@@ -110,7 +53,6 @@ export default function ShiftPage(props: any) {
                         {startLoco}
                     </>
                 )
-
             case 'Поезд':
                 return (
                     <>
@@ -118,7 +60,6 @@ export default function ShiftPage(props: any) {
                         {train}
                     </>
                 )
-
             case 'Сдан':
                 return (
                     <>
@@ -127,54 +68,33 @@ export default function ShiftPage(props: any) {
                         {startPass}
                     </>
                 )
-
             case 'Конец смены':
                 break;
         }
     }
 
     return (
-        <div className={classes.wrapper}>
-            <CssBaseline/>
-            <div className={classes.header}>
-                <AppBarMain title={'Смена'}/>
-            </div>
-            {/* Main */}
-            <Container className={classes.main} maxWidth="sm">
-                <Grid container>
+        <>
+            <AppBarMain title={'Смена'}/>
+            <Container maxWidth="sm">
+                <Box sx={{mt: 3, mb: 3}}>
                     <TextButtonBack/>
-                </Grid>
-                <Grid
-                    container
-                >
+                </Box>
+                <Stack spacing={3}>
                     {props.cards.map((card: { title: string | undefined; info: string | undefined; }, i: any) => {
-                        return (
-                            <Grid item xs={12} key={i}>
-                                <SimpleCard
+                        return (<SimpleCard
+                                    key={i}
                                     title={card.title}
                                     info={card.info}
                                     to={'/start'}
                                     state={''}
-                                />
-                            </Grid>
-                        )
+                                />)
                     })}
-                </Grid>
-            </Container>
-            {/* End main */}
-
-            {/* Footer */}
-            <Container className={classes.footer} maxWidth="sm">
-                <Grid
-                    container
-                    direction="column"
-                    justifyContent="center"
-                    alignItems="center"
-                >
+                </Stack>
+                <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
                     {showButtonHelper(props.lastAction)}
-                </Grid>
+                </Stack>
             </Container>
-            {/* End footer */}
-        </div>
+        </>
     );
 }

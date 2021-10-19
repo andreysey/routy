@@ -10,14 +10,12 @@ import EndShiftPage from './components/pages/EndShiftPage';
 import EndLocoPage from './components/pages/EndLocoPage';
 import HistoryPage from "./components/pages/HistoryPage";
 import TextFieldInput from "./components/TextFieldInput";
-import PickDates from "./components/pickers/PickDates";
-import PickTimes from "./components/pickers/PickTimes";
 import SelectLoco from "./components/SelectLoco";
-import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
+import {SaveAltRounded} from "@mui/icons-material";
 import TextButton from "./components/TextButton";
-import SimpleCard from "./components/SimpleCard";
 import {ICards} from "./interfaces";
-import Grid from "@material-ui/core/Grid";
+import CssBaseline from '@mui/material/CssBaseline';
+import PickTime from './components/pickers/PickTime';
 
 function App() {
     const cardsHandler = (title: string, info: Date | null | undefined | string) => {
@@ -37,15 +35,12 @@ function App() {
 
     // Start shift page state
     const [route, setRoute] = useState('');
-    const [startShiftDate, setStartShiftDate] = React.useState<Date | null>(new Date());
     const [startShiftTime, setStartShiftTime] = React.useState<Date | null>(new Date());
     // Pass state
     const [passTrain, setPassTrain] = useState('');
     const [passStationDeparture, setPassStationDeparture] = useState('');
-    const [passDateDeparture, setPassDateDeparture] = React.useState<Date | null>(new Date());
     const [passTimeDeparture, setPassTimeDeparture] = React.useState<Date | null>(new Date());
     const [passStationArrival, setPassStationArrival] = useState('');
-    const [passDateArrival, setPassDateArrival] = React.useState<Date | null>(new Date());
     const [passTimeArrival, setPassTimeArrival] = React.useState<Date | null>(new Date());
     // Start loco
     const [locoType, setLocoType] = useState('');
@@ -57,10 +52,8 @@ function App() {
     // Train state
     const [train, setTrain] = useState('');
     const [trainStationDeparture, setTrainStationDeparture] = useState('');
-    const [trainDateDeparture, setTrainDateDeparture] = React.useState<Date | null>(new Date());
     const [trainTimeDeparture, setTrainTimeDeparture] = React.useState<Date | null>(new Date());
     const [trainStationArrival, setTrainStationArrival] = useState('');
-    const [trainDateArrival, setTrainDateArrival] = React.useState<Date | null>(new Date());
     const [trainTimeArrival, setTrainTimeArrival] = React.useState<Date | null>(new Date());
     // End loco
     const [endEnergyA, setEndEnergyA] = useState('');
@@ -68,369 +61,234 @@ function App() {
     const [endRecupA, setEndRecupA] = useState('');
     const [endRecupB, setEndRecupB] = useState('');
     // End shift state
-    const [endShiftDate, setEndShiftDate] = React.useState<Date | null>(new Date());
     const [endShiftTime, setEndShiftTime] = React.useState<Date | null>(new Date());
 
 
     return (
-        <div className={'container'}>
-            <Switch>
-                <Route path="/" exact>
-                    <MainPage
-                        startShiftToggle={startShiftToggle}
-                    />
-                </Route>
-                <Route path="/start">
-                    <StartShiftPage
-                        date={
-                            <PickDates
-                                id={'startShiftDate'}
-                                state={startShiftDate}
-                                setState={setStartShiftDate}
-                            />
-                        }
-                        time={
-                            <PickTimes
+        <>
+            <CssBaseline/>
+                <Switch>
+                    <Route path="/" exact>
+                        <MainPage
+                            startShiftToggle={startShiftToggle}/>
+                    </Route>
+                    <Route path="/start">
+                        <StartShiftPage
+                            time={<PickTime
                                 id={'startShiftTime'}
                                 state={startShiftTime}
-                                setState={setStartShiftTime}
-                            />
-                        }
-                        routeInput={
-                            <TextFieldInput
+                                setState={setStartShiftTime}/>}
+                            routeInput={<TextFieldInput
                                 id={'route'}
                                 state={route}
                                 setState={setRoute}
                                 label={'Маршрут'}
                                 placeholder={'Номер'}
-                                type={'number'}
-                            />
-                        }
-                        saveButton={
-                            <TextButton
+                                type={'number'}/>}
+                            saveButton={<TextButton
                                 name={'Сохранить'}
                                 to={'/shift'}
-                                startIcon={<SaveAltRoundedIcon/>}
+                                startIcon={<SaveAltRounded/>}
                                 onClick={() => {
-                                    setStartShiftToggle(true)
-                                    cardsHandler('Явка', startShiftTime)
-                                    setLastAction('Явка')
-                                }}
-                            />
-                        }
-                    />
-                </Route>
-                <Route path="/shift">
-                    <ShiftPage
-                        cards={cards}
-                        lastAction={lastAction}
-                    />
-                </Route>
-                <Route path="/start-loco">
-                    <StartLocoPage
-                        locoType={
-                            <SelectLoco
+                                    setStartShiftToggle(true);
+                                    cardsHandler('Явка', startShiftTime);
+                                    setLastAction('Явка');
+                                }}/>}/>
+                    </Route>
+                    <Route path="/shift">
+                        <ShiftPage
+                            cards={cards}
+                            lastAction={lastAction}/>
+                    </Route>
+                    <Route path="/start-loco">
+                        <StartLocoPage
+                            locoType={<SelectLoco
                                 id={'locoType'}
                                 state={locoType}
-                                setState={setLocoType}
-                            />
-                        }
-                        locoNumber={
-                            <TextFieldInput
+                                setState={setLocoType}/>}
+                            locoNumber={<TextFieldInput
                                 id={'locoNumber'}
                                 state={locoNumber}
                                 setState={setLocoNumber}
                                 label={'Номер'}
                                 placeholder={'Локомотива'}
                                 helperText={' '}
-                                type={'number'}
-                            />
-                        }
-                        startEnergyA={
-                            <TextFieldInput
+                                type={'number'}/>}
+                            startEnergyA={<TextFieldInput
                                 id={'startEnergyA'}
                                 state={startEnergyA}
                                 setState={setStartEnergyA}
                                 label={'А'}
                                 placeholder={'00-00-00'}
                                 helperText={'Энергия'}
-                                type={'number'}
-                            />
-                        }
-                        startEnergyB={
-                            <TextFieldInput
+                                type={'number'}/>}
+                            startEnergyB={<TextFieldInput
                                 id={'startEnergyB'}
                                 state={startEnergyB}
                                 setState={setStartEnergyB}
                                 label={'Б'}
                                 placeholder={'00-00-00'}
                                 helperText={'Энергия'}
-                                type={'number'}
-                            />
-                        }
-                        startRecupA={
-                            <TextFieldInput
+                                type={'number'}/>}
+                            startRecupA={<TextFieldInput
                                 id={'startRecupA'}
                                 state={startRecupA}
                                 setState={setStartRecupA}
                                 label={'А'}
                                 placeholder={'00-00-00'}
                                 helperText={'Рекуперация'}
-                                type={'number'}
-                            />
-                        }
-                        startRecupB={
-                            <TextFieldInput
+                                type={'number'}/>}
+                            startRecupB={<TextFieldInput
                                 id={'startRecupB'}
                                 state={startRecupB}
                                 setState={setStartRecupB}
                                 label={'Б'}
                                 placeholder={'00-00-00'}
                                 helperText={'Рекуперация'}
-                                type={'number'}
-                            />
-                        }
-                        saveButton={
-                            <TextButton
+                                type={'number'}/>}
+                            saveButton={<TextButton
                                 name={'Сохранить'}
                                 to={'/shift'}
-                                startIcon={<SaveAltRoundedIcon/>}
+                                startIcon={<SaveAltRounded/>}
                                 onClick={() => {
-                                    cardsHandler('Принят', locoNumber)
-                                    setLastAction('Принят')
-                                }}
-                            />
-                        }
-                    />
-                </Route>
-                <Route path="/start-pass">
-                    <StartPassPage
-                        passTrain={
-                            <TextFieldInput
+                                    cardsHandler('Принят', locoNumber);
+                                    setLastAction('Принят');
+                                }}/>}/>
+                    </Route>
+                    <Route path="/start-pass">
+                        <StartPassPage
+                            passTrain={<TextFieldInput
                                 id={'passTrain'}
                                 label={'Поезд'}
                                 placeholder={'Номер'}
                                 state={passTrain}
                                 setState={setPassTrain}
-                                type={'number'}
-                            />
-                        }
-                        passStationDeparture={
-                            <TextFieldInput
+                                type={'number'}/>}
+                            timeDeparture={<PickTime
+                                id={'passTimeDeparture'}
+                                state={passTimeDeparture}
+                                setState={setPassTimeDeparture}/>}
+                            passStationDeparture={<TextFieldInput
                                 id={'passStationDeparture'}
                                 label={'Станция оправления'}
                                 state={passStationDeparture}
-                                setState={setPassStationDeparture}
-                            />
-                        }
-                        dateDeparture={
-                            <PickDates
-                                id={'passDateDeparture'}
-                                state={passDateDeparture}
-                                setState={setPassDateDeparture}
-                            />
-                        }
-                        timeDeparture={
-                            <PickTimes
-                                id={'passTimeDeparture'}
-                                state={passTimeDeparture}
-                                setState={setPassTimeDeparture}
-                            />
-                        }
-                        passStationArrival={
-                            <TextFieldInput
+                                setState={setPassStationDeparture}/>}
+                            timeArrival={<PickTime
+                                id={'passTimeArrival'}
+                                state={passTimeArrival}
+                                setState={setPassTimeArrival}/>}
+                            passStationArrival={<TextFieldInput
                                 id={'passStationArrival'}
                                 label={'Станция прибытия'}
                                 state={passStationArrival}
-                                setState={setPassStationArrival}
-                            />}
-                        dateArrival={
-                            <PickDates
-                                id={'passDateArrival'}
-                                state={passDateArrival}
-                                setState={setPassDateArrival}
-                            />
-                        }
-                        timeArrival={
-                            <PickTimes
-                                id={'passTimeArrival'}
-                                state={passTimeArrival}
-                                setState={setPassTimeArrival}
-                            />
-                        }
-                        saveButton={
-                            <TextButton
+                                setState={setPassStationArrival}/>}
+                            saveButton={<TextButton
                                 name={'Сохранить'}
                                 to={'/shift'}
-                                startIcon={<SaveAltRoundedIcon/>}
+                                startIcon={<SaveAltRounded/>}
                                 onClick={() => {
-                                    cardsHandler('Пассажиром', passTimeDeparture)
-                                    setLastAction('Пассажиром')
-                                }}
-                            />
-                        }
-                    />
-                </Route>
-                <Route path="/start-train">
-                    <StartTrainPage
-                        train={
-                            <TextFieldInput
+                                    cardsHandler('Пассажиром', passTimeDeparture);
+                                    setLastAction('Пассажиром');
+                                }}/>}/>
+                    </Route>
+                    <Route path="/start-train">
+                        <StartTrainPage
+                            train={<TextFieldInput
                                 id={'train'}
                                 label={'Поезд'}
                                 placeholder={'Номер'}
                                 state={train}
-                                setState={setTrain}
-                            />
-                        }
-                        trainStationDeparture={
-                            <TextFieldInput
+                                setState={setTrain}/>}
+                            trainStationDeparture={<TextFieldInput
                                 id={'trainStationDeparture'}
                                 label={'Станция оправления'}
                                 state={trainStationDeparture}
-                                setState={setTrainStationDeparture}
-                            />
-                        }
-                        dateDeparture={
-                            <PickDates
-                                id={'trainDateDeparture'}
-                                state={trainDateDeparture}
-                                setState={setTrainDateDeparture}
-                            />
-                        }
-                        timeDeparture={
-                            <PickTimes
+                                setState={setTrainStationDeparture}/>}
+                            timeDeparture={<PickTime
                                 id={'trainTimeDeparture'}
                                 state={trainTimeDeparture}
-                                setState={setTrainTimeDeparture}
-                            />
-                        }
-                        trainStationArrival={
-                            <TextFieldInput
+                                setState={setTrainTimeDeparture}/>}
+                            trainStationArrival={<TextFieldInput
                                 id={'trainStationArrival'}
                                 label={'Станция прибытия'}
                                 state={trainStationArrival}
-                                setState={setTrainStationArrival}
-                            />}
-                        dateArrival={
-                            <PickDates
-                                id={'trainDateArrival'}
-                                state={trainDateArrival}
-                                setState={setTrainDateArrival}
-                            />
-                        }
-                        timeArrival={
-                            <PickTimes
+                                setState={setTrainStationArrival}/>}
+                            timeArrival={<PickTime
                                 id={'trainTimeArrival'}
                                 state={trainTimeArrival}
-                                setState={setTrainTimeArrival}
-                            />
-                        }
-                        saveButton={
-                            <TextButton
+                                setState={setTrainTimeArrival}/>}
+                            saveButton={<TextButton
                                 name={'Сохранить'}
                                 to={'/shift'}
-                                startIcon={<SaveAltRoundedIcon/>}
+                                startIcon={<SaveAltRounded/>}
                                 onClick={() => {
-                                    cardsHandler('Поезд', train)
-                                    setLastAction('Поезд')
-                                }}
-                            />
-                        }
-                    />
-                </Route>
-                <Route path="/end-loco">
-                    <EndLocoPage
-                        endEnergyA={
-                            <TextFieldInput
+                                    cardsHandler('Поезд', train);
+                                    setLastAction('Поезд');
+                                }}/>}/>
+                    </Route>
+                    <Route path="/end-loco">
+                        <EndLocoPage
+                            endEnergyA={<TextFieldInput
                                 id={'endEnergyA'}
                                 state={endEnergyA}
                                 setState={setEndEnergyA}
                                 label={'А'}
                                 placeholder={'00-00-00'}
                                 helperText={'Энергия'}
-                                type={'number'}
-                            />
-                        }
-                        endEnergyB={
-                            <TextFieldInput
+                                type={'number'}/>}
+                            endEnergyB={<TextFieldInput
                                 id={'endEnergyB'}
                                 state={endEnergyB}
                                 setState={setEndEnergyB}
                                 label={'Б'}
                                 placeholder={'00-00-00'}
                                 helperText={'Энергия'}
-                                type={'number'}
-                            />
-                        }
-                        endRecupA={
-                            <TextFieldInput
+                                type={'number'}/>}
+                            endRecupA={<TextFieldInput
                                 id={'endRecupA'}
                                 state={endRecupA}
                                 setState={setEndRecupA}
                                 label={'А'}
                                 placeholder={'00-00-00'}
                                 helperText={'Рекуперация'}
-                                type={'number'}
-                            />
-                        }
-                        endRecupB={
-                            <TextFieldInput
+                                type={'number'}/>}
+                            endRecupB={<TextFieldInput
                                 id={'endRecupB'}
                                 state={endRecupB}
                                 setState={setEndRecupB}
                                 label={'Б'}
                                 placeholder={'00-00-00'}
                                 helperText={'Рекуперация'}
-                                type={'number'}
-                            />
-                        }
-                        saveButton={
-                            <TextButton
+                                type={'number'}/>}
+                            saveButton={<TextButton
                                 name={'Сохранить'}
                                 to={'/shift'}
-                                startIcon={<SaveAltRoundedIcon/>}
+                                startIcon={<SaveAltRounded/>}
                                 onClick={() => {
-                                    cardsHandler('Сдан', locoNumber)
-                                    setLastAction('Сдан')
-                                }}
-                            />
-                        }
-                    />
-                </Route>
-                <Route path="/end">
-                    <EndShiftPage
-                        date={
-                            <PickDates
-                                id={'endShiftDate'}
-                                state={endShiftDate}
-                                setState={setEndShiftDate}
-                            />
-                        }
-                        time={
-                            <PickTimes
+                                    cardsHandler('Сдан', locoNumber);
+                                    setLastAction('Сдан');
+                                }}/>}/>
+                    </Route>
+                    <Route path="/end">
+                        <EndShiftPage
+                            time={<PickTime
                                 id={'endShiftTime'}
                                 state={endShiftTime}
-                                setState={setEndShiftTime}
-                            />
-                        }
-                        saveButton={
-                            <TextButton
+                                setState={setEndShiftTime}/>}
+                            saveButton={<TextButton
                                 name={'Сохранить'}
                                 to={'/shift'}
-                                startIcon={<SaveAltRoundedIcon/>}
+                                startIcon={<SaveAltRounded/>}
                                 onClick={() => {
-                                    cardsHandler('Конец смены', endShiftTime)
-                                    setLastAction('Конец смены')
-                                }}
-                            />
-                        }
-                    />
-                </Route>
-                <Route path="/history">
-                    <HistoryPage/>
-                </Route>
-            </Switch>
-        </div>
+                                    cardsHandler('Конец смены', endShiftTime);
+                                    setLastAction('Конец смены');
+                                }}/>}/>
+                    </Route>
+                    <Route path="/history">
+                        <HistoryPage/>
+                    </Route>
+                </Switch>
+        </>
     );
 }
 

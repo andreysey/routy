@@ -1,18 +1,5 @@
 import React, {useEffect} from 'react';
-import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
-import TextField, {BaseTextFieldProps} from '@material-ui/core/TextField';
-
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            '& > *': {
-                // margin: theme.spacing(2),
-                // width: '34ch',
-            },
-        },
-    }),
-);
+import TextField, {BaseTextFieldProps} from '@mui/material/TextField';
 
 interface ITextFieldProps extends BaseTextFieldProps {
     state?: any;
@@ -21,7 +8,6 @@ interface ITextFieldProps extends BaseTextFieldProps {
 }
 
 export default function TextFieldInput(props: ITextFieldProps) {
-    const classes = useStyles();
 
     const state = props.state;
     const setState = props.setState;
@@ -46,10 +32,8 @@ export default function TextFieldInput(props: ITextFieldProps) {
         setState(event.target.value)
     }
 
-    console.log(state)
-
     return (
-        <form className={classes.root} noValidate autoComplete="off">
+        <form  noValidate autoComplete="off">
             <TextField
                 fullWidth
                 id={props.id}

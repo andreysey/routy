@@ -1,95 +1,41 @@
 import React from "react";
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBarMain from "../AppBarMain";
-import {Container} from "@material-ui/core";
-import Grid from '@material-ui/core/Grid';
-import PickDatesYM from '../pickers/PickDatesYM';
+import PickDatesYM from '../pickers/PickDate';
 import TextButtonBack from "../TextButtonBack";
 import SimpleCard from "../SimpleCard";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        wrapper: {
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '100vh',
-        },
-        header: {},
-        main: {
-            marginTop: theme.spacing(2),
-        },
-        footer: {
-            padding: theme.spacing(4),
-        },
-    }),
-);
+import Container from '@mui/material/Container';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 
 export default function HistoryPage() {
-    const classes = useStyles();
-
     return (
-        <div className={classes.wrapper}>
-            <CssBaseline/>
-            <div className={classes.header}>
-                <AppBarMain title={'Маршруты'}/>
-            </div>
-            {/* Main */}
-            <Container className={classes.main} maxWidth="sm">
-                <Grid container>
-                    <Grid item xs={12}>
-                        <TextButtonBack/>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <PickDatesYM/>
-                    </Grid>
-                </Grid>
-                <Grid
-                    container
-                    // spacing={4}
-                    // direction="column"
-                    // justifyContent="center"
-                    // alignItems="center"
-                >
-                    <Grid item xs={12}>
-                        <SimpleCard
-                            title={'24.08.21  2002/4004'}
-                            info={''}
-                            to={'/shift'}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <SimpleCard
-                            title={'24.08.21  2002/4004'}
-                            info={''}
-                            to={'/shift'}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <SimpleCard
-                            title={'24.08.21  2002/4004'}
-                            info={''}
-                            to={'/shift'}
-                        />
-                    </Grid>
-                </Grid>
+        <>
+            <AppBarMain title={'Маршруты'}/>
+            <Container maxWidth="sm">
+                <Box sx={{mt: 3, mb: 3}}>
+                    <TextButtonBack/>
+                </Box>
+                <Stack spacing={3}>
+                    <PickDatesYM/>
+                    <Divider/>
+                    <SimpleCard
+                        title={'24.08.21  2002/4004'}
+                        info={''}
+                        to={'/shift'}
+                    />
+                    <SimpleCard
+                        title={'24.08.21  2002/4004'}
+                        info={''}
+                        to={'/shift'}
+                    />
+                    <SimpleCard
+                        title={'24.08.21  2002/4004'}
+                        info={''}
+                        to={'/shift'}
+                    />
+                </Stack>
             </Container>
-            {/* End main */}
-
-            {/* Footer */}
-            {/*<Container className={classes.footer} maxWidth="sm">*/}
-            {/*    <Grid*/}
-            {/*        container*/}
-            {/*        direction="column"*/}
-            {/*        justifyContent="center"*/}
-            {/*        alignItems="center"*/}
-            {/*    >*/}
-            {/*        <Grid item>*/}
-            {/*            <ButtonEndShift/>*/}
-            {/*        </Grid>*/}
-            {/*    </Grid>*/}
-            {/*</Container>*/}
-            {/* End footer */}
-        </div>
+        </>
     );
 }

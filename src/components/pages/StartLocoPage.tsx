@@ -1,51 +1,20 @@
 import React from "react";
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBarMain from "../AppBarMain";
-import {Container} from "@material-ui/core";
-import Grid from '@material-ui/core/Grid';
-import SaveAltRoundedIcon from "@material-ui/icons/SaveAltRounded";
-import TextButton from "../TextButton";
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 import TextButtonBack from "../TextButtonBack";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        wrapper: {
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '100vh',
-            // backgroundColor: 'grey',
-
-        },
-        header: {},
-        main: {
-            marginTop: theme.spacing(2),
-            // backgroundColor: 'grey',
-        },
-        footer: {
-            padding: theme.spacing(4),
-        },
-    }),
-);
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 
 export default function StartLocoPage(props: any) {
-    const classes = useStyles();
-
     return (
-        <div className={classes.wrapper}>
-            <CssBaseline/>
-            <div className={classes.header}>
-                <AppBarMain title={'Приемка локомотива'}/>
-            </div>
-            {/* Main */}
-            <Container className={classes.main} maxWidth="sm">
-                <Grid container>
+        <>
+            <AppBarMain title={'Приемка локомотива'}/>
+            <Container maxWidth="sm">
+                <Box sx={{mt: 3, mb: 3}}>
                     <TextButtonBack/>
-                </Grid>
-                <Grid
-                    container
-                    spacing={3}
-                >
+                </Box>
+                <Grid container spacing={3}>
                     <Grid item xs={6}>
                         <Grid>
                             {props.locoType}
@@ -58,8 +27,7 @@ export default function StartLocoPage(props: any) {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={6}
-                    >
+                    <Grid item xs={6}>
                         <Grid>
                             {props.locoNumber}
                         </Grid>
@@ -71,23 +39,10 @@ export default function StartLocoPage(props: any) {
                         </Grid>
                     </Grid>
                 </Grid>
+                <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
+                    {props.saveButton}
+                </Stack>
             </Container>
-            {/* End main */}
-
-            {/* Footer */}
-            <Container className={classes.footer} maxWidth="sm">
-                <Grid container
-                      direction="column"
-                      justifyContent="center"
-                      alignItems="center"
-                >
-                    <Grid item xs={12}>
-                        {props.saveButton}
-                    </Grid>
-
-                </Grid>
-            </Container>
-            {/* End footer */}
-        </div>
+        </>
     );
 }

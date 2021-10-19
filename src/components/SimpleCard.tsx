@@ -1,26 +1,12 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
-import IconButton from "@material-ui/core/IconButton";
-import Grid from '@material-ui/core/Grid';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import {CreateRounded} from "@mui/icons-material";
+import IconButton from '@mui/material/IconButton';
+import Grid from '@mui/material/Grid';
 import { Link as RouterLink} from 'react-router-dom';
-
-const useStyles = makeStyles({
-    root: {
-        minWidth: 275,
-        marginBottom: 12,
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-});
 
 interface ICardProps {
     title?: string;
@@ -30,7 +16,6 @@ interface ICardProps {
 }
 
 export default function SimpleCard(props: ICardProps) {
-    const classes = useStyles();
 
     const addLeadingZero = (date: string) => {
         return (date.length === 1) ? '0' + date : date;
@@ -45,13 +30,13 @@ export default function SimpleCard(props: ICardProps) {
     }
 
     return (
-        <Card className={classes.root}>
+        <Card>
             <Grid container
                   alignItems="center"
             >
                 <Grid item xs>
                     <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        <Typography color="textSecondary" gutterBottom>
                             {props.title || 'Card name'}
                         </Typography>
                         <Typography variant="h5" component="h2">
@@ -64,7 +49,7 @@ export default function SimpleCard(props: ICardProps) {
                         <IconButton
                             component={RouterLink} to={props.to || ''}
                             color="primary" aria-label="изменить">
-                            <CreateRoundedIcon/>
+                            <CreateRounded/>
                         </IconButton>
                     </CardActions>
                 </Grid>
