@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Route, Switch,} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import MainPage from "./components/pages/MainPage";
 import StartShiftPage from "./components/pages/StartShiftPage";
 import ShiftPage from "./components/pages/ShiftPage";
@@ -14,7 +14,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 function App() {
 
-  const cardsHandler = (title: string, info: Date | null | undefined | string) => {
+    const cardsHandler = (title: string, info: Date | null | undefined | string) => {
         const newCard: ICards = {
             title: title,
             id: Date.now(),
@@ -34,52 +34,46 @@ function App() {
     return (
         <>
             <CssBaseline/>
-            <Switch>
-                <Route path="/" exact>
+            <Routes>
+                <Route path="/" element={
                     <MainPage
-                        startShiftToggle={startShiftToggle}/>
-                </Route>
-                <Route path="/shift">
+                        startShiftToggle={startShiftToggle}/>}/>
+
+                <Route path="/shift" element={
                     <ShiftPage
                         cards={cards}
-                        lastAction={lastAction}/>
-                </Route>
-                <Route path="/history">
-                    <HistoryPage/>
-                </Route>
-                <Route path="/start">
+                        lastAction={lastAction}/>}/>
+
+                <Route path="/history" element={
+                    <HistoryPage/>}/>
+
+                <Route path="/start" element={
                     <StartShiftPage
                         setStartShiftToggle={setStartShiftToggle}
-                        setLastAction={setLastAction}
-                    />
-                </Route>
-                <Route path="/start-loco">
+                        setLastAction={setLastAction}/>}/>
+
+                <Route path="/start-loco" element={
                     <StartLocoPage
-                        setLastAction={setLastAction}
-                    />
-                </Route>
-                <Route path="/start-pass">
+                        setLastAction={setLastAction}/>}/>
+
+                <Route path="/start-pass" element={
                     <StartPassPage
-                        setLastAction={setLastAction}
-                    />
-                </Route>
-                <Route path="/start-train">
+                        setLastAction={setLastAction}/>}/>
+
+                <Route path="/start-train" element={
                     <StartTrainPage
-                        setLastAction={setLastAction}
-                    />
-                </Route>
-                <Route path="/end-loco">
+                        setLastAction={setLastAction}/>}/>
+
+                <Route path="/end-loco" element={
                     <EndLocoPage
                         setLastAction={setLastAction}
-                        locoNumber={locoNumber}/>
-                </Route>
-                <Route path="/end">
+                        locoNumber={locoNumber}/>}/>
+
+                <Route path="/end" element={
                     <EndShiftPage
                         setLastAction={setLastAction}
-                        locoNumber={locoNumber}
-                    />
-                </Route>
-            </Switch>
+                        locoNumber={locoNumber}/>}/>
+            </Routes>
         </>
     );
 }
