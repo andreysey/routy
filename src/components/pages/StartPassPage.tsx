@@ -1,12 +1,37 @@
-import React from "react";
+import React, {useState} from "react";
 import Container from '@mui/material/Container';
 import AppBarMain from "../AppBarMain";
 import TextButtonBack from "../TextButtonBack";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+import TextFieldInput from "../TextFieldInput";
+import PickTime from "../pickers/PickTime";
+import {SaveAltRounded} from "@mui/icons-material";
+import TextButton from "../TextButton";
+import {addEvent} from "../features/events/eventSlice";
+import {nanoid} from "@reduxjs/toolkit";
+import {useAppDispatch} from "../../hooks";
 
 export default function StartPassPage(props: any) {
+    const [passTrain, setPassTrain] = useState('');
+    const [passStationDeparture, setPassStationDeparture] = useState('');
+    const [passTimeDeparture, setPassTimeDeparture] = React.useState<Date | null>(new Date());
+    const [passStationArrival, setPassStationArrival] = useState('');
+    const [passTimeArrival, setPassTimeArrival] = React.useState<Date | null>(new Date());
+
+    const dispatch = useAppDispatch()
+
+    const addEventStartPass = () => {
+        dispatch(
+            addEvent({
+                id: nanoid(),
+                title: 'Пассажиром',
+                info: passTrain,
+            })
+        )
+    }
+
     return (
         <>
             <AppBarMain title={'Пассажиром'}/>
@@ -15,16 +40,43 @@ export default function StartPassPage(props: any) {
                     <TextButtonBack/>
                 </Box>
                 <Stack spacing={3}>
-                    {props.passTrain}
+                    <TextFieldInput
+                        id={'passTrain'}
+                        label={'Поезд'}
+                        placeholder={'Номер'}
+                        state={passTrain}
+                        setState={setPassTrain}
+                        type={'number'}/>
                     <Divider/>
-                    {props.timeDeparture}
-                    {props.passStationDeparture}
+                    <PickTime
+                        id={'passTimeDeparture'}
+                        state={passTimeDeparture}
+                        setState={setPassTimeDeparture}/>
+                    <TextFieldInput
+                        id={'passStationDeparture'}
+                        label={'Станция оправления'}
+                        state={passStationDeparture}
+                        setState={setPassStationDeparture}/>
                     <Divider/>
-                    {props.timeArrival}
-                    {props.passStationArrival}
+                    <PickTime
+                        id={'passTimeArrival'}
+                        state={passTimeArrival}
+                        setState={setPassTimeArrival}/>
+                    <TextFieldInput
+                        id={'passStationArrival'}
+                        label={'Станция прибытия'}
+                        state={passStationArrival}
+                        setState={setPassStationArrival}/>
                 </Stack>
                 <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
-                    {props.saveButton}
+                    <TextButton
+                        name={'Сохранить'}
+                        to={'/shift'}
+                        startIcon={<SaveAltRounded/>}
+                        onClick={() => {
+                            addEventStartPass();
+                            props.setLastAction('Пассажиром');
+                        }}/>
                 </Stack>
             </Container>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import AppBarMain from "../AppBarMain";
 import Container from '@mui/material/Container';
-import SimpleCard from '../SimpleCard';
+import EventCard from '../EventCard';
 import TextButton from "../TextButton";
 import {
     DirectionsRailwayRounded,
@@ -13,6 +13,7 @@ import {
 import TextButtonBack from "../TextButtonBack";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import {useAppSelector} from "../../hooks";
 
 
 export default function ShiftPage(props: any) {
@@ -31,47 +32,58 @@ export default function ShiftPage(props: any) {
 
         switch (lastAction) {
             case 'Явка':
-                return (
-                    <>
+                return (<>
                         {end}
                         {startPass}
                         {startLoco}
-                    </>
-                )
+                    </>)
             case 'Принят':
-                return (
-                    <>
+                return (<>
                         {endLoco}
                         {train}
-                    </>
-                )
+                    </>)
             case 'Пассажиром':
-                return (
-                    <>
+                return (<>
                         {startPass}
                         {end}
                         {startLoco}
-                    </>
-                )
+                    </>)
             case 'Поезд':
-                return (
-                    <>
+                return (<>
                         {endLoco}
                         {train}
-                    </>
-                )
+                    </>)
             case 'Сдан':
-                return (
-                    <>
+                return (<>
                         {startLoco}
                         {end}
                         {startPass}
-                    </>
-                )
+                    </>)
             case 'Конец смены':
                 break;
         }
     }
+
+    // const renderCards = props.cards.map((card: { title: string | undefined; info: string | undefined; }, i: any) => (
+    //     <EventCard
+    //         key={i}
+    //         title={card.title}
+    //         info={card.info}
+    //         to={'/start'}
+    //         state={''}
+    //     />
+    // ))
+    const events = useAppSelector(state => state.event)
+
+    const renderEvent = events.map((item) => (
+            <EventCard
+                key={item.id}
+                title={item.title}
+                info={item.info}
+                to={'/start'}
+                state={''}
+            />
+    ))
 
     return (
         <>
@@ -81,15 +93,7 @@ export default function ShiftPage(props: any) {
                     <TextButtonBack/>
                 </Box>
                 <Stack spacing={3}>
-                    {props.cards.map((card: { title: string | undefined; info: string | undefined; }, i: any) => {
-                        return (<SimpleCard
-                                    key={i}
-                                    title={card.title}
-                                    info={card.info}
-                                    to={'/start'}
-                                    state={''}
-                                />)
-                    })}
+                    {renderEvent}
                 </Stack>
                 <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
                     {showButtonHelper(props.lastAction)}

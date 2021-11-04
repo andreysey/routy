@@ -1,26 +1,10 @@
 import React from 'react';
-// import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-// const useStyles = makeStyles((theme: Theme) =>
-//     createStyles({
-//         formControl: {
-//             // margin: theme.spacing(1),
-//             // marginBottom: theme.spacing(5),
-//             // minWidth: 120,
-//             // minWidth: '19.5ch',
-//             // maxWidth: '33.5ch',
-//             // width: '33.5ch',
-//         },
-//         selectEmpty: {
-//             // marginTop: theme.spacing(2),
-//         },
-//     }),
-// );
 
 export default function SelectLoco(props: any) {
     // const classes = useStyles();
@@ -31,7 +15,7 @@ export default function SelectLoco(props: any) {
 
     return (
         <div>
-            <FormControl variant="outlined" fullWidth>
+            <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-outlined-label">Локомотив</InputLabel>
                 <Select
                     // autoWidth
@@ -40,6 +24,7 @@ export default function SelectLoco(props: any) {
                     value={props.state}
                     onChange={handleChange}
                     label="Локомотив"
+                    autoWidth
                     // fullWidth
                 >
                     <MenuItem value="">

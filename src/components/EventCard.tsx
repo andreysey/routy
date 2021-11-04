@@ -9,26 +9,29 @@ import Grid from '@mui/material/Grid';
 import { Link as RouterLink} from 'react-router-dom';
 
 interface ICardProps {
-    title?: string;
+    title?: string | number | Date | null;
     info?: any;
     to?: string | undefined;
     state?: any;
 }
 
-export default function SimpleCard(props: ICardProps) {
+export default function EventCard(props: ICardProps) {
 
     const addLeadingZero = (date: string) => {
         return (date.length === 1) ? '0' + date : date;
     }
 
-    const timeHandler = (date: any) => {
-        if(!date && typeof date !== 'object') return
-        console.log(date)
-        let hour = addLeadingZero(date.getHours().toString());
-        let minutes = addLeadingZero(date.getMinutes().toString());
-        return   hour + `:` + minutes
+    const timeHandler = (timeStamp: any) => {
+        if(typeof timeStamp === 'number') {
+            let dateObj = new Date(timeStamp)
+            let hour = addLeadingZero(dateObj.getHours().toString());
+            let minutes = addLeadingZero(dateObj.getMinutes().toString());
+            return   hour + `:` + minutes
+        } else {
+            return timeStamp.toString()
+        }
     }
-
+    // props.info.toString()
     return (
         <Card>
             <Grid container
@@ -40,7 +43,7 @@ export default function SimpleCard(props: ICardProps) {
                             {props.title || 'Card name'}
                         </Typography>
                         <Typography variant="h5" component="h2">
-                            {props.info.toString() || 'Card info'}
+                            {timeHandler(props.info) || 'Card info'}
                         </Typography>
                     </CardContent>
                 </Grid>

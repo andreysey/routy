@@ -1,12 +1,38 @@
-import React from "react";
+import React, {useState} from "react";
 import AppBarMain from "../AppBarMain";
 import Container from '@mui/material/Container';
 import TextButtonBack from "../TextButtonBack";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
+import TextFieldInput from "../TextFieldInput";
+import PickTime from "../pickers/PickTime";
+import {SaveAltRounded} from "@mui/icons-material";
+import TextButton from "../TextButton";
+import {addEvent} from "../features/events/eventSlice";
+import {nanoid} from "@reduxjs/toolkit";
+import {useAppDispatch} from "../../hooks";
 
 export default function StartTrainPage(props: any) {
+
+    const [train, setTrain] = useState('');
+    const [trainStationDeparture, setTrainStationDeparture] = useState('');
+    const [trainTimeDeparture, setTrainTimeDeparture] = React.useState<Date | null>(new Date());
+    const [trainStationArrival, setTrainStationArrival] = useState('');
+    const [trainTimeArrival, setTrainTimeArrival] = React.useState<Date | null>(new Date());
+
+    const dispatch = useAppDispatch()
+
+    const addEventTrain = () => {
+        dispatch(
+            addEvent({
+                id: nanoid(),
+                title: 'Поезд',
+                info: train,
+            })
+        )
+    }
+
     return (
         <>
             <AppBarMain title={'Поезд'}/>
@@ -15,16 +41,42 @@ export default function StartTrainPage(props: any) {
                     <TextButtonBack/>
                 </Box>
                 <Stack spacing={3}>
-                    {props.train}
+                    <TextFieldInput
+                        id={'train'}
+                        label={'Поезд'}
+                        placeholder={'Номер'}
+                        state={train}
+                        setState={setTrain}/>
                     <Divider/>
-                    {props.timeDeparture}
-                    {props.trainStationDeparture}
+                    <PickTime
+                        id={'trainTimeDeparture'}
+                        state={trainTimeDeparture}
+                        setState={setTrainTimeDeparture}/>
+                    <TextFieldInput
+                        id={'trainStationDeparture'}
+                        label={'Станция оправления'}
+                        state={trainStationDeparture}
+                        setState={setTrainStationDeparture}/>
                     <Divider/>
-                    {props.timeArrival}
-                    {props.trainStationArrival}
+                    <PickTime
+                        id={'trainTimeArrival'}
+                        state={trainTimeArrival}
+                        setState={setTrainTimeArrival}/>
+                    <TextFieldInput
+                        id={'trainStationArrival'}
+                        label={'Станция прибытия'}
+                        state={trainStationArrival}
+                        setState={setTrainStationArrival}/>
                 </Stack>
                 <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
-                    {props.saveButton}
+                    <TextButton
+                        name={'Сохранить'}
+                        to={'/shift'}
+                        startIcon={<SaveAltRounded/>}
+                        onClick={() => {
+                            addEventTrain();
+                            props.setLastAction('Поезд');
+                        }}/>
                 </Stack>
             </Container>
         </>

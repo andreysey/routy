@@ -91,25 +91,20 @@ interface IDateProps {
 }
 
 export default function MaterialUIPickers(props: IDateProps) {
-    // const [value, setValue] = React.useState<Date | null>(
-    //     new Date('2014-08-18T21:11:54'),
-    // );
 
-    const handleChange = (newValue: Date | null) => {
-        // setValue(newValue);
-        props.setState(newValue)
-    };
+    // const handleChange = (date: any) => {
+    //         props.setState(date.getTime())
+    // };
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
                 <DateTimePicker
-                    // label="Date&Time picker"
-                    toolbarTitle={'Дата и время'}
-                    mask={"dd-MM-yy"}
+                    label="Дата и время"
+                    // toolbarTitle={'Дата и время'}
                     value={props.state}
-                    onChange={handleChange}
+                    onChange={(newValue) => {props.setState(newValue.getTime())}}
                     renderInput={(params) => <TextField {...params} />}
-                />
+                 />
         </LocalizationProvider>
     );
 }

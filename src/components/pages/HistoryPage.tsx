@@ -2,13 +2,27 @@ import React from "react";
 import AppBarMain from "../AppBarMain";
 import PickDatesYM from '../pickers/PickDate';
 import TextButtonBack from "../TextButtonBack";
-import SimpleCard from "../SimpleCard";
 import Container from '@mui/material/Container';
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+import {useAppSelector} from "../../hooks";
+import ShiftCard from "../ShiftCard";
 
 export default function HistoryPage() {
+
+    const shifts = useAppSelector(state => state.shift)
+
+    // const dispatch = useAppDispatch()
+
+    const renderShifts = shifts.map(shift => (
+        <ShiftCard key={shift.id}
+                   title={shift.shiftStart}
+                   info={shift.shiftEnd}
+                   to={'/shift'}
+        />
+    ))
+
     return (
         <>
             <AppBarMain title={'Маршруты'}/>
@@ -19,21 +33,7 @@ export default function HistoryPage() {
                 <Stack spacing={3}>
                     <PickDatesYM/>
                     <Divider/>
-                    <SimpleCard
-                        title={'24.08.21  2002/4004'}
-                        info={''}
-                        to={'/shift'}
-                    />
-                    <SimpleCard
-                        title={'24.08.21  2002/4004'}
-                        info={''}
-                        to={'/shift'}
-                    />
-                    <SimpleCard
-                        title={'24.08.21  2002/4004'}
-                        info={''}
-                        to={'/shift'}
-                    />
+                    {renderShifts}
                 </Stack>
             </Container>
         </>
