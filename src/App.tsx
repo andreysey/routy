@@ -9,23 +9,11 @@ import StartTrainPage from "./components/pages/StartTrainPage";
 import EndShiftPage from './components/pages/EndShiftPage';
 import EndLocoPage from './components/pages/EndLocoPage';
 import HistoryPage from "./components/pages/HistoryPage";
-import {ICards} from "./interfaces";
 import CssBaseline from '@mui/material/CssBaseline';
 
 function App() {
 
-    const cardsHandler = (title: string, info: Date | null | undefined | string) => {
-        const newCard: ICards = {
-            title: title,
-            id: Date.now(),
-            info: info
-        }
-        setCards(prevState => [...prevState, newCard])
-    }
-
     const [lastAction, setLastAction] = useState('')
-
-    const [cards, setCards] = useState<ICards[]>([]);
 
     const [startShiftToggle, setStartShiftToggle] = useState<boolean>(false);
 
@@ -41,7 +29,6 @@ function App() {
 
                 <Route path="/shift" element={
                     <ShiftPage
-                        cards={cards}
                         lastAction={lastAction}/>}/>
 
                 <Route path="/history" element={

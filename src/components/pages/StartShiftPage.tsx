@@ -17,7 +17,8 @@ export default function StartShiftPage(props: any) {
     const [route, setRoute] = useState('');
     const [startShiftTime, setStartShiftTime] = React.useState<Date | null | number>(Date.now());
 
-    // const event = useAppSelector(state => state.event)
+    const shift = useAppSelector(state => state.shift)
+
     const dispatch = useAppDispatch()
 
     const addEventStartShift = () => {
