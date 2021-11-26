@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {Route, Routes} from "react-router-dom";
 import MainPage from "./components/pages/MainPage";
-import StartShiftPage from "./components/pages/StartShiftPage";
-import ShiftPage from "./components/pages/ShiftPage";
-import StartLocoPage from "./components/pages/StartLocoPage";
-import StartPassPage from "./components/pages/StartPassPage";
-import StartTrainPage from "./components/pages/StartTrainPage";
-import EndShiftPage from './components/pages/EndShiftPage';
-import EndLocoPage from './components/pages/EndLocoPage';
-import HistoryPage from "./components/pages/HistoryPage";
+import ShiftStartPage from "./components/features/shiftStart/ShiftStartPage";
+import ShiftPage from "./components/features/shift/ShiftPage";
+import LocomotiveStartPage from "./components/features/locomotiveStart/LocomotiveStartPage";
+import PassengerPage from "./components/features/passenger/PassengerPage";
+import TrainPage from "./components/features/train/TrainPage";
+import EndShiftPage from './components/features/shiftEnd/ShiftEndPage';
+import LocomotiveEndPage from './components/features/locomotiveEnd/LocomotiveEndPage';
+import ShiftListPage from "./components/features/shiftList/ShiftListPage";
 import CssBaseline from '@mui/material/CssBaseline';
 
 function App() {
@@ -32,27 +32,27 @@ function App() {
                         lastAction={lastAction}/>}/>
 
                 <Route path="/history" element={
-                    <HistoryPage/>}/>
+                    <ShiftListPage/>}/>
 
                 <Route path="/start" element={
-                    <StartShiftPage
+                    <ShiftStartPage
                         setStartShiftToggle={setStartShiftToggle}
                         setLastAction={setLastAction}/>}/>
 
                 <Route path="/start-loco" element={
-                    <StartLocoPage
+                    <LocomotiveStartPage
                         setLastAction={setLastAction}/>}/>
 
                 <Route path="/start-pass" element={
-                    <StartPassPage
+                    <PassengerPage
                         setLastAction={setLastAction}/>}/>
 
                 <Route path="/start-train" element={
-                    <StartTrainPage
+                    <TrainPage
                         setLastAction={setLastAction}/>}/>
 
                 <Route path="/end-loco" element={
-                    <EndLocoPage
+                    <LocomotiveEndPage
                         setLastAction={setLastAction}
                         locoNumber={locoNumber}/>}/>
 

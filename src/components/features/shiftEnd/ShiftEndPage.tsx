@@ -1,30 +1,31 @@
 import React from "react";
-import AppBarMain from "../AppBarMain";
-import TextButtonBack from "../TextButtonBack";
+import AppBarMain from "../../AppBarMain";
+import TextButtonBack from "../../TextButtonBack";
 import Container from '@mui/material/Container';
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import PickTime from "../pickers/PickTime";
+import PickTime from "../../pickers/PickTime";
 import {SaveAltRounded} from "@mui/icons-material";
-import TextButton from "../TextButton";
-import {useAppDispatch} from "../../hooks";
-import {addEvent} from "../features/events/eventSlice";
-import {nanoid} from "@reduxjs/toolkit";
+import TextButton from "../../TextButton";
+import {useAppDispatch} from "../../../hooks";
 
-export default function StartShiftPage(props: any) {
-    const [endShiftTime, setEndShiftTime] = React.useState<Date | null | number>(Date.now());
+export default function ShiftEndPage(props: any) {
+    const [endShiftTime, setEndShiftTime] = React.useState<number>(Date.now());
 
     const dispatch = useAppDispatch()
 
     const addEventEndShift = () => {
-        dispatch(
-            addEvent({
-                id: nanoid(),
-                title: 'Конец смены',
-                info: endShiftTime,
-            })
-        )
+
     }
+
+    // const endShiftHandler = () => {
+    //     dispatch(
+    //         addShift({
+    //             end: endShiftTime,
+    //             completed: true,
+    //         })
+    //     )
+    // }
 
 
     return (

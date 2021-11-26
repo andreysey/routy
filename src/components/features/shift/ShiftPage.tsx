@@ -1,8 +1,8 @@
 import React from "react";
-import AppBarMain from "../AppBarMain";
+import AppBarMain from "../../AppBarMain";
 import Container from '@mui/material/Container';
-import EventCard from '../EventCard';
-import TextButton from "../TextButton";
+import EventCard from '../../EventCard';
+import TextButton from "../../TextButton";
 import {
     DirectionsRailwayRounded,
     DirectionsRunRounded,
@@ -10,10 +10,10 @@ import {
     LocalBarRounded,
     TrainRounded
 } from "@mui/icons-material";
-import TextButtonBack from "../TextButtonBack";
+import TextButtonBack from "../../TextButtonBack";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import {useAppSelector} from "../../hooks";
+import {useAppSelector} from "../../../hooks";
 
 
 export default function ShiftPage(props: any) {
@@ -73,13 +73,13 @@ export default function ShiftPage(props: any) {
     //         state={''}
     //     />
     // ))
-    const events = useAppSelector(state => state.event)
+    const events = useAppSelector(state => state.shift.events)
 
-    const renderEvent = events.map((item) => (
+    const renderEvent = events.map((item: { id: React.Key | null | undefined; type: string | number | Date | null | undefined;}) => (
             <EventCard
                 key={item.id}
-                title={item.title}
-                info={item.info}
+                title={item.type}
+                // info={item.info}
                 to={'/start'}
                 state={''}
             />

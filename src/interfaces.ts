@@ -11,7 +11,7 @@ export interface IRout {
 // export declare namespace JSX {
 //     interface IntrinsicElements {
 //         id: number
-//         startShift: {
+//         shiftStart: {
 //             date: number
 //             time: number
 //             route: number

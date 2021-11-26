@@ -28,7 +28,7 @@ export default function EventCard(props: ICardProps) {
             let minutes = addLeadingZero(dateObj.getMinutes().toString());
             return   hour + `:` + minutes
         } else {
-            return timeStamp.toString()
+            return timeStamp?.toString()
         }
     }
     // props.info.toString()

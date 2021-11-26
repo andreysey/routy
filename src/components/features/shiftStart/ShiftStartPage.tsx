@@ -1,34 +1,33 @@
 import React, {useState} from "react";
 import Stack from '@mui/material/Stack';
-import AppBarMain from "../AppBarMain";
+import AppBarMain from "../../AppBarMain";
 import Container from '@mui/material/Container';
-import TextButtonBack from "../TextButtonBack";
+import TextButtonBack from "../../TextButtonBack";
 import Box from "@mui/material/Box";
-import PickTime from "../pickers/PickTime";
-import TextFieldInput from "../TextFieldInput";
-import TextButton from "../TextButton";
+import PickTime from "../../pickers/PickTime";
+import TextFieldInput from "../../TextFieldInput";
+import TextButton from "../../TextButton";
 import {SaveAltRounded} from "@mui/icons-material";
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import { addEvent } from "../features/events/eventSlice";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
+import {addShiftStartEvent, startShift} from "../shift/shiftSlice";
 import {nanoid} from "@reduxjs/toolkit";
 
-export default function StartShiftPage(props: any) {
+export default function ShiftStartPage(props: any) {
 
     const [route, setRoute] = useState('');
-    const [startShiftTime, setStartShiftTime] = React.useState<Date | null | number>(Date.now());
+    const [time, setTime] = React.useState<number>(Date.now());
 
     const shift = useAppSelector(state => state.shift)
 
     const dispatch = useAppDispatch()
 
-    const addEventStartShift = () => {
-        dispatch(
-            addEvent({
-                id: nanoid(),
-                title: 'Явка',
-                info: startShiftTime,
-            })
-        )
+    const addEvent = () => {
+        dispatch(addShiftStartEvent({
+            id: nanoid(),
+            type: 'startShift',
+            timeStart: time,
+            route: route
+        }))
     }
 
     return (
@@ -41,8 +40,8 @@ export default function StartShiftPage(props: any) {
                 <Stack spacing={3}>
                     <PickTime
                         id={'startShiftTime'}
-                        state={startShiftTime}
-                        setState={setStartShiftTime}/>
+                        state={time}
+                        setState={setTime}/>
                     <TextFieldInput
                         id={'route'}
                         state={route}
@@ -58,9 +57,8 @@ export default function StartShiftPage(props: any) {
                         startIcon={<SaveAltRounded/>}
                         onClick={() => {
                             props.setStartShiftToggle(true);
-                            // cardsHandler('Явка', startShiftTime);
                             props.setLastAction('Явка');
-                            addEventStartShift();
+                            addEvent();
                         }}/>
                 </Stack>
             </Container>

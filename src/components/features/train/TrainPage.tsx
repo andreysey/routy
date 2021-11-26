@@ -1,19 +1,17 @@
 import React, {useState} from "react";
-import AppBarMain from "../AppBarMain";
+import AppBarMain from "../../AppBarMain";
 import Container from '@mui/material/Container';
-import TextButtonBack from "../TextButtonBack";
+import TextButtonBack from "../../TextButtonBack";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import TextFieldInput from "../TextFieldInput";
-import PickTime from "../pickers/PickTime";
+import TextFieldInput from "../../TextFieldInput";
+import PickTime from "../../pickers/PickTime";
 import {SaveAltRounded} from "@mui/icons-material";
-import TextButton from "../TextButton";
-import {addEvent} from "../features/events/eventSlice";
-import {nanoid} from "@reduxjs/toolkit";
-import {useAppDispatch} from "../../hooks";
+import TextButton from "../../TextButton";
+import {useAppDispatch} from "../../../hooks";
 
-export default function StartTrainPage(props: any) {
+export default function TrainPage(props: any) {
 
     const [train, setTrain] = useState('');
     const [trainStationDeparture, setTrainStationDeparture] = useState('');
@@ -24,13 +22,7 @@ export default function StartTrainPage(props: any) {
     const dispatch = useAppDispatch()
 
     const addEventTrain = () => {
-        dispatch(
-            addEvent({
-                id: nanoid(),
-                title: 'Поезд',
-                info: train,
-            })
-        )
+
     }
 
     return (

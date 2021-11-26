@@ -1,36 +1,29 @@
 import React, {useState} from "react";
-import AppBarMain from "../AppBarMain";
+import AppBarMain from "../../AppBarMain";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import TextButtonBack from "../TextButtonBack";
+import TextButtonBack from "../../TextButtonBack";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import SelectLoco from "../SelectLoco";
-import TextFieldInput from "../TextFieldInput";
+import SelectLoco from "../../SelectLoco";
+import TextFieldInput from "../../TextFieldInput";
 import {SaveAltRounded} from "@mui/icons-material";
-import TextButton from "../TextButton";
-import {addEvent} from "../features/events/eventSlice";
-import {nanoid} from "@reduxjs/toolkit";
-import {useAppDispatch} from "../../hooks";
+import TextButton from "../../TextButton";
+import {useAppDispatch} from "../../../hooks";
 
-export default function StartLocoPage(props: any) {
-    const [locoType, setLocoType] = useState('');
-    const [locoNumber, setLocoNumber] = useState('');
-    const [startEnergyA, setStartEnergyA] = useState('');
-    const [startEnergyB, setStartEnergyB] = useState('');
-    const [startRecupA, setStartRecupA] = useState('');
-    const [startRecupB, setStartRecupB] = useState('');
+export default function LocomotiveStartPage(props: any) {
+
+    const [model, setModel] = useState('');
+    const [number, setNumber] = useState('');
+    const [electricityCounterA, setElectricityCounterA] = useState('');
+    const [electricityCounterB, setElectricityCounterB] = useState('');
+    const [recuperationCounterA, setRecuperationCounterA] = useState('');
+    const [recuperationCounterB, setRecuperationCounterB] = useState('');
 
     const dispatch = useAppDispatch()
 
-    const addEventStartLoco = () => {
-        dispatch(
-            addEvent({
-                id: nanoid(),
-                title: 'Принят',
-                info: locoNumber,
-            })
-        )
+    const addEvent = () => {
+
     }
 
     return (
@@ -44,15 +37,15 @@ export default function StartLocoPage(props: any) {
                     <Grid item xs={6}>
                         <Grid>
                             <SelectLoco
-                                id={'locoType'}
-                                state={locoType}
-                                setState={setLocoType}/>
+                                id={'model'}
+                                state={model}
+                                setState={setModel}/>
                         </Grid>
                         <Grid>
                             <TextFieldInput
-                                id={'startEnergyA'}
-                                state={startEnergyA}
-                                setState={setStartEnergyA}
+                                id={'electricityCounterA'}
+                                state={electricityCounterA}
+                                setState={setElectricityCounterA}
                                 label={'А'}
                                 placeholder={'00-00-00'}
                                 helperText={'Энергия'}
@@ -60,9 +53,9 @@ export default function StartLocoPage(props: any) {
                         </Grid>
                         <Grid>
                             <TextFieldInput
-                                id={'startRecupA'}
-                                state={startRecupA}
-                                setState={setStartRecupA}
+                                id={'recuperationCounterA'}
+                                state={recuperationCounterA}
+                                setState={setRecuperationCounterA}
                                 label={'А'}
                                 placeholder={'00-00-00'}
                                 helperText={'Рекуперация'}
@@ -74,8 +67,8 @@ export default function StartLocoPage(props: any) {
                         <Grid>
                             <TextFieldInput
                                 id={'locoNumber'}
-                                state={locoNumber}
-                                setState={setLocoNumber}
+                                state={number}
+                                setState={setNumber}
                                 label={'Номер'}
                                 placeholder={'Локомотива'}
                                 helperText={' '}
@@ -83,9 +76,9 @@ export default function StartLocoPage(props: any) {
                         </Grid>
                         <Grid>
                             <TextFieldInput
-                                id={'startEnergyB'}
-                                state={startEnergyB}
-                                setState={setStartEnergyB}
+                                id={'electricityCounterB'}
+                                state={electricityCounterB}
+                                setState={setElectricityCounterB}
                                 label={'Б'}
                                 placeholder={'00-00-00'}
                                 helperText={'Энергия'}
@@ -93,9 +86,9 @@ export default function StartLocoPage(props: any) {
                         </Grid>
                         <Grid>
                             <TextFieldInput
-                                id={'startRecupB'}
-                                state={startRecupB}
-                                setState={setStartRecupB}
+                                id={'recuperationCounterB'}
+                                state={recuperationCounterB}
+                                setState={setRecuperationCounterB}
                                 label={'Б'}
                                 placeholder={'00-00-00'}
                                 helperText={'Рекуперация'}
@@ -109,7 +102,7 @@ export default function StartLocoPage(props: any) {
                         to={'/shift'}
                         startIcon={<SaveAltRounded/>}
                         onClick={() => {
-                            addEventStartLoco();
+                            addEvent();
                             props.setLastAction('Принят');
                         }}/>
                 </Stack>

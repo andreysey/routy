@@ -1,19 +1,18 @@
 import React, {useState} from "react";
 import Container from '@mui/material/Container';
-import AppBarMain from "../AppBarMain";
-import TextButtonBack from "../TextButtonBack";
+import AppBarMain from "../../AppBarMain";
+import TextButtonBack from "../../TextButtonBack";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-import TextFieldInput from "../TextFieldInput";
-import PickTime from "../pickers/PickTime";
+import TextFieldInput from "../../TextFieldInput";
+import PickTime from "../../pickers/PickTime";
 import {SaveAltRounded} from "@mui/icons-material";
-import TextButton from "../TextButton";
-import {addEvent} from "../features/events/eventSlice";
+import TextButton from "../../TextButton";
 import {nanoid} from "@reduxjs/toolkit";
-import {useAppDispatch} from "../../hooks";
+import {useAppDispatch} from "../../../hooks";
 
-export default function StartPassPage(props: any) {
+export default function PassengerPage(props: any) {
     const [passTrain, setPassTrain] = useState('');
     const [passStationDeparture, setPassStationDeparture] = useState('');
     const [passTimeDeparture, setPassTimeDeparture] = React.useState<Date | null>(new Date());
@@ -23,13 +22,7 @@ export default function StartPassPage(props: any) {
     const dispatch = useAppDispatch()
 
     const addEventStartPass = () => {
-        dispatch(
-            addEvent({
-                id: nanoid(),
-                title: 'Пассажиром',
-                info: passTrain,
-            })
-        )
+
     }
 
     return (

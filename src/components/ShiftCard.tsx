@@ -9,10 +9,10 @@ import Grid from '@mui/material/Grid';
 import { Link as RouterLink} from 'react-router-dom';
 
 interface ICardProps {
-    title?: string | number | Date | null;
-    info?: any;
-    to?: string | undefined;
-    state?: any;
+    title?: any
+    info?: any
+    to?: string | undefined
+    state?: any
 }
 
 export default function EventCard(props: ICardProps) {

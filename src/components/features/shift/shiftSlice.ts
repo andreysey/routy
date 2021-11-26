@@ -1,52 +1,39 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit"
-import {RootState} from "../../../store";
+import {createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit"
+import {RootState} from '../../../store';
+import {Shift} from "./types";
+import {ShiftStart} from "../shiftStart/types";
 
-interface Shift {
-    id?: number,
-    shiftStart?: string | number,
-    routeNumber?: string | number,
-    shiftEnd?: number,
-    events?: [],
-    completed?: boolean,
+
+const initialState: Shift = {
+    id: '',
+    timeStart: 0,
+    timeEnd: 0,
+    events: [],
+    lastEvent: '',
+    completed: false,
 }
 
-const initialState: Shift[] = [
-    // {
-    //     id: 0,
-    //     shiftStart: 213123123,
-    //     routeNumber: 123,
-    //     shiftEnd: 23123131,
-    //     events: [],
-    //     completed: true,
-    // },
-    // {
-    //     id: 1,
-    //     shiftStart: 12313123,
-    //     routeNumber: 321,
-    //     shiftEnd: 1231312313,
-    //     events: [],
-    //     completed: true,
-    // }
-];
-
 export const shiftSlice = createSlice({
-    name: 'shifts',
+    name: 'shift',
     initialState,
     reducers: {
-        addShift: (state, action: PayloadAction<Shift>) => {
-            state.push(action.payload)
+        startShift: (state, action: PayloadAction<number>) => {
+            state.id = nanoid();
+            state.timeStart = action.payload;
         },
-        updateStartShift: (state, {payload}: PayloadAction) => {
-
-        }
-        ,
         updateEnd: (state, action: PayloadAction<Shift>) => {
             // state.sfs.shiftStart.time = action.payload
+        },
+        addShiftStartEvent: (state, action: PayloadAction<ShiftStart>) => {
+            state.id = action.payload.id
+            state.timeStart = action.payload.timeStart
+            state.lastEvent = action.payload.type
+            state.events.push(action.payload)
         },
     },
 })
 
-export const {addShift, updateStartShift, updateEnd} = shiftSlice.actions
+export const {startShift, updateEnd, addShiftStartEvent} = shiftSlice.actions
 
 export const selectShift = (state: RootState) => state.shift
 

@@ -1,18 +1,16 @@
 import React, {useState} from "react";
-import AppBarMain from "../AppBarMain";
+import AppBarMain from "../../AppBarMain";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import TextButtonBack from "../TextButtonBack";
+import TextButtonBack from "../../TextButtonBack";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import TextFieldInput from "../TextFieldInput";
+import TextFieldInput from "../../TextFieldInput";
 import {SaveAltRounded} from "@mui/icons-material";
-import TextButton from "../TextButton";
-import {useAppDispatch} from "../../hooks";
-import {addEvent} from "../features/events/eventSlice";
-import {nanoid} from "@reduxjs/toolkit";
+import TextButton from "../../TextButton";
+import {useAppDispatch} from "../../../hooks";
 
-export default function EndLocoPage(props: any) {
+export default function LocomotiveEndPage(props: any) {
 
     const [endEnergyA, setEndEnergyA] = useState('');
     const [endEnergyB, setEndEnergyB] = useState('');
@@ -22,13 +20,7 @@ export default function EndLocoPage(props: any) {
     const dispatch = useAppDispatch()
 
     const addEventEndLoco = () => {
-        dispatch(
-            addEvent({
-                id: nanoid(),
-                title: 'Сдан',
-                info: props.locoNumber,
-            })
-        )
+
     }
 
     return (
