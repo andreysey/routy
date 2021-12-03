@@ -3,8 +3,8 @@ export interface LocomotiveStart {
     type: string
     model: string
     number: string
-    electricityCounterA: number
-    electricityCounterB: number
-    recuperationCounterA: number
-    recuperationCounterB: number
+    electricityCounterA: number | string
+    electricityCounterB: number | string
+    recuperationCounterA: number | string
+    recuperationCounterB: number | string
 }

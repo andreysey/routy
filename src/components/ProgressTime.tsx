@@ -21,7 +21,7 @@ export default function CircularProgressWithLabel() {
 
     return (
         <>
-            <ButtonBase component={RouterLink} to={'/history'} >
+            <ButtonBase component={RouterLink} to={'/shift-list'} >
             <Box position={"relative"} display={"inline-flex"}>
                 <CircularProgress variant="determinate" value={progress} size={300} color={"success"}/>
                 <Box

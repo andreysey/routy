@@ -13,9 +13,6 @@ export default function ShiftListPage() {
 
     const list = useAppSelector(state => state.shiftList)
 
-    // const dispatch = useAppDispatch()
-
-    // @ts-ignore
     const renderShifts = list.map((item) => (
         <ShiftCard
             // key={item.id}
@@ -25,19 +22,17 @@ export default function ShiftListPage() {
         />
     ))
 
-    return (
-        <>
-            <AppBarMain title={'Маршруты'}/>
-            <Container maxWidth="sm">
-                <Box sx={{mt: 3, mb: 3}}>
-                    <TextButtonBack/>
-                </Box>
-                <Stack spacing={3}>
-                    <PickDatesYM/>
-                    <Divider/>
-                    {renderShifts}
-                </Stack>
-            </Container>
-        </>
-    );
+    return (<>
+        <AppBarMain title={'Маршруты'}/>
+        <Container maxWidth="sm">
+            <Box sx={{mt: 3, mb: 3}}>
+                <TextButtonBack/>
+            </Box>
+            <Stack spacing={3}>
+                <PickDatesYM/>
+                <Divider/>
+                {renderShifts}
+            </Stack>
+        </Container>
+    </>)
 }

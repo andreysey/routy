@@ -1,8 +1,8 @@
 export interface LocomotiveEnd {
     id: string
     type: string
-    electricityCounterA: number
-    electricityCounterB: number
-    recuperationCounterA: number
-    recuperationCounterB: number
+    electricityCounterA: number | string
+    electricityCounterB: number | string
+    recuperationCounterA: number | string
+    recuperationCounterB: number | string
 }

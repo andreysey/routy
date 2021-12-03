@@ -11,18 +11,29 @@ import {SaveAltRounded} from "@mui/icons-material";
 import TextButton from "../../TextButton";
 import {nanoid} from "@reduxjs/toolkit";
 import {useAppDispatch} from "../../../hooks";
+import {addPassengerEvent} from "../shift/shiftSlice";
+import {EventType} from "../shift/types";
 
-export default function PassengerPage(props: any) {
-    const [passTrain, setPassTrain] = useState('');
-    const [passStationDeparture, setPassStationDeparture] = useState('');
-    const [passTimeDeparture, setPassTimeDeparture] = React.useState<Date | null>(new Date());
-    const [passStationArrival, setPassStationArrival] = useState('');
-    const [passTimeArrival, setPassTimeArrival] = React.useState<Date | null>(new Date());
+export default function PassengerPage() {
+
+    const [trainNumber, setTrainNumber] = useState('');
+    const [stationStart, setStationStart] = useState('');
+    const [timeStart, setTimeStart] = React.useState<number>(Date.now());
+    const [stationEnd, setStationEnd] = useState('');
+    const [timeEnd, setTimeEnd] = React.useState<number>(Date.now());
 
     const dispatch = useAppDispatch()
 
-    const addEventStartPass = () => {
-
+    const addEventHandler = () => {
+        dispatch(addPassengerEvent({
+            id: nanoid(),
+            type: EventType.passenger,
+            trainNumber: trainNumber,
+            timeStart: timeStart,
+            timeEnd: timeEnd,
+            stationStart: stationStart,
+            stationEnd: stationEnd
+        }))
     }
 
     return (
@@ -34,32 +45,32 @@ export default function PassengerPage(props: any) {
                 </Box>
                 <Stack spacing={3}>
                     <TextFieldInput
-                        id={'passTrain'}
+                        id={'trainNumber'}
                         label={'Поезд'}
                         placeholder={'Номер'}
-                        state={passTrain}
-                        setState={setPassTrain}
+                        state={trainNumber}
+                        setState={setTrainNumber}
                         type={'number'}/>
                     <Divider/>
                     <PickTime
-                        id={'passTimeDeparture'}
-                        state={passTimeDeparture}
-                        setState={setPassTimeDeparture}/>
+                        id={'timeStart'}
+                        state={timeStart}
+                        setState={setTimeStart}/>
                     <TextFieldInput
-                        id={'passStationDeparture'}
+                        id={'stationStart'}
                         label={'Станция оправления'}
-                        state={passStationDeparture}
-                        setState={setPassStationDeparture}/>
+                        state={stationStart}
+                        setState={setStationStart}/>
                     <Divider/>
                     <PickTime
-                        id={'passTimeArrival'}
-                        state={passTimeArrival}
-                        setState={setPassTimeArrival}/>
+                        id={'timeEnd'}
+                        state={timeEnd}
+                        setState={setTimeEnd}/>
                     <TextFieldInput
-                        id={'passStationArrival'}
+                        id={'stationEnd'}
                         label={'Станция прибытия'}
-                        state={passStationArrival}
-                        setState={setPassStationArrival}/>
+                        state={stationEnd}
+                        setState={setStationEnd}/>
                 </Stack>
                 <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
                     <TextButton
@@ -67,12 +78,10 @@ export default function PassengerPage(props: any) {
                         to={'/shift'}
                         startIcon={<SaveAltRounded/>}
                         onClick={() => {
-                            addEventStartPass();
-                            props.setLastAction('Пассажиром');
+                            addEventHandler();
                         }}/>
                 </Stack>
             </Container>
-
         </>
     );
 }

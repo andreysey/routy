@@ -14,11 +14,16 @@ import TextButtonBack from "../../TextButtonBack";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import {useAppSelector} from "../../../hooks";
+import {EventType} from "./types";
 
 
-export default function ShiftPage(props: any) {
+export default function ShiftPage() {
 
-    const showButtonHelper = (lastAction: any) => {
+    const events = useAppSelector(state => state.shift.events)
+
+    const lastEventType = events[events.length - 1]?.type || EventType.blank
+
+    const showButtonHelper = (lastEvent: string) => {
 
         const end = (<TextButton name={'Конец смены'} to={'/end'} startIcon={<LocalBarRounded/>}/>);
 
@@ -30,50 +35,39 @@ export default function ShiftPage(props: any) {
 
         const train = (<TextButton name={'Поезд'} to={'/start-train'} startIcon={<DirectionsRailwayRounded/>}/>);
 
-        switch (lastAction) {
-            case 'Явка':
+        switch (lastEvent) {
+            case EventType.shiftStart:
                 return (<>
                         {end}
                         {startPass}
                         {startLoco}
                     </>)
-            case 'Принят':
+            case EventType.locomotiveStart:
                 return (<>
                         {endLoco}
                         {train}
                     </>)
-            case 'Пассажиром':
+            case EventType.passenger:
                 return (<>
                         {startPass}
                         {end}
                         {startLoco}
                     </>)
-            case 'Поезд':
+            case EventType.train:
                 return (<>
                         {endLoco}
                         {train}
                     </>)
-            case 'Сдан':
+            case EventType.locomotiveEnd:
                 return (<>
                         {startLoco}
                         {end}
                         {startPass}
                     </>)
-            case 'Конец смены':
+            case EventType.shiftEnd:
                 break;
         }
     }
-
-    // const renderCards = props.cards.map((card: { title: string | undefined; info: string | undefined; }, i: any) => (
-    //     <EventCard
-    //         key={i}
-    //         title={card.title}
-    //         info={card.info}
-    //         to={'/start'}
-    //         state={''}
-    //     />
-    // ))
-    const events = useAppSelector(state => state.shift.events)
 
     const renderEvent = events.map((item: { id: React.Key | null | undefined; type: string | number | Date | null | undefined;}) => (
             <EventCard
@@ -96,7 +90,7 @@ export default function ShiftPage(props: any) {
                     {renderEvent}
                 </Stack>
                 <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
-                    {showButtonHelper(props.lastAction)}
+                    {showButtonHelper(lastEventType)}
                 </Stack>
             </Container>
         </>

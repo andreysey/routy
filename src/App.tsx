@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import MainPage from "./components/pages/MainPage";
 import ShiftStartPage from "./components/features/shiftStart/ShiftStartPage";
@@ -13,56 +13,37 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 function App() {
 
-    const [lastAction, setLastAction] = useState('')
+    return (<>
+        <CssBaseline/>
+        <Routes>
+            <Route path="/" element={
+                <MainPage/>}/>
 
-    const [startShiftToggle, setStartShiftToggle] = useState<boolean>(false);
+            <Route path="/shift" element={
+                <ShiftPage/>}/>
 
-    const [locoNumber, setLocoNumber] = useState('');
+            <Route path="/shift-list" element={
+                <ShiftListPage/>}/>
 
-    return (
-        <>
-            <CssBaseline/>
-            <Routes>
-                <Route path="/" element={
-                    <MainPage
-                        startShiftToggle={startShiftToggle}/>}/>
+            <Route path="/start" element={
+                <ShiftStartPage/>}/>
 
-                <Route path="/shift" element={
-                    <ShiftPage
-                        lastAction={lastAction}/>}/>
+            <Route path="/start-loco" element={
+                <LocomotiveStartPage/>}/>
 
-                <Route path="/history" element={
-                    <ShiftListPage/>}/>
+            <Route path="/start-pass" element={
+                <PassengerPage/>}/>
 
-                <Route path="/start" element={
-                    <ShiftStartPage
-                        setStartShiftToggle={setStartShiftToggle}
-                        setLastAction={setLastAction}/>}/>
+            <Route path="/start-train" element={
+                <TrainPage/>}/>
 
-                <Route path="/start-loco" element={
-                    <LocomotiveStartPage
-                        setLastAction={setLastAction}/>}/>
+            <Route path="/end-loco" element={
+                <LocomotiveEndPage/>}/>
 
-                <Route path="/start-pass" element={
-                    <PassengerPage
-                        setLastAction={setLastAction}/>}/>
-
-                <Route path="/start-train" element={
-                    <TrainPage
-                        setLastAction={setLastAction}/>}/>
-
-                <Route path="/end-loco" element={
-                    <LocomotiveEndPage
-                        setLastAction={setLastAction}
-                        locoNumber={locoNumber}/>}/>
-
-                <Route path="/end" element={
-                    <EndShiftPage
-                        setLastAction={setLastAction}
-                        locoNumber={locoNumber}/>}/>
-            </Routes>
-        </>
-    );
+            <Route path="/end" element={
+                <EndShiftPage/>}/>
+        </Routes>
+    </>)
 }
 
 export default App;
