@@ -13,8 +13,10 @@ import {
 import TextButtonBack from "../../TextButtonBack";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import {useAppSelector} from "../../../hooks";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {EventType} from "./types";
+import {addToShiftList} from "../shiftList/shiftListSlice";
+import {resetShiftState} from "./shiftSlice";
 
 
 export default function ShiftPage() {
@@ -22,6 +24,17 @@ export default function ShiftPage() {
     const events = useAppSelector(state => state.shift.events)
 
     const lastEventType = events[events.length - 1]?.type || EventType.blank
+
+    const dispatch = useAppDispatch()
+
+    const shift = useAppSelector(state => state.shift)
+
+    const addToShiftListHandler = () => {
+        if (lastEventType === EventType.shiftEnd) {
+            dispatch(addToShiftList({...shift}))
+            dispatch(resetShiftState())
+        }
+    }
 
     const showButtonHelper = (lastEvent: string) => {
 
@@ -37,33 +50,15 @@ export default function ShiftPage() {
 
         switch (lastEvent) {
             case EventType.shiftStart:
-                return (<>
-                        {end}
-                        {startPass}
-                        {startLoco}
-                    </>)
+                return (<> {end} {startPass} {startLoco}</>)
             case EventType.locomotiveStart:
-                return (<>
-                        {endLoco}
-                        {train}
-                    </>)
+                return (<> {endLoco} {train} </>)
             case EventType.passenger:
-                return (<>
-                        {startPass}
-                        {end}
-                        {startLoco}
-                    </>)
+                return (<> {startPass} {end} {startLoco} </>)
             case EventType.train:
-                return (<>
-                        {endLoco}
-                        {train}
-                    </>)
+                return (<> {endLoco} {train} </>)
             case EventType.locomotiveEnd:
-                return (<>
-                        {startLoco}
-                        {end}
-                        {startPass}
-                    </>)
+                return (<> {startLoco} {end} {startPass} </>)
             case EventType.shiftEnd:
                 break;
         }
@@ -84,7 +79,9 @@ export default function ShiftPage() {
             <AppBarMain title={'Смена'}/>
             <Container maxWidth="sm">
                 <Box sx={{mt: 3, mb: 3}}>
-                    <TextButtonBack/>
+                    <TextButtonBack
+                        onClick={addToShiftListHandler}
+                    />
                 </Box>
                 <Stack spacing={3}>
                     {renderEvent}

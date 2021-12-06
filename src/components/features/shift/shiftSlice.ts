@@ -42,7 +42,8 @@ export const shiftSlice = createSlice({
         },
         addShiftEndEvent: (state, action: PayloadAction<ShiftEnd>) => {
             state.events.push(action.payload)
-        }
+        },
+        resetShiftState: () => initialState
     },
 })
 
@@ -53,7 +54,8 @@ export const {
     addTrainEvent,
     addLocomotiveStartEvent,
     addLocomotiveEndEvent,
-    addShiftEndEvent
+    addShiftEndEvent,
+    resetShiftState
 } = shiftSlice.actions
 
 export const selectShift = (state: RootState) => state.shift

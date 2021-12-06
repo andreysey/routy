@@ -7,10 +7,11 @@ import Stack from "@mui/material/Stack";
 import PickTime from "../../pickers/PickTime";
 import {SaveAltRounded} from "@mui/icons-material";
 import TextButton from "../../TextButton";
-import {useAppDispatch} from "../../../hooks";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {addShiftEndEvent} from "../shift/shiftSlice";
 import {nanoid} from "@reduxjs/toolkit";
 import {EventType} from "../shift/types";
+import {addToShiftList} from "../shiftList/shiftListSlice";
 
 export default function ShiftEndPage() {
 
@@ -18,19 +19,30 @@ export default function ShiftEndPage() {
 
     const dispatch = useAppDispatch()
 
+    const shift = useAppSelector(state => state.shift)
+
     const addEventHandler = () => {
+        console.log('addEventHandler')
         dispatch(addShiftEndEvent({
             id: nanoid(),
             type: EventType.shiftEnd,
             timeEnd: timeEnd
         }))
+
+    }
+
+    const addToShiftListHandler = () => {
+        return console.log('dispatch')
+        // dispatch(addToShiftList({...shift}))
     }
 
     return (<>
         <AppBarMain title={'Конец смены'}/>
         <Container maxWidth="sm">
             <Box sx={{mt: 3, mb: 3}}>
-                <TextButtonBack/>
+                <TextButtonBack
+                    onClick={addToShiftListHandler}
+                />
             </Box>
             <Stack spacing={3}>
                 <PickTime
@@ -43,9 +55,8 @@ export default function ShiftEndPage() {
                     name={'Сохранить'}
                     to={'/shift'}
                     startIcon={<SaveAltRounded/>}
-                    onClick={() => {
-                        addEventHandler();
-                    }}/>
+                    onClick={addEventHandler}
+                />
             </Stack>
         </Container>
     </>)

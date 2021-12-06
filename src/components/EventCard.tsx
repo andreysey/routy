@@ -31,7 +31,7 @@ export default function EventCard(props: ICardProps) {
             return timeStamp?.toString()
         }
     }
-    // props.info.toString()
+
     return (
         <Card>
             <Grid container

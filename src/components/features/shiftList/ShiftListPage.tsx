@@ -16,8 +16,8 @@ export default function ShiftListPage() {
     const renderShifts = list.map((item) => (
         <ShiftCard
             // key={item.id}
-            title={item.shiftStart}
-            info={item.shiftEnd}
+            title={item.timeStart}
+            info={item.timeEnd}
             to={'/shift'}
         />
     ))
@@ -31,7 +31,7 @@ export default function ShiftListPage() {
             <Stack spacing={3}>
                 <PickDatesYM/>
                 <Divider/>
-                {renderShifts}
+                {list.length > 0 ? renderShifts : 'Нет маршрутов'}
             </Stack>
         </Container>
     </>)
