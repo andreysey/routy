@@ -1,14 +1,12 @@
 import React, {useState} from "react";
 import Stack from '@mui/material/Stack';
-import AppBarMain from "../../AppBarMain";
-import Container from '@mui/material/Container';
-import TextButtonBack from "../../TextButtonBack";
+import TextButtonBack from "../../components/TextButtonBack";
 import Box from "@mui/material/Box";
-import PickTime from "../../pickers/PickTime";
-import TextFieldInput from "../../TextFieldInput";
-import TextButton from "../../TextButton";
+import PickTime from "../../components/pickers/PickTime";
+import TextFieldInput from "../../components/TextFieldInput";
+import TextButton from "../../components/TextButton";
 import {SaveAltRounded} from "@mui/icons-material";
-import {useAppDispatch} from "../../../hooks";
+import {useAppDispatch} from "../../hooks";
 import {addShiftStartEvent} from "../shift/shiftSlice";
 import {nanoid} from "@reduxjs/toolkit";
 import {EventType} from "../shift/types";
@@ -23,15 +21,13 @@ export default function ShiftStartPage() {
     const addEventHandler = () => {
         dispatch(addShiftStartEvent({
             id: nanoid(),
-            type: EventType.shiftStart,
+            type: EventType.ShiftStart,
             timeStart: time,
             route: route
         }))
     }
 
     return (<>
-        <AppBarMain title={'Начать смену'}/>
-        <Container maxWidth="sm">
             <Box sx={{mt: 3, mb: 3}}>
                 <TextButtonBack/>
             </Box>
@@ -57,6 +53,5 @@ export default function ShiftStartPage() {
                         addEventHandler();
                     }}/>
             </Stack>
-        </Container>
     </>)
 }

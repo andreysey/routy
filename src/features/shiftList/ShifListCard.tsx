@@ -6,27 +6,26 @@ import Typography from '@mui/material/Typography';
 import {CreateRounded} from "@mui/icons-material";
 import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
-import { Link as RouterLink} from 'react-router-dom';
+import {Link as RouterLink} from 'react-router-dom';
+import {format, millisecondsToMinutes} from "date-fns";
 
 interface ICardProps {
-    title?: any
-    info?: any
+    start: number
+    end: number
     to?: string | undefined
     state?: any
 }
 
-export default function EventCard(props: ICardProps) {
+export default function ShiftListCard(props: ICardProps) {
 
-    const addLeadingZero = (date: string) => {
-        return (date.length === 1) ? '0' + date : date;
+    const hoursAndMinutes = (start: number, end: number) => {
+        const duration = end - start
+        const durationInMinutes = millisecondsToMinutes(duration)
+        const hours = Math.floor(durationInMinutes / 60)
+        const minutes = durationInMinutes % 60
+        return (hours < 10 ? '0' + hours : hours) + `:` + (minutes < 10 ? '0' + minutes : minutes)
     }
 
-    const timeHandler = (timeStamp: any) => {
-            let dateObj = new Date(timeStamp)
-            let hour = addLeadingZero(dateObj.getHours().toString());
-            let minutes = addLeadingZero(dateObj.getMinutes().toString());
-            return   hour + `:` + minutes
-    }
 
     return (
         <Card>
@@ -36,10 +35,10 @@ export default function EventCard(props: ICardProps) {
                 <Grid item xs>
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>
-                            {timeHandler(props.title) || 'Card name'}
+                            {`${format(props.start, "dd.MM HH:mm")} - ${format(props.end, "dd.MM HH:mm")}` || 'Card name'}
                         </Typography>
-                        <Typography variant="h5" component="h2">
-                            {timeHandler(props.info) || 'Card info'}
+                        <Typography variant="h6" component="h2">
+                            {hoursAndMinutes(props.start, props.end) || 'Card info'}
                         </Typography>
                     </CardContent>
                 </Grid>

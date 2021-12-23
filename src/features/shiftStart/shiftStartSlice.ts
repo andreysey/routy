@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
-import {RootState} from '../../../store';
+import {RootState} from '../../store';
 import {ShiftStart} from "./types";
 import {EventType} from "../shift/types";
 
 const initialState: ShiftStart = {
     id: '',
-    type: EventType.shiftStart,
+    type: EventType.ShiftStart,
     timeStart: 0,
     route: '',
 }

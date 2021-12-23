@@ -14,11 +14,12 @@ export interface Shift {
 }
 
 export enum EventType {
-    shiftStart = 'Явка',
-    passenger = 'Пассажиром',
-    locomotiveStart = 'Приемка',
-    train = 'Поезд',
-    locomotiveEnd = 'Сдача',
-    shiftEnd = 'Конец смены',
-    blank = ''
+    ShiftStart = 'Явка',
+    Passenger = 'Пассажиром',
+    LocomotiveStart = 'Приемка',
+    Train = 'Поезд',
+    LocomotiveEnd = 'Сдача',
+    ShiftEnd = 'Конец смены',
+    Blank = ''
 }
+// events: Array<ShiftStart | Passenger | Train | LocomotiveStart | LocomotiveEnd | ShiftEnd>

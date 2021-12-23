@@ -1,48 +1,65 @@
 import React from 'react';
 import {Route, Routes} from "react-router-dom";
-import MainPage from "./components/pages/MainPage";
-import ShiftStartPage from "./components/features/shiftStart/ShiftStartPage";
-import ShiftPage from "./components/features/shift/ShiftPage";
-import LocomotiveStartPage from "./components/features/locomotiveStart/LocomotiveStartPage";
-import PassengerPage from "./components/features/passenger/PassengerPage";
-import TrainPage from "./components/features/train/TrainPage";
-import EndShiftPage from './components/features/shiftEnd/ShiftEndPage';
-import LocomotiveEndPage from './components/features/locomotiveEnd/LocomotiveEndPage';
-import ShiftListPage from "./components/features/shiftList/ShiftListPage";
+import MainPage from "./features/MainPage";
+import ShiftStartPage from "./features/shiftStart/ShiftStartPage";
+import ShiftPage from "./features/shift/ShiftPage";
+import LocomotiveStartPage from "./features/locomotiveStart/LocomotiveStartPage";
+import PassengerPage from "./features/passenger/PassengerPage";
+import TrainPage from "./features/train/TrainPage";
+import ShiftEndPage from './features/shiftEnd/ShiftEndPage';
+import LocomotiveEndPage from './features/locomotiveEnd/LocomotiveEndPage';
+import ShiftListPage from "./features/shiftList/ShiftListPage";
 import CssBaseline from '@mui/material/CssBaseline';
+import AppBarMain from "./components/AppBarMain";
+import {Container} from '@mui/material';
+
+export enum UrlPath {
+    Main = '/',
+    Shift = '/shift',
+    ShiftList = '/shift-list',
+    ShiftStart = '/shift-start',
+    ShiftEnd = '/shift-end',
+    LocomotiveStart = '/locomotive-start',
+    Passenger = '/passenger',
+    Train = '/train',
+    LocomotiveEnd = '/locomotive-end'
+}
 
 function App() {
 
     return (<>
         <CssBaseline/>
-        <Routes>
-            <Route path="/" element={
-                <MainPage/>}/>
+        <AppBarMain/>
+        <Container maxWidth="sm">
+            <Routes>
+                <Route path={UrlPath.Main} element={
+                    <MainPage/>}/>
 
-            <Route path="/shift" element={
-                <ShiftPage/>}/>
+                <Route path={UrlPath.Shift} element={
+                    <ShiftPage/>}/>
 
-            <Route path="/shift-list" element={
-                <ShiftListPage/>}/>
+                <Route path={UrlPath.ShiftList} element={
+                    <ShiftListPage/>}/>
 
-            <Route path="/start" element={
-                <ShiftStartPage/>}/>
+                <Route path={UrlPath.ShiftStart} element={
+                    <ShiftStartPage/>}/>
 
-            <Route path="/start-loco" element={
-                <LocomotiveStartPage/>}/>
+                <Route path={UrlPath.LocomotiveStart} element={
+                    <LocomotiveStartPage/>}/>
 
-            <Route path="/start-pass" element={
-                <PassengerPage/>}/>
+                <Route path={UrlPath.Passenger} element={
+                    <PassengerPage/>}/>
 
-            <Route path="/start-train" element={
-                <TrainPage/>}/>
+                <Route path={UrlPath.Train} element={
+                    <TrainPage/>}/>
 
-            <Route path="/end-loco" element={
-                <LocomotiveEndPage/>}/>
+                <Route path={UrlPath.LocomotiveEnd} element={
+                    <LocomotiveEndPage/>}/>
 
-            <Route path="/end" element={
-                <EndShiftPage/>}/>
-        </Routes>
+                <Route path={UrlPath.ShiftEnd} element={
+                    <ShiftEndPage/>}/>
+            </Routes>
+        </Container>
     </>)
 }
 

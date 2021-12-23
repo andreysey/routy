@@ -1,15 +1,13 @@
 import React, {useState} from "react";
-import AppBarMain from "../../AppBarMain";
-import Container from '@mui/material/Container';
-import TextButtonBack from "../../TextButtonBack";
+import TextButtonBack from "../../components/TextButtonBack";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import TextFieldInput from "../../TextFieldInput";
-import PickTime from "../../pickers/PickTime";
+import TextFieldInput from "../../components/TextFieldInput";
+import PickTime from "../../components/pickers/PickTime";
 import {SaveAltRounded} from "@mui/icons-material";
-import TextButton from "../../TextButton";
-import {useAppDispatch} from "../../../hooks";
+import TextButton from "../../components/TextButton";
+import {useAppDispatch} from "../../hooks";
 import {addTrainEvent} from "../shift/shiftSlice";
 import {nanoid} from "@reduxjs/toolkit";
 import {EventType} from "../shift/types";
@@ -27,7 +25,7 @@ export default function TrainPage() {
     const addEventHandler = () => {
         dispatch(addTrainEvent({
             id: nanoid(),
-            type: EventType.train,
+            type: EventType.Train,
             trainNumber: trainNumber,
             timeStart: timeStart,
             timeEnd: timeEnd,
@@ -37,8 +35,6 @@ export default function TrainPage() {
     }
 
     return (<>
-        <AppBarMain title={'Поезд'}/>
-        <Container maxWidth="sm">
             <Box sx={{mt: 3, mb: 3}}>
                 <TextButtonBack/>
             </Box>
@@ -80,6 +76,5 @@ export default function TrainPage() {
                         addEventHandler();
                     }}/>
             </Stack>
-        </Container>
     </>)
 }

@@ -1,30 +1,26 @@
 import React from "react";
-import AppBarMain from "../../AppBarMain";
-import PickDatesYM from '../../pickers/PickDate';
-import TextButtonBack from "../../TextButtonBack";
-import Container from '@mui/material/Container';
+import PickDatesYM from '../../components/pickers/PickDate';
+import TextButtonBack from "../../components/TextButtonBack";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-import {useAppSelector} from "../../../hooks";
-import ShiftCard from "../../ShiftCard";
+import {useAppSelector} from "../../hooks";
+import ShiftListCard from "./ShifListCard";
 
 export default function ShiftListPage() {
 
     const list = useAppSelector(state => state.shiftList)
 
     const renderShifts = list.map((item) => (
-        <ShiftCard
-            // key={item.id}
-            title={item.timeStart}
-            info={item.timeEnd}
+        <ShiftListCard
+            key={item.id}
+            start={item.timeStart}
+            end={item.timeEnd}
             to={'/shift'}
         />
     ))
 
     return (<>
-        <AppBarMain title={'Маршруты'}/>
-        <Container maxWidth="sm">
             <Box sx={{mt: 3, mb: 3}}>
                 <TextButtonBack/>
             </Box>
@@ -33,6 +29,5 @@ export default function ShiftListPage() {
                 <Divider/>
                 {list.length > 0 ? renderShifts : 'Нет маршрутов'}
             </Stack>
-        </Container>
     </>)
 }

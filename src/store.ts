@@ -1,8 +1,8 @@
 import {configureStore} from "@reduxjs/toolkit";
 
-import {shiftSlice} from "./components/features/shift/shiftSlice";
-import {shiftListSlice} from "./components/features/shiftList/shiftListSlice";
-import {shiftStartSlice} from "./components/features/shiftStart/shiftStartSlice";
+import {shiftSlice} from "./features/shift/shiftSlice";
+import {shiftListSlice} from "./features/shiftList/shiftListSlice";
+import {shiftStartSlice} from "./features/shiftStart/shiftStartSlice";
 
 
 const store = configureStore({
@@ -17,4 +17,4 @@ export type RootState = ReturnType<typeof store.getState>
 
 export type AppDispatch = typeof store.dispatch
 
-export default store;
+export default store

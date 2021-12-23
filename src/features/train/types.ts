@@ -1,8 +1,8 @@
 import {EventType} from "../shift/types";
 
-export interface Passenger {
+export interface Train {
     id: string
-    type: EventType.passenger
+    type: EventType.Train
     trainNumber: string
     timeStart: number
     timeEnd: number

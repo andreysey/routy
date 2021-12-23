@@ -7,7 +7,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
 export default function SelectLoco(props: any) {
-    // const classes = useStyles();
 
     const handleChange = (event: SelectChangeEvent) => {
         props.setState(event.target.value as string);

@@ -1,17 +1,14 @@
 import React from "react";
-import AppBarMain from "../../AppBarMain";
-import TextButtonBack from "../../TextButtonBack";
-import Container from '@mui/material/Container';
+import TextButtonBack from "../../components/TextButtonBack";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import PickTime from "../../pickers/PickTime";
+import PickTime from "../../components/pickers/PickTime";
 import {SaveAltRounded} from "@mui/icons-material";
-import TextButton from "../../TextButton";
-import {useAppDispatch, useAppSelector} from "../../../hooks";
+import TextButton from "../../components/TextButton";
+import {useAppDispatch} from "../../hooks";
 import {addShiftEndEvent} from "../shift/shiftSlice";
 import {nanoid} from "@reduxjs/toolkit";
 import {EventType} from "../shift/types";
-import {addToShiftList} from "../shiftList/shiftListSlice";
 
 export default function ShiftEndPage() {
 
@@ -19,30 +16,17 @@ export default function ShiftEndPage() {
 
     const dispatch = useAppDispatch()
 
-    const shift = useAppSelector(state => state.shift)
-
     const addEventHandler = () => {
-        console.log('addEventHandler')
         dispatch(addShiftEndEvent({
             id: nanoid(),
-            type: EventType.shiftEnd,
+            type: EventType.ShiftEnd,
             timeEnd: timeEnd
         }))
-
-    }
-
-    const addToShiftListHandler = () => {
-        return console.log('dispatch')
-        // dispatch(addToShiftList({...shift}))
     }
 
     return (<>
-        <AppBarMain title={'Конец смены'}/>
-        <Container maxWidth="sm">
             <Box sx={{mt: 3, mb: 3}}>
-                <TextButtonBack
-                    onClick={addToShiftListHandler}
-                />
+                <TextButtonBack/>
             </Box>
             <Stack spacing={3}>
                 <PickTime
@@ -58,6 +42,5 @@ export default function ShiftEndPage() {
                     onClick={addEventHandler}
                 />
             </Stack>
-        </Container>
     </>)
 }

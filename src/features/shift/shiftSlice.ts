@@ -1,5 +1,5 @@
 import {createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit"
-import {RootState} from '../../../store';
+import {RootState} from '../../store';
 import {Shift} from "./types";
 import {ShiftStart} from "../shiftStart/types";
 import {Passenger} from "../passenger/types";
@@ -21,12 +21,10 @@ export const shiftSlice = createSlice({
     name: 'shift',
     initialState,
     reducers: {
-        startShift: (state, action: PayloadAction<number>) => {
-            state.id = nanoid();
-            state.timeStart = action.payload;
-        },
         addShiftStartEvent: (state, action: PayloadAction<ShiftStart>) => {
             state.events.push(action.payload)
+            state.id = nanoid()
+            state.timeStart = action.payload.timeStart
         },
         addPassengerEvent: (state, action: PayloadAction<Passenger>) => {
             state.events.push(action.payload)
@@ -42,13 +40,13 @@ export const shiftSlice = createSlice({
         },
         addShiftEndEvent: (state, action: PayloadAction<ShiftEnd>) => {
             state.events.push(action.payload)
+            state.timeEnd = action.payload.timeEnd
         },
         resetShiftState: () => initialState
     },
 })
 
 export const {
-    startShift,
     addShiftStartEvent,
     addPassengerEvent,
     addTrainEvent,
