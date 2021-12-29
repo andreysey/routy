@@ -7,28 +7,21 @@ import {CreateRounded} from "@mui/icons-material";
 import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
 import {Link as RouterLink} from 'react-router-dom';
-import {format, millisecondsToMinutes} from "date-fns";
+import {format} from "date-fns";
 
-interface ICardProps {
-    start: number | undefined
-    end: number | undefined
-    to?: string | undefined
-    state?: any
+
+interface ShiftStartCardProps {
+    title?: string | number | Date | null;
+    info?: number | Date;
+    to?: string | undefined;
+    state?: any;
 }
 
-export default function ShiftListCard(props: ICardProps) {
+export default function ShiftStartCard(props: ShiftStartCardProps) {
 
-    const start = props.start || 0
-    const end = props.end || 0
-
-    const hoursAndMinutes = (start: number, end: number) => {
-        const duration = end - start
-        const durationInMinutes = millisecondsToMinutes(duration)
-        const hours = Math.floor(durationInMinutes / 60)
-        const minutes = durationInMinutes % 60
-        return (hours < 10 ? '0' + hours : hours) + `:` + (minutes < 10 ? '0' + minutes : minutes)
-    }
-
+    const type = props.state.type
+    const timeStart = props.state.timeStart
+    const route = props.state.route
 
     return (
         <Card>
@@ -38,10 +31,10 @@ export default function ShiftListCard(props: ICardProps) {
                 <Grid item xs>
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>
-                            {`${format(start, "dd.MM HH:mm")} - ${format(end, "dd.MM HH:mm")}` || 'Card name'}
+                            {`${type}  ${format(timeStart, "dd.MM")} маршрут: ${route}` || 'Card name'}
                         </Typography>
-                        <Typography variant="h6" component="h2">
-                            {hoursAndMinutes(start, end) || 'Card info'}
+                        <Typography variant="h5" component="h2">
+                            {format(timeStart, "HH:mm") || 'Card info'}
                         </Typography>
                     </CardContent>
                 </Grid>

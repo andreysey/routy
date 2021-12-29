@@ -11,7 +11,7 @@ interface IDateProps {
     id?: any;
 }
 
-export default function MaterialUIPickers(props: IDateProps) {
+export default function PickTime(props: IDateProps) {
 
     // const handleChange = (date: any) => {
     //         props.setState(date.getTime())
@@ -20,12 +20,32 @@ export default function MaterialUIPickers(props: IDateProps) {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
                 <DateTimePicker
+                    mask={''}
+                    renderInput={(props) => <TextField {...props} />}
                     label="Дата и время"
-                    // toolbarTitle={'Дата и время'}
                     value={props.state}
                     onChange={(newValue) => {props.setState(newValue.getTime())}}
-                    renderInput={(params) => <TextField {...params} />}
                  />
         </LocalizationProvider>
     );
 }
+
+//
+// export default function MaterialUIPickers(props: IDateProps) {
+//
+//     // const handleChange = (date: any) => {
+//     //         props.setState(date.getTime())
+//     // };
+//
+//     return (
+//         <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
+//             <DateTimePicker
+//                 label="Дата и время"
+//                 // toolbarTitle={'Дата и время'}
+//                 value={props.state}
+//                 onChange={(newValue) => {props.setState(newValue.getTime())}}
+//                 renderInput={(params) => <TextField {...params} />}
+//             />
+//         </LocalizationProvider>
+//     );
+// }

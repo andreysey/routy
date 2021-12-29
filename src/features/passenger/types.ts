@@ -1,11 +1,11 @@
-import {EventType} from "../shift/types";
+import {EventType, ShiftEvents} from "../shift/types";
 
 export interface Passenger {
     id: string
-    type: EventType.Passenger
-    trainNumber: string
-    timeStart: number
-    timeEnd: number
-    stationStart: string
-    stationEnd: string
+    type: EventType
+    trainNumber?: string | undefined
+    timeStart?: number | undefined
+    timeEnd?: number | undefined
+    stationStart?: string | undefined
+    stationEnd?: string | undefined
 }

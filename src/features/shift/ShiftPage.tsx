@@ -12,16 +12,11 @@ import TextButtonBack from "../../components/TextButtonBack";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {EventType, Shift} from "./types";
+import {EventType, ShiftEvents} from "./types";
 import {addToShiftList} from "../shiftList/shiftListSlice";
 import {resetShiftState} from "./shiftSlice";
 import {UrlPath} from "../../App";
-import {ShiftStart} from "../shiftStart/types";
-import {Passenger} from "../passenger/types";
-import {Train} from "../train/types";
-import {LocomotiveStart} from "../locomotiveStart/types";
-import {LocomotiveEnd} from "../locomotiveEnd/types";
-import {ShiftEnd} from "../shiftEnd/types";
+import ShiftStartCard from "../shiftStart/ShiftStartCard";
 
 
 export default function ShiftPage() {
@@ -62,15 +57,29 @@ export default function ShiftPage() {
         }
     }
 
+    const showCardHelper = (item: ShiftEvents) => {
+        switch (item.type) {
+            case EventType.ShiftStart:
+                return (<ShiftStartCard key={item.id} state={item}/>)
+            default:
+                break
+                break
+        }
+    };
+
     const renderEvent = events.map((item) => (
-        <ShiftEventCard
-            key={item.id}
-            title={item.type}
-            info={item.timeStart}
-            to={'/start'}
-            state={''}
-        />
+        showCardHelper(item)
     ))
+    console.log(renderEvent);
+
+    // (<ShiftEventCard
+    // key={item.id}
+    // title={item.type}
+    // info={item.timeStart}
+    // to={'/start'}
+    // state={''}
+    // />)
+
 
     return (
         <>

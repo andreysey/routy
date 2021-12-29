@@ -1,6 +1,6 @@
 import {createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit"
 import {RootState} from '../../store';
-import {Shift} from "./types";
+import {Shift, ShiftEvents} from "./types";
 import {ShiftStart} from "../shiftStart/types";
 import {Passenger} from "../passenger/types";
 import {Train} from "../train/types";
@@ -21,29 +21,29 @@ export const shiftSlice = createSlice({
     name: 'shift',
     initialState,
     reducers: {
-        addShiftStartEvent: (state, action: PayloadAction<ShiftStart>) => {
-            state.events.push(action.payload)
-            state.id = nanoid()
-            state.timeStart = action.payload.timeStart
-        },
-        addPassengerEvent: (state, action: PayloadAction<Passenger>) => {
-            state.events.push(action.payload)
-        },
-        addTrainEvent: (state, action: PayloadAction<Train>) => {
-            state.events.push(action.payload)
-        },
-        addLocomotiveStartEvent: (state, action: PayloadAction<LocomotiveStart>) => {
-            state.events.push(action.payload)
-        },
-        addLocomotiveEndEvent: (state, action: PayloadAction<LocomotiveEnd>) => {
-            state.events.push(action.payload)
-        },
-        addShiftEndEvent: (state, action: PayloadAction<ShiftEnd>) => {
-            state.events.push(action.payload)
-            state.timeEnd = action.payload.timeEnd
-        },
-        resetShiftState: () => initialState
+    addShiftStartEvent: (state, action: PayloadAction<ShiftStart>) => {
+        state.events.push(action.payload)
+        state.id = nanoid()
+        state.timeStart = action.payload.timeStart
     },
+        addPassengerEvent: (state, action: PayloadAction<Passenger>) => {
+        state.events.push(action.payload)
+    },
+        addTrainEvent: (state, action: PayloadAction<Train>) => {
+        state.events.push(action.payload)
+    },
+        addLocomotiveStartEvent: (state, action: PayloadAction<LocomotiveStart>) => {
+        state.events.push(action.payload)
+    },
+        addLocomotiveEndEvent: (state, action: PayloadAction<LocomotiveEnd>) => {
+        state.events.push(action.payload)
+    },
+        addShiftEndEvent: (state, action: PayloadAction<ShiftEnd>) => {
+        state.events.push(action.payload)
+        state.timeEnd = action.payload.timeEnd
+    },
+        resetShiftState: () => initialState
+},
 })
 
 export const {
@@ -59,3 +59,28 @@ export const {
 export const selectShift = (state: RootState) => state.shift
 
 export default shiftSlice.reducer
+
+// reducers: {
+//     addShiftStartEvent: (state, action: PayloadAction<ShiftStart>) => {
+//         state.events.push(action.payload)
+//         state.id = nanoid()
+//         state.timeStart = action.payload.timeStart
+//     },
+//         addPassengerEvent: (state, action: PayloadAction<Passenger>) => {
+//         state.events.push(action.payload)
+//     },
+//         addTrainEvent: (state, action: PayloadAction<Train>) => {
+//         state.events.push(action.payload)
+//     },
+//         addLocomotiveStartEvent: (state, action: PayloadAction<LocomotiveStart>) => {
+//         state.events.push(action.payload)
+//     },
+//         addLocomotiveEndEvent: (state, action: PayloadAction<LocomotiveEnd>) => {
+//         state.events.push(action.payload)
+//     },
+//         addShiftEndEvent: (state, action: PayloadAction<ShiftEnd>) => {
+//         state.events.push(action.payload)
+//         state.timeEnd = action.payload.timeEnd
+//     },
+//         resetShiftState: () => initialState
+// },

@@ -7,9 +7,9 @@ import {ShiftEnd} from "../shiftEnd/types";
 
 export interface Shift {
     id: string
-    timeStart: number
-    timeEnd: number
-    events: Array<ShiftStart | Passenger | Train | LocomotiveStart | LocomotiveEnd | ShiftEnd>
+    timeStart: number | undefined
+    timeEnd: number | undefined
+    events: Array<ShiftEvents>
     completed: boolean
 }
 
@@ -22,4 +22,11 @@ export enum EventType {
     ShiftEnd = 'Конец смены',
     Blank = ''
 }
+
 // events: Array<ShiftStart | Passenger | Train | LocomotiveStart | LocomotiveEnd | ShiftEnd>
+
+// Array<ShiftEvents>
+
+export interface ShiftEvents extends ShiftStart, Passenger, Train, LocomotiveStart, LocomotiveEnd, ShiftEnd {
+
+}

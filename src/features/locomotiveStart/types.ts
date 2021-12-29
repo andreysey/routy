@@ -1,12 +1,12 @@
-import {EventType} from "../shift/types";
+import {EventType, ShiftEvents} from "../shift/types";
 
 export interface LocomotiveStart {
     id: string
-    type: EventType.LocomotiveStart
-    model: string
-    number: string
-    electricityCounterA: number | string
-    electricityCounterB: number | string
-    recuperationCounterA: number | string
-    recuperationCounterB: number | string
+    type: EventType
+    model?: string | undefined
+    number?: string | undefined
+    electricityCounterA?: number | string | undefined
+    electricityCounterB?: number | string | undefined
+    recuperationCounterA?: number | string | undefined
+    recuperationCounterB?: number | string | undefined
 }

@@ -11,22 +11,22 @@ interface IDateProps {
     id?: any;
 }
 
-export default function MaterialUIPickers(props: IDateProps) {
+export default function PickDate(props: IDateProps) {
     // const [value, setValue] = React.useState<Date | null>(
     //     new Date('2014-08-18T21:11:54'),
     // );
 
-    const handleChange = (newValue: Date | null) => {
-        // setValue(newValue);
-        props.setState(newValue)
-    };
+    // const handleChange = (newValue: Date | null) => {
+    //     // setValue(newValue);
+    //     props.setState(newValue)
+    // };
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
             <DateTimePicker
                 // label="Date&Time picker"
                 value={props.state}
-                onChange={handleChange}
+                onChange={(newValue) => {props.setState(newValue.getTime())}}
                 renderInput={(params) => <TextField {...params} />}
             />
         </LocalizationProvider>

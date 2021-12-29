@@ -1,7 +1,7 @@
-import {EventType} from "../shift/types";
+import {EventType, ShiftEvents} from "../shift/types";
 
-export interface ShiftEnd {
+export interface ShiftEnd{
     id: string
-    type: EventType.ShiftEnd
-    timeEnd: number
+    type: EventType
+    timeEnd?: number | undefined
 }
