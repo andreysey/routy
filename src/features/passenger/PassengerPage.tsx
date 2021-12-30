@@ -9,8 +9,9 @@ import {SaveAltRounded} from "@mui/icons-material";
 import TextButton from "../../components/TextButton";
 import {nanoid} from "@reduxjs/toolkit";
 import {useAppDispatch} from "../../hooks";
-import {addPassengerEvent} from "../shift/shiftSlice";
-import {EventType} from "../shift/types";
+import {addPassengerEvent} from "../shiftEvents/shiftSlice";
+import {EventType} from "../shiftEvents/types";
+import {UrlPath} from "../../App";
 
 export default function PassengerPage() {
 
@@ -71,7 +72,7 @@ export default function PassengerPage() {
             <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
                 <TextButton
                     name={'Сохранить'}
-                    to={'/shift'}
+                    to={UrlPath.ShiftEvents}
                     startIcon={<SaveAltRounded/>}
                     onClick={() => {
                         addEventHandler();

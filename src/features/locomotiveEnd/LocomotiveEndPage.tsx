@@ -7,9 +7,10 @@ import TextFieldInput from "../../components/TextFieldInput";
 import {SaveAltRounded} from "@mui/icons-material";
 import TextButton from "../../components/TextButton";
 import {useAppDispatch} from "../../hooks";
-import {addLocomotiveEndEvent} from "../shift/shiftSlice";
+import {addLocomotiveEndEvent} from "../shiftEvents/shiftSlice";
 import {nanoid} from "@reduxjs/toolkit";
-import {EventType} from "../shift/types";
+import {EventType} from "../shiftEvents/types";
+import {UrlPath} from "../../App";
 
 export default function LocomotiveEndPage() {
 
@@ -84,7 +85,7 @@ export default function LocomotiveEndPage() {
         <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
             <TextButton
                 name={'Сохранить'}
-                to={'/shift'}
+                to={UrlPath.ShiftEvents}
                 startIcon={<SaveAltRounded/>}
                 onClick={() => {
                     addEventHandler();

@@ -18,7 +18,7 @@ export default function AppBarMain() {
             case UrlPath.Main:
                 setTitle('Норма TODO');
                 break;
-            case UrlPath.Shift:
+            case UrlPath.ShiftEvents:
                 setTitle('Смена');
                 break;
             case UrlPath.ShiftList:

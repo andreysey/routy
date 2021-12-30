@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 import {RootState} from '../../store';
 import {ShiftList} from "./types";
-import {Shift} from "../shift/types";
+import {Shift} from "../shiftEvents/types";
 
 const initialState: ShiftList = []
 

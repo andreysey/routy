@@ -7,9 +7,10 @@ import TextFieldInput from "../../components/TextFieldInput";
 import TextButton from "../../components/TextButton";
 import {SaveAltRounded} from "@mui/icons-material";
 import {useAppDispatch} from "../../hooks";
-import {addShiftStartEvent} from "../shift/shiftSlice";
+import {addShiftStartEvent} from "../shiftEvents/shiftSlice";
 import {nanoid} from "@reduxjs/toolkit";
-import {EventType} from "../shift/types";
+import {EventType} from "../shiftEvents/types";
+import {UrlPath} from "../../App";
 
 export default function ShiftStartPage() {
 
@@ -47,7 +48,7 @@ export default function ShiftStartPage() {
             <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
                 <TextButton
                     name={'Сохранить'}
-                    to={'/shift'}
+                    to={UrlPath.ShiftEvents}
                     startIcon={<SaveAltRounded/>}
                     onClick={() => {
                         addEventHandler();

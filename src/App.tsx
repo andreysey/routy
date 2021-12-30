@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import MainPage from "./features/MainPage";
 import ShiftStartPage from "./features/shiftStart/ShiftStartPage";
-import ShiftPage from "./features/shift/ShiftPage";
+import ShiftPage from "./features/shiftEvents/ShiftPage";
 import LocomotiveStartPage from "./features/locomotiveStart/LocomotiveStartPage";
 import PassengerPage from "./features/passenger/PassengerPage";
 import TrainPage from "./features/train/TrainPage";
@@ -15,7 +15,7 @@ import {Container} from '@mui/material';
 
 export enum UrlPath {
     Main = '/',
-    Shift = '/shift',
+    ShiftEvents = '/shift-events',
     ShiftList = '/shift-list',
     ShiftStart = '/shift-start',
     ShiftEnd = '/shift-end',
@@ -35,7 +35,7 @@ function App() {
                 <Route path={UrlPath.Main} element={
                     <MainPage/>}/>
 
-                <Route path={UrlPath.Shift} element={
+                <Route path={UrlPath.ShiftEvents} element={
                     <ShiftPage/>}/>
 
                 <Route path={UrlPath.ShiftList} element={

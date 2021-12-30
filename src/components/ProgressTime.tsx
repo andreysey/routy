@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
 import ButtonBase from '@mui/material/ButtonBase';
 import {Link as RouterLink} from 'react-router-dom';
+import {UrlPath} from "../App";
 
 export default function CircularProgressWithLabel() {
 
@@ -21,7 +22,7 @@ export default function CircularProgressWithLabel() {
 
     return (
         <>
-            <ButtonBase component={RouterLink} to={'/shift-list'} >
+            <ButtonBase component={RouterLink} to={UrlPath.ShiftList} >
             <Box position={"relative"} display={"inline-flex"}>
                 <CircularProgress variant="determinate" value={progress} size={300} color={"success"}/>
                 <Box

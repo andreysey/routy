@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import {ArrowBackRounded, PlayArrowRounded} from "@mui/icons-material";
 import Stack from "@mui/material/Stack";
 import {useAppSelector} from "../hooks";
-import {EventType} from "./shift/types";
+import {EventType} from "./shiftEvents/types";
 import {format} from "date-fns";
 import {ru} from "date-fns/locale";
 import {UrlPath} from '../App';
@@ -41,7 +41,7 @@ export default function MainPage() {
         </Stack>
         <Stack spacing={2} sx={{mt: 3, mb: 3}} justifyContent="center" alignItems="center">
             {lastEventType
-                ? (<TextButton name={'Вернутся'} startIcon={<ArrowBackRounded/>} to={UrlPath.Shift}/>)
+                ? (<TextButton name={'Вернутся'} startIcon={<ArrowBackRounded/>} to={UrlPath.ShiftEvents}/>)
                 : (<TextButton name={'Начать смену'} startIcon={<PlayArrowRounded/>} to={UrlPath.ShiftStart}/>)
             }
         </Stack>

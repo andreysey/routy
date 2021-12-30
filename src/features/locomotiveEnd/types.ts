@@ -1,4 +1,4 @@
-import {EventType, ShiftEvents} from "../shift/types";
+import {EventType, ShiftEvents} from "../shiftEvents/types";
 
 export interface LocomotiveEnd {
     id: string

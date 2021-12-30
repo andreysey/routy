@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import {useAppSelector} from "../../hooks";
 import ShiftListCard from "./ShifListCard";
+import {UrlPath} from "../../App";
 
 export default function ShiftListPage() {
 
@@ -16,7 +17,7 @@ export default function ShiftListPage() {
             key={item.id}
             start={item.timeStart}
             end={item.timeEnd}
-            to={'/shift'}
+            to={UrlPath.ShiftEvents}
         />
     ))
 

@@ -25,6 +25,7 @@ export default function PickDate(props: IDateProps) {
         <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
             <DateTimePicker
                 // label="Date&Time picker"
+                mask={''}
                 value={props.state}
                 onChange={(newValue) => {props.setState(newValue.getTime())}}
                 renderInput={(params) => <TextField {...params} />}

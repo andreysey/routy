@@ -17,21 +17,26 @@ import {addToShiftList} from "../shiftList/shiftListSlice";
 import {resetShiftState} from "./shiftSlice";
 import {UrlPath} from "../../App";
 import ShiftStartCard from "../shiftStart/ShiftStartCard";
+import ShiftEndCard from "../shiftEnd/ShiftEndCard";
+import LocomotiveStartCard from '../locomotiveStart/LocomotiveStartCard';
+import LocomotiveEndCard from "../locomotiveEnd/LocomotiveEndCard";
+import PassengerCard from "../passenger/PassengerCard";
+import TrainCard from "../train/TrainCard";
 
 
 export default function ShiftPage() {
 
-    const events = useAppSelector(state => state.shift.events)
-    const shift = useAppSelector(state => state.shift)
-    const lastEventType = events[events.length - 1]?.type || EventType.Blank
-    const dispatch = useAppDispatch()
+    const events = useAppSelector(state => state.shift.events);
+    const shift = useAppSelector(state => state.shift);
+    const lastEventType = events[events.length - 1]?.type || EventType.Blank;
+    const dispatch = useAppDispatch();
 
     const addToShiftListHandler = () => {
         if (lastEventType === EventType.ShiftEnd) {
-            dispatch(addToShiftList({...shift}))
-            dispatch(resetShiftState())
+            dispatch(addToShiftList({...shift}));
+            dispatch(resetShiftState());
         }
-    }
+    };
 
     const showButtonHelper = (lastEvent: string) => {
 
@@ -43,15 +48,15 @@ export default function ShiftPage() {
 
         switch (lastEvent) {
             case EventType.ShiftStart:
-                return (<> {end} {startPass} {startLoco}</>)
+                return (<> {end} {startPass} {startLoco}</>);
             case EventType.LocomotiveStart:
-                return (<> {endLoco} {train} </>)
+                return (<> {endLoco} {train} </>);
             case EventType.Passenger:
-                return (<> {startPass} {end} {startLoco} </>)
+                return (<> {startPass} {end} {startLoco} </>);
             case EventType.Train:
-                return (<> {endLoco} {train} </>)
+                return (<> {endLoco} {train} </>);
             case EventType.LocomotiveEnd:
-                return (<> {startLoco} {end} {startPass} </>)
+                return (<> {startLoco} {end} {startPass} </>);
             case EventType.ShiftEnd:
                 break;
         }
@@ -60,16 +65,24 @@ export default function ShiftPage() {
     const showCardHelper = (item: ShiftEvents) => {
         switch (item.type) {
             case EventType.ShiftStart:
-                return (<ShiftStartCard key={item.id} state={item}/>)
+                return (<ShiftStartCard key={item.id} state={item}/>);
+            case EventType.LocomotiveStart:
+                return (<LocomotiveStartCard key={item.id} state={item}/>);
+            case EventType.Passenger:
+                return (<PassengerCard key={item.id} state={item}/>)
+            case EventType.Train:
+                return (<TrainCard key={item.id} state={item}/>)
+            case EventType.LocomotiveEnd:
+                return (<LocomotiveEndCard key={item.id} state={item}/>);
+            case EventType.ShiftEnd:
+                return (<ShiftEndCard key={item.id} state={item}/>);
             default:
-                break
                 break
         }
     };
 
-    const renderEvent = events.map((item) => (
-        showCardHelper(item)
-    ))
+    const renderEvent = events.map((item) => showCardHelper(item));
+
     console.log(renderEvent);
 
     // (<ShiftEventCard

@@ -1,6 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit";
 
-import {shiftSlice} from "./features/shift/shiftSlice";
+import {shiftSlice} from "./features/shiftEvents/shiftSlice";
 import {shiftListSlice} from "./features/shiftList/shiftListSlice";
 import {shiftStartSlice} from "./features/shiftStart/shiftStartSlice";
 
