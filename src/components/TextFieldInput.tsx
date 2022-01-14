@@ -12,21 +12,21 @@ export default function TextFieldInput(props: ITextFieldProps) {
     const state = props.state;
     const setState = props.setState;
 
-    useEffect(() => {
-
-        const data = localStorage.getItem(`${props.id}`)
-
-        if (data) {
-            setState(JSON.parse(data))
-        }
-
-    }, [])
-
-    useEffect(() => {
-
-        localStorage.setItem(`${props.id}`, JSON.stringify(state))
-
-    })
+    // useEffect(() => {
+    //
+    //     const data = localStorage.getItem(`${props.id}`)
+    //
+    //     if (data) {
+    //         setState(JSON.parse(data))
+    //     }
+    //
+    // }, [])
+    //
+    // useEffect(() => {
+    //
+    //     localStorage.setItem(`${props.id}`, JSON.stringify(state))
+    //
+    // })
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState(event.target.value)

@@ -17,7 +17,7 @@ export default function MainPage() {
 
     const lastEventType = events[events.length - 1]?.type || EventType.Blank
 
-    const dateNow = () => format(Date.now(), 'd.M EEEE', {locale: ru})
+    const dateNow = () => format(Date.now(), 'dd.MM EEEE', {locale: ru})
 
     return (<>
         <Grid container spacing={2}

@@ -23,7 +23,7 @@ export default function LocomotiveEndCard(props: LocomotiveEndCardProps) {
         electricityCounterA = props.state.electricityCounterA,
         electricityCounterB = props.state.electricityCounterB,
         recuperationCounterA = props.state.recuperationCounterA,
-        recuperationCounterB = props.state.recuperationCounterB
+        recuperationCounterB = props.state.recuperationCounterB;
 
     return (
         <Card>
@@ -52,4 +52,4 @@ export default function LocomotiveEndCard(props: LocomotiveEndCardProps) {
             </Grid>
         </Card>
     );
-}
+};

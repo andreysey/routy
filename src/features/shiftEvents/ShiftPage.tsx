@@ -60,7 +60,7 @@ export default function ShiftPage() {
             case EventType.ShiftEnd:
                 break;
         }
-    }
+    };
 
     const showCardHelper = (item: ShiftEvents) => {
         switch (item.type) {
@@ -82,17 +82,6 @@ export default function ShiftPage() {
     };
 
     const renderEvent = events.map((item) => showCardHelper(item));
-
-    console.log(renderEvent);
-
-    // (<ShiftEventCard
-    // key={item.id}
-    // title={item.type}
-    // info={item.timeStart}
-    // to={'/start'}
-    // state={''}
-    // />)
-
 
     return (
         <>
